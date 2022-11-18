@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ADMController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\Geral;
 use App\Models\User;
 
 /*
@@ -21,24 +22,10 @@ Route::get('/logout',function(){
     Auth::logout();
     return redirect('/');
 })->middleware('auth')->name('logout');
-Route::get('/esqueceuSenha',function(){
-    return view('Geral.recSenha');
-});
-Route::post('esqueceuSenha-Forms',function(Request $request){
-    /*$this->validate($request,[
-        'esqueceuSenha'=>'required',],[
-        'esqueceuSenha.required'=>'O campo E-mail é obrigatorio',        
-        ]);*/
-    $request->esqueceuSenha;
-    if(!empty(User::where('email', 'like', '%'.$esqueceuSenha.'%')->first())){
-         $entidades=User::where([
-             ['email', 'like', '%'.$esqueceuSenha.'%']
-             ])->first();
-         return view('Geral.recSenhaAffter',['user'=>$entidades]);
-    }else{
-         return redirect()->back()->with('danger','Email invalido!');
-    }
-})->name('recSenha');
+
+Route::get('/esqueceuSenha', [Geral::class, 'indexSenha']);
+Route::post('/esqueceuSenha-Forms-email', [Geral::class, 'esqueceuSenhaFormsEmail'])->name('recSenhaToEmail');
+Route::post('/esqueceuSenha-Forms', [Geral::class, 'esqueceuSenhaForms']);
 //Rotas da entidade ADM
 //******LOGIN********/
 Route::get('/loginAdm', [ADMController::class, 'indexADM'])->name('home.ADMlogin');
@@ -49,6 +36,9 @@ Route::get('/homeAdm', [ADMController::class, 'homeADM'])->middleware('auth');
 //Criar aluno
 Route::get('/criarAluno', [ADMController::class, 'criarAluno'])->middleware('auth');
 Route::post('/Forms-Aluno-Criar',[ADMController::class, 'criarAlunoForms'])->name('ADM.criarAluno')->middleware('auth');
+//Editar aluno
+Route::get('/editarAluno/{id}', [ADMController::class, 'editarAluno'])->middleware('auth');
+Route::post('/Forms-Aluno-Editar/{id}',[ADMController::class, 'editarAlunoForms'])->name('ADM.editarAluno')->middleware('auth');
 //Criar professor
 Route::get('/criarProfessor', [ADMController::class, 'criarProfessor'])->middleware('auth');
 Route::post('/Forms-Professor-Criar',[ADMController::class, 'criarProfessorForms'])->name('ADM.criarProfessor')->middleware('auth');

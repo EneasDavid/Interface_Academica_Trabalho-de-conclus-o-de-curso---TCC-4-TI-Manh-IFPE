@@ -111,7 +111,12 @@
              @endif
                  <div class="entrada">
                      <label for="nome-aluno">Nome do aluno:</label>
-                     <p type="text" class="input-home" disabled>{{$entidade->name}}</p>
+                     @if(empty($aluno->nomeUsual))
+                         <p><b>Nome: </b>{{$entidade->name}}</p>     
+                         <p type="text" class="input-home" disabled>{{$entidade->name}}</p>
+                     @else
+                         <p type="text" class="input-home" disabled>{{$aluno->nomeUsual}}</p>
+                     @endif
                      <label for="matricula">Matrícula:</label>
                      <p type="text" class="input-home" disabled>  {{$entidade->matricula}}</p>
                      <button class="btn" style="margin-top: 10px">Editar</button>

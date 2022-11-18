@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('emprestimo', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_livro_emprestimo')->nullable();
-            $table->unsignedBigInteger('id_aluno_emprestimo')->nullable();
+            $table->unsignedBigInteger('id_livro_emprestimo');
+            $table->unsignedBigInteger('id_aluno_emprestimo');
             $table->string('causa');
             $table->boolean('vencido');
             $table->timestamps();

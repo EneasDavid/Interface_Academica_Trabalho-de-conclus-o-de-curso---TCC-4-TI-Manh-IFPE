@@ -35,10 +35,10 @@
     <div style="display: flex; flex-direction: column; height: 70%; text-align: center;">
         <div class="middle">
             <p>Insira o e-mail de cadastro:</p>
-            <form action="{{route('recSenha')}}" method="POST">
+            <form action="{{route('recSenhaToEmail')}}" method="POST">
                 @csrf
-                <input type="email" class="input" name="esqueceuSenha" placeholder="E-mail: ">
-                <button class="botao" type="submit" >Entrar</button>
+                <input type="email" class="input" name="email" placeholder="E-mail: ">
+                <button class="botao" type="submit" >Recuperar</button>
             </form>
         </div>
     </div>

@@ -1,0 +1,29 @@
+               $alunoAtualizado->sexo=$request->sexo;
+                $alunoAtualizado->estadoCivil=$request->estadoCivil;
+                $alunoAtualizado->nomeMae=$request->nomeMae;
+                $alunoAtualizado->TipoSanguineo=$request->TipoSanguineo;
+                $alunoAtualizado->dataNascimento=$request->dataNascimento;
+                $alunoAtualizado->naturalidade=$request->naturalidade;
+                $alunoAtualizado->nomeUsual=$request->nomeUsual;
+                $alunoAtualizado->etnia=$request->etnia;
+                $alunoAtualizado->rg=$request->rg;
+                $alunoAtualizado->rgExpedicao=$request->rgExpedicao;
+                $alunoAtualizado->ufExpeditor=$request->ufExpeditor;
+                $alunoAtualizado->expeditorRg=$request->expeditorRg;
+                $alunoAtualizado->cpf=$request->cpf;
+                $alunoAtualizado->numeroCelular=$request->numeroCelular;
+                $alunoAtualizado->cep=$request->cep;
+                $alunoAtualizado->UF=$request->UF;
+                $alunoAtualizado->cidade=$request->cidade;
+                $alunoAtualizado->bairro=$request->bairro;
+                $alunoAtualizado->rua=$request->rua;
+                $alunoAtualizado->numeroCasa=$request->numeroCasa;
+                $alunoAtualizado->complementoCasa=$request->complementoCasa;
+                $alunoAtualizado->grauInstrucao=$request->grauInstrucao;
+                $alunoAtualizado->turno=$request->turno;
+                $alunoAtualizado->anoIngreso=$request->anoIngreso-2000;
+                $anoAtual=date('Y')-2000;
+                $alunoAtualizado->anoCurso=($anoAtual-$alunoAtualizado->anoIngreso)+1;
+                //Nível de acesso de aluno é o acesso dois
+                $alunoAtualizadoTurma=salaAula::where('curso',$request->curso)->where('serie',$alunoAtualizado->anoCurso)->where('turno',$request->turno)->first();
+                

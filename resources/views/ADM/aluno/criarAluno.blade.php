@@ -35,12 +35,12 @@
                 <p>Dados pessoais</p>
                 <input type="text" name="name" placeholder="Nome:" class="input-home">
                 <select name="sexo" class="form-control" id="Base_Combobox">
-                    <option selected>Sexo:</option>
+                    <option selected value="">Sexo:</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                 </select>
                 <select class="form-control" name="estadoCivil" id="Base_Combobox" style="display: block;">
-                    <option selected>Estado civíl</option>
+                    <option selected value="">Estado civíl</option>
                     <option value="solteiro">Solteiro(a)</option>
                     <option value="casado">Casado(a)</option>
                     <option value="divorciado">Divorciado(a)</option>
@@ -48,7 +48,7 @@
                 </select>
                 <input type="text" name="nomeMae" placeholder="Nome da mãe:" class="input-home">
                 <select type="text" name="TipoSanguineo" class="form-control" id="Base_Combobox" style="display: block;">
-                     <option selected>Tipo Sanguineo</option>
+                     <option selected value="">Tipo Sanguineo</option>
                      <option value="AB+">AB+</option>
                      <option value="AB-">AB-</option>
                      <option value="A+">A+</option>
@@ -63,7 +63,7 @@
                 <input type="text" name="naturalidade" placeholder="Naturalidade" class="input-home">
                 <input type="text" name="nomeUsual" placeholder="Nome usual:" class="input-home">
                 <select name="etnia" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected>Etnia</option>
+                    <option selected value="">Etnia</option>
                     <option value="branco">Branco</option>
                     <option value="negro">Negro</option>
                     <option value="pardo">Pardo</option>
@@ -76,7 +76,7 @@
                 <label for="" style="font-size: 12px; padding-left:5px ;">Data de expedição do RG:</label>
                 <input type="date"name="rgExpedicao"  placeholder="" class="input-home">
                 <select type="text" name="ufExpeditor" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected>Estado Expeditor</option>
+                    <option selected value="">Estado Expeditor</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -130,7 +130,7 @@
                 <input class="input-home" name="nivelAcesso" style="background: #c1c8cf;" value="aluno" readonly>
                 <input class="input-home" name="grauInstrucao" style="background: #c1c8cf;" value="ensino-medio" readonly>
                 <select name="curso" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected>Curso</option>
+                    <option selected value="">Curso</option>
                     <option value="TMA">TMA</option>
                     <option value="TI">TI</option>
                     <option value="TEE">TEE</option>

@@ -40,16 +40,27 @@
                         @endif
                         @foreach($entidades as $entidade)
                             @if($entidade->id==$aluno->id_usuario_to_aluno)
-                            <div class="pesquisa">
-                            <p><b>Nome: </b>{{$entidade->name}}</p>     
+                                <div class="pesquisa">
+                            @if(empty($aluno->nomeUsual))
+                                <p><b>Nome: </b>{{$entidade->name}}</p>     
+                            @else
+                                <p><b>Nome: </b>{{$aluno->nomeUsual}}</p>     
+                            @endif
                             <p><b>Matricula: </b>{{$entidade->matricula}}</p>    
                             </div>
                             @endif
                         @endforeach
                         <div class="pesquisa">
                             <p><b>Turma: </b>{{$aluno->anoCurso}} {{$aluno->curso}} {{$aluno->turno}}</p>
-                            <a href="{{$entidade->id}}" class="btn" style="height: auto">Editar Aluno</a>    
-                            </div>
+                        </div>
+                        <div style="display: flex;align-items: center;justify-content: space-between;flex-direction: row;">
+                            <a href="editarAluno/{{$entidade->id}}" class="btn" style="height: auto">Editar Aluno</a>    
+                            <form action="/destruir/{{$entidade->id}}" method="POST">
+                                     @csrf
+                                     @method('DELETE')
+                                     <button type="submit" class="btn btn-danger delete-btn">Deletar</button>
+                             </form>    
+                        </div>
                         </div>
         </div>
         </div>

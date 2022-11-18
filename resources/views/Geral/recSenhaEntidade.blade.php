@@ -21,6 +21,7 @@
             <p>Insira a nova senha: </p>
 
             <form action="">
+                <input type="hidden" value="{{$entidade->id}}">
                 <input type="password" class="input" placeholder="Nova senha: ">
                 <input type="password" class="input" placeholder="Confirmar nova senha: ">
                 <button type="submit" class="btn">Salvar senha</button>
