@@ -19,14 +19,14 @@
         </form>
         @if ($busca)
             <p>Procurando por {{$busca}}</p>
-        @elseif(!empty($professores) && empty($busca))
+        @elseif(count($professores)>0 && empty($busca))
             <h4>Todos os professores contratados</h4>
         @endif
         @if (empty($professores) && $busca)
             <p>Professor não encontrado</p>
         @elseif (empty($professores))
             <p>Nenhum Professor contratado</p>
-        @endif
+        @else
         <div style="width: auto;display: flex;align-items: center;flex-wrap: wrap;">
         @foreach ($professores as $professor)
         <div class="container marketing pt-5" style="width: auto;">   
@@ -55,6 +55,7 @@
         </div>
         @endforeach
         </div>
+        @endif
         <div class="voltarTopo" >
             @if ($busca)
             <a href="/listarProfessores">Todas os professores</a>

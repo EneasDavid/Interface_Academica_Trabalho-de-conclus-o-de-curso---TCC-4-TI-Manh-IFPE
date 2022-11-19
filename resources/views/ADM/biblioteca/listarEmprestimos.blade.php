@@ -12,8 +12,8 @@
         <a href="/homeAdm"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
         <h4 style="padding-left: 55px">Consulta emprestimos</h4>
     </div>
-    
     <div class="table-responsive">
+        @if(count($emprestimoLivro)>0)
         <table class="table">
             <thead>
                 <tr>
@@ -23,6 +23,7 @@
                     <th>matricula</th>
                     <th>Data do Emprestimo</th>
                     <th>Situação</th>
+                    <th>Finalizar</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,11 +39,14 @@
                     @else
                         <td>Emprestado</td>
                     @endif
+                    <td>destruirEmprestimo/{{$livros->id}}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        @else
+            <p style="margin:auto">Não há emprestimos</p>
+        @endif
     </div>
-    
 </body>
 </html>

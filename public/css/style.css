@@ -694,6 +694,7 @@ fieldset {
 
 .turma,
 .acaoAdministrativo {
+  width: 15rem !important;
   background-color: #fff;
   height: 200px;
   border-radius: 3%;

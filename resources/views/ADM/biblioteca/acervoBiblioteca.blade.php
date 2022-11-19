@@ -15,22 +15,12 @@
     </div>
     <div class="container">
       <div style="display:flex;align-items: center;justify-content: space-between;">
-        <form class="forms-pesquisa" action="/listarAlunos" method="get">
-          <input type="text" name="search" style="border-right-width: 0px!important; border-bottom-right-radius: 0!important;border-top-right-radius: 0!important;" id="search" class="form-control" placeholder="Pesquisar Aluno">
+        <form class="forms-pesquisa" action="/acervoBiblioteca" method="get">
+          <input type="text" name="search" style="border-right-width: 0px!important; border-bottom-right-radius: 0!important;border-top-right-radius: 0!important;" id="search" class="form-control" placeholder="Pesquisar Livros">
           <button class="btn" style="width:auto;height:2.3rem"><img src="/img/lupaBusca.png" class="selecionar-foto" style="padding:0 !important;width: 1.6rem;" alt=""></button>
         </form>
-        <button type="button" class="btn" data-target="#modalExemplo" onclick="chamaPopUp()">Adicionar livro</button>
+        <button type="button" class="btn" data-target="#modalExemplo" data-salvar onclick="chamaPopUp()">Adicionar livro</button>
       </div>
-      @if ($busca)
-      <p>Procurando por {{$busca}}</p>
-      @elseif(!empty($alunos) && empty($busca))
-      <h5>Todos os alunos matriculados</h5>
-      @endif
-      @if (empty($entidades) && $busca)
-      <p>Aluno não encontrado</p>
-      @elseif (empty($entidades))
-      <p>Nenhum aluno matriculado</p>
-      @endif
       <div class="modal pagina input" id="modalExemplo" tabindex="-1" role="dialog" style="margin: 0!important;" aria-labelledby="exampleModalLabel" aria-hidden="true" popUp-cadastrar-tag>
       <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -65,8 +55,18 @@
         <button class="btn" type="submit">Salvar</button>
         </div>
       </div>
-  </div>
     </div>
+  </div>
+      @if ($busca)
+      <p>Procurando por {{$busca}}</p>
+      @elseif(!empty($livros) && empty($busca))
+      <h5>Todos os livros cadastrados</h5>
+      @endif
+      @if (empty($livros) && $busca)
+      <p>Livro não encontrado</p>
+      @elseif(empty($livros))
+      <p>Nenhum livro cadastrado </p>
+      @else
     <div class="">
       <table class="table">
           <thead>
@@ -76,21 +76,30 @@
                   <th>Edição</th>
                   <th>Volume</th>
                   <th>Qtd. disponível</th>
+                  <th>*</th>
+
               </tr>
           </thead>
           <tbody>
-          @foreach ($livro as $livros)
+          @foreach ($livros as $livros)
               <tr>
                   <td>{{$livros->titulo}}</td>
                   <td>{{$livros->autor}}</td>
                   <td>{{$livros->edicao}}</td>
                   <td>{{$livros->volume}}</td>
                   <td>{{$livros->qtd_disponivel}}</td>
+                  <td>
+                    <form action="/excluirLivro/{{$livros->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                            <button type="submit" class="btn btn-danger delete-btn">Deletar</button>
+                      </form>
               </tr>
             @endforeach
           </tbody>
       </table>
   </div>
+  @endif
   </div>
     <script src="/js/cadastros.js"></script>
     <script src="/js/jquery.js"></script>

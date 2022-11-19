@@ -16,78 +16,73 @@
         <p class="alert alert-success">{{session('msg')}}</p>
     @endif
     <div class="container">
-        
-        <div class="row">
-            <div class="col-sm-4">
-                 <a href="\criarAluno">
+        <div style="height: 90%;display: flex; flex-wrap: wrap; justify-content: space-around;">
+            @if(count($salas)>0)
+                 <a class="row" href="\criarAluno" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
                          <div class="middle">
                              <h1>Criar Aluno</h1>
                         </div>
                     </div>
                 </a>
-
-                <a href="\listarAlunos">  
+        @else
+                 <a class="row" href="#" style="margin-bottom: 1rem;">
+                     <div class="acaoAdministrativo" title="ainda não há turmas, logo não pode inserir um estudante">
+                         <div class="middle">
+                             <h1>Criar Aluno</h1>
+                        </div>
+                    </div>
+                </a>
+        @endif
+                <a class="row" href="\listarAlunos" style="margin-bottom: 1rem;">  
                     <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" >
                              <h1>Listar Alunos</h1>
                          </div>
                     </div>
                 </a>
-                <a href="\editarTurma">
+                <a class="row" href="\editarTurma" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
                         <div class="middle">
                              <h1>Editar Turma</h1>
                         </div>
                     </div>
                 </a>       
-            </div>
-            <div class="col-sm-4">
-                <a href="\criarProfessor">
+                <a class="row" href="\criarProfessor" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
                         <div class="middle">
                             <h1>Criar Professor</h1>
                         </div>
                     </div>
                 </a>
-                <a href="\listarProfessores">    
+                <a class="row" href="\listarProfessores" style="margin-bottom: 1rem;">    
                     <div class="acaoAdministrativo">
                         <div class="middle">
                             <h1>Listar Professores</h1>    
                         </div>
                     </div>
                 </a>
-                <a href="\criarHorario">
+                <a class="row" href="\criarHorario" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
                         <div class="middle">
                              <h1>Criar Horario</h1>
                         </div>
                     </div>
                 </a>
-            </div>
-            <div class="col-sm-4">
-                <a href="\acervoBiblioteca"> 
+                <a class="row" href="\acervoBiblioteca" style="margin-bottom: 1rem;"> 
                     <div class="acaoAdministrativo">
                         <div class="middle">
                                 <h1>Biblioteca</h1>
                         </div>
                     </div>
                 </a>
-                <a href="\acervoBiblioteca-Emprestimos">
-                <div class="acaoAdministrativo">
-                    <div class="middle">
-                        <h1>Consultar Empréstimos</h1>
-                    </div>
-                </div>
-                </a>
-                <a href="\editarHorario">
+                <a class="row" href="\acervoBiblioteca-Emprestimos" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
                         <div class="middle">
-                             <h1>Editar Horario</h1>
+                            <h1>Consultar Empréstimos</h1>
                         </div>
                     </div>
                 </a>
-            </div>
         </div>
     </div>
 

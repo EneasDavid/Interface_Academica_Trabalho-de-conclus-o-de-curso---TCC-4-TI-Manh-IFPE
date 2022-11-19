@@ -25,8 +25,8 @@
         @if (empty($entidades) && $busca)
              <p>Aluno não encontrado</p>
         @elseif (empty($entidades))
-             <p>Nenhum aluno matriculado</p>
-        @endif
+             <p>Nenhum aluno matriculado <b><a href="/criarAluno">click aqui para matricualr um</a></b></p>
+        @else
              <div style="display: flex;align-items: center;flex-wrap: wrap;">
         @foreach ($alunos as $aluno)
         <div class="container marketing pt-5" style="width: auto;">   
@@ -62,11 +62,12 @@
                              </form>    
                         </div>
                         </div>
-        </div>
-        </div>
-        </div>
+                </div>
+               </div>
+           </div>
         @endforeach
-        </div>
+    </div>
+    @endif
 
         @if ($busca)
             <a href="/listarAlunos">Ver todos os alunos</a>

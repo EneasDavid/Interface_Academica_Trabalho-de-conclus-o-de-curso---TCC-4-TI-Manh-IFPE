@@ -17,7 +17,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_aluno');
             $table->unsignedBigInteger('id_materia');
-            $table->unsignedBigInteger('qtd_falta');
+            $table->unsignedBigInteger('qtd_falta_geral');
+            $table->unsignedBigInteger('qtd_falta_Um');
+            $table->unsignedBigInteger('qtd_falta_Dois');
+            $table->unsignedBigInteger('qtd_falta_Tres');
+            $table->unsignedBigInteger('qtd_falta_Quatro');
             $table->unsignedBigInteger('notaUm')->nullable();
             $table->unsignedBigInteger('notaDois')->nullable();
             $table->unsignedBigInteger('notaTres')->nullable();

@@ -44,7 +44,8 @@ class ADMController extends Controller
         //after login
         public function homeADM()
         {
-            return view('ADM.homeAdm');
+            $sala_aula=salaAula::all();
+            return view('ADM.homeAdm',['salas'=>$sala_aula]);
         }
         
         //------------------------------Criar Aluno------------------------------
@@ -267,21 +268,23 @@ class ADMController extends Controller
         //Biblioteca
         public function acervoBiblioteca()
         {
-             $busca=request('search'); 
-             if($busca){
-                 if(!empty(User::where('titulo', 'like', '%'.$busca.'%')->first())){
-                        $livros=Livros::where([
+            $busca=request('search'); 
+            if($busca){
+                if(!empty(Livros::where('titulo', 'like', '%'.$busca.'%')->first())){
+                    $livro=Livros::where([
                         ['titulo', 'like', '%'.$busca.'%']
                         ])->get();
-                    }else if(!empty(User::where('autor', 'like', '%'.$busca.'%')->first())){
-                         $livros=Livros::where([
-                         ['name', 'like', '%'.$busca.'%']
-                     ])->get();
-                 }
-             }else{
-                 $livros=Livros::all();
-             }
-             return view('ADM.biblioteca.acervoBiblioteca',['livro'=>$livros,'busca'=>$busca]);
+                }else if(!empty(Livros::where('autor', 'like', '%'.$busca.'%')->first())){
+                     $livro=Livros::where([
+                             ['autor', 'like', '%'.$busca.'%']
+                             ])->get();
+                }else{
+                    $livro=null;
+                }
+            }else{
+                $livro=Livros::all();
+            }
+            return view('ADM.biblioteca.acervoBiblioteca',['livros'=>$livro,'busca'=>$busca]);
         }
         public function cadastrarLivro(Request $request)
         {            
@@ -441,15 +444,18 @@ class ADMController extends Controller
                         foreach ($entidades as $aluno){
                             $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
                         }
-                }else if(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
+                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
                         $entidades=User::where([
                             ['name', 'like', '%'.$busca.'%']
                             ])->get();
                             foreach ($entidades as $aluno){
                                 $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
                             }
-                }
                 }else{
+                    $entidades=null;
+                    $alunos=null;
+               }
+            }else{
                 $entidades=User::all();
                 $alunos=address::all();
             }
@@ -473,8 +479,11 @@ class ADMController extends Controller
                          foreach ($entidades as $professors){
                              $professores=professor::where([['id_usuario_to_professors','like',$professors->id]])->get();
                          }
-                }
                 }else{
+                    $entidades=null;
+                    $professores=null;
+                }
+            }else{
                 $entidades=User::all();
                 $professores=professor::all();
             }
