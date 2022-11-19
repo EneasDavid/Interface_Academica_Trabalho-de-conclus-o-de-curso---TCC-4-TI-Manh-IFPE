@@ -20,8 +20,7 @@
         <div class="middle">
             <p>Insira a nova senha: </p>
 
-            <form action="{{route(recSenhaEntidade)}}" method="POST">
-                <input type="hidden" value="{{$entidade->id}}">
+            <form action="">
                 <input type="password" class="input" placeholder="Nova senha: ">
                 <input type="password" class="input" placeholder="Confirmar nova senha: ">
                 <button type="submit" class="btn">Salvar senha</button>

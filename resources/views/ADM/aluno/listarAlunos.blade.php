@@ -18,16 +18,16 @@
             <button class="btn" style="width:auto;height:2.3rem"><img src="/img/lupaBusca.png" class="selecionar-foto" style="padding:0 !important;width: 1.6rem;" alt=""></button>
         </form>
         @if ($busca)
-        <p>Procurando por {{$busca}}</p>
-        @elseif(!empty($alunos) && empty($busca))
-        <h5>Todos os alunos matriculados</h5>
+             <p>Procurando por {{$busca}}</p>
+        @elseif(count($alunos)>0 && empty($busca))
+             <h5>Todos os alunos matriculados</h5>
         @endif
         @if (empty($entidades) && $busca)
-        <p>Aluno não encontrado</p>
+             <p>Aluno não encontrado</p>
         @elseif (empty($entidades))
-        <p>Nenhum aluno matriculado</p>
+             <p>Nenhum aluno matriculado</p>
         @endif
-        <div style="display: flex;align-items: center;flex-wrap: wrap;">
+             <div style="display: flex;align-items: center;flex-wrap: wrap;">
         @foreach ($alunos as $aluno)
         <div class="container marketing pt-5" style="width: auto;">   
             <div class="row featurette">

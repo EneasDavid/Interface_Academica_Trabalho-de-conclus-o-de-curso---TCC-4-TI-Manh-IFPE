@@ -24,8 +24,8 @@ Route::get('/logout',function(){
 })->middleware('auth')->name('logout');
 
 Route::get('/esqueceuSenha', [Geral::class, 'indexSenha']);
-Route::post('/esqueceuSenha-Forms-email', [Geral::class, 'esqueceuSenhaFormsEmail'])->name('recSenhaToEmail');
-Route::post('/esqueceuSenha-Forms', [Geral::class, 'esqueceuSenhaForms']);
+Route::POST('/esqueceuSenha-Forms-email', [Geral::class, 'esqueceuSenhaFormsEmail'])->name('recSenhaToEmail');
+Route::post('/esqueceuSenha-Forms', [Geral::class, 'esqueceuSenhaForms'])->name('recSenhaEntidade');
 //Rotas da entidade ADM
 //******LOGIN********/
 Route::get('/loginAdm', [ADMController::class, 'indexADM'])->name('home.ADMlogin');

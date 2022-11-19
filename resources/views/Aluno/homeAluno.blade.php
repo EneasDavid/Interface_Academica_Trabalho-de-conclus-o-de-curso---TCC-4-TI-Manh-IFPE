@@ -110,14 +110,13 @@
                  <p class="img" style="display: flex;justify-content: space-around;"><img src="img/upload-foto.png" class="selecionar-foto" alt="selecionar foto"></p>
              @endif
                  <div class="entrada">
-                     <label for="nome-aluno">Nome do aluno:</label>
+                     <label for="nome-aluno"><b>Nome do aluno:</b></label>
                      @if(empty($aluno->nomeUsual))
-                         <p><b>Nome: </b>{{$entidade->name}}</p>     
                          <p type="text" class="input-home" disabled>{{$entidade->name}}</p>
                      @else
                          <p type="text" class="input-home" disabled>{{$aluno->nomeUsual}}</p>
                      @endif
-                     <label for="matricula">Matrícula:</label>
+                     <label for="matricula"><b>Matrícula:</b></label>
                      <p type="text" class="input-home" disabled>  {{$entidade->matricula}}</p>
                      <button class="btn" style="margin-top: 10px">Editar</button>
                  </div>
