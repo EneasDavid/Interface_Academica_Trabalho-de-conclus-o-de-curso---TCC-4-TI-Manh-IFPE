@@ -54,8 +54,8 @@
                             <p><b>Turma: </b>{{$aluno->anoCurso}} {{$aluno->curso}} {{$aluno->turno}}</p>
                         </div>
                         <div style="display: flex;align-items: center;justify-content: space-between;flex-direction: row;">
-                            <a href="editarAluno/{{$entidade->id}}" class="btn" style="height: auto">Editar Aluno</a>    
-                            <form action="/destruir/{{$entidade->id}}" method="POST">
+                            <a href="editarAluno/{{$aluno->id}}" class="btn" style="height: auto">Editar Aluno</a>    
+                            <form action="/destruirAluno/{{$aluno->id}}" method="POST">
                                      @csrf
                                      @method('DELETE')
                                      <button type="submit" class="btn btn-danger delete-btn">Deletar</button>

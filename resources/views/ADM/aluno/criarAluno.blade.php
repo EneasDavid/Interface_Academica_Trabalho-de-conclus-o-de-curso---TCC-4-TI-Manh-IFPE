@@ -71,7 +71,7 @@
                 </select>
             </div>       
             <div class="col-sm-3">
-                <p>RG</p>
+                <p>Documentação</p>
                 <input type="text" name="rg" placeholder="RG" class="input-home">
                 <label for="" style="font-size: 12px; padding-left:5px ;">Data de expedição do RG:</label>
                 <input type="date"name="rgExpedicao"  placeholder="" class="input-home">

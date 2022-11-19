@@ -8,53 +8,22 @@
         <title>Sistema Acadêmico</title>
     </head>
 <body>
-<div style="display: flex;">
-        <a href="logout"><img src="img/voltar.png" alt="clique para voltar" height="21px"></a>
+    <div style="display: flex;justify-content: space-between;">
         <h4 style="padding-left: 55px">Home</h4>
+        <a href="logout" style="padding-right: .8rem;"><img src="img/sair.png" alt="clique para voltar" height="21px"></a>
     </div>
-    <div class="container" >
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="turma">
-                    <div class="middle">
-                        <a href="/turma">
-                            <h1>1º Ano A</h1>
-                            <p>Matéria</p>
-                        </a>
+    <div class="container">
+        <div style="height: 90%;display: flex; flex-wrap: wrap; justify-content: space-around;">
+        @foreach ($turmas as $turma)     
+            <a class="row" href="/turma/{{$turma->id}}" style="margin-bottom: 1rem;">
+                     <div class="acaoAdministrativo">
+                         <div class="middle">
+                             <h1>$turma->materia</h1>
+                             <p>$sala->serie° $sala->curso $sala->turno</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="turma">
-                    <div class="middle">
-                        <a href="/turma">
-                            <h1>1º Ano A</h1>
-                            <p>Matéria</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="turma">
-                    <div class="middle">
-                        <a href="/turma">
-                            <h1>1º Ano A</h1>
-                            <p>Matéria</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="turma">
-                    <div class="middle">
-                        <a href="/turma">
-                            <h1>1º Ano A</h1>
-                            <p>Matéria</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </a>
+         </div>
+     </div>
 </body>
 </html>

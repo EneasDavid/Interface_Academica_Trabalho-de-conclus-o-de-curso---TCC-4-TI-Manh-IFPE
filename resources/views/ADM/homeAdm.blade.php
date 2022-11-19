@@ -8,9 +8,9 @@
         <title>Sistema Acadêmico</title>
     </head>
 <body>
-    <div style="display: flex;">
-        <a href="logout"><img src="img/sair.png" alt="clique para voltar" height="21px"></a>
+    <div style="display: flex;justify-content: space-between;">
         <h4 style="padding-left: 55px">Home</h4>
+        <a href="logout" style="padding-right: .8rem;"><img src="img/sair.png" alt="clique para voltar" height="21px"></a>
     </div>
     @if (session('msg'))
         <p class="alert alert-success">{{session('msg')}}</p>
@@ -40,13 +40,6 @@
                              <h1>Listar Alunos</h1>
                          </div>
                     </div>
-                </a>
-                <a class="row" href="\editarTurma" style="margin-bottom: 1rem;">
-                    <div class="acaoAdministrativo">
-                        <div class="middle">
-                             <h1>Editar Turma</h1>
-                        </div>
-                    </div>
                 </a>       
                 <a class="row" href="\criarProfessor" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
@@ -62,10 +55,17 @@
                         </div>
                     </div>
                 </a>
-                <a class="row" href="\criarHorario" style="margin-bottom: 1rem;">
+                <a class="row" href="\editarTurma" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
                         <div class="middle">
-                             <h1>Criar Horario</h1>
+                             <h1>Editar Turma</h1>
+                        </div>
+                    </div>
+                </a>
+                <a class="row" href="\criarMateria" style="margin-bottom: 1rem;">
+                    <div class="acaoAdministrativo">
+                        <div class="middle">
+                             <h1>Criar Materia</h1>
                         </div>
                     </div>
                 </a>

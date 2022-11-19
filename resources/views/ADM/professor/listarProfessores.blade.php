@@ -46,9 +46,14 @@
                             </div>
                             @endif
                         @endforeach
-                        <div class="pesquisa">
-                            <a href="{{$professor->id}}" class="botao" style="height: auto">Editar Professor</a>    
-                            </div>
+                        <div style="display: flex;align-items: center;justify-content: space-between;flex-direction: row;">
+                            <a href="editarProfessor/{{$professor->id}}" class="botao" style="height: auto">Editar Professor</a>    
+                            <form action="/destruirProfessor/{{$professor->id}}" method="POST">
+                                     @csrf
+                                     @method('DELETE')
+                                     <button type="submit" class="btn btn-danger delete-btn">Deletar</button>
+                             </form>   
+                        </div>
                         </div>
         </div>
         </div>

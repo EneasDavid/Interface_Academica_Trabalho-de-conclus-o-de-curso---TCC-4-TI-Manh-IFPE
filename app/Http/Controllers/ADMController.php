@@ -169,11 +169,11 @@ class ADMController extends Controller
         }
         public function editarAluno($id)
         {
-            $entidade=User::findOrFail($id);
-            $aluno=address::where('id_usuario_to_aluno', 'like', '%'.$entidade->id.'%')->first();
+            $aluno=address::findOrFail($id);
             if(empty($aluno)){
                 return redirect('/listarAlunos')->with('msg','Esse aluno não existe!');
             }
+            $entidade=address::findOrFail($aluno->id_usuario_to_aluno);
             return view('ADM.aluno.editarAluno',['aluno'=>$aluno, 'entidade'=>$entidade]);
         }
         public function editarAlunoForms(Request $request)
@@ -264,7 +264,43 @@ class ADMController extends Controller
             return redirect('/listarAlunos')->with('msg','Editado com sucesso!');
             
         }
-        
+        public function listarAlunos()
+        {
+            $busca=request('search'); 
+            if($busca){
+                if(!empty(User::where('matricula', 'like', '%'.$busca.'%')->first())){
+                    $entidades=User::where([
+                        ['matricula', 'like', '%'.$busca.'%']
+                        ])->get();
+                        foreach ($entidades as $aluno){
+                            $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
+                        }
+                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
+                        $entidades=User::where([
+                            ['name', 'like', '%'.$busca.'%']
+                            ])->get();
+                            foreach ($entidades as $aluno){
+                                $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
+                            }
+                }else{
+                    $entidades=null;
+                    $alunos=null;
+               }
+            }else{
+                $entidades=User::all();
+                $alunos=address::all();
+            }
+            return view('ADM.aluno.listarAlunos',['entidades'=>$entidades,'alunos'=>$alunos,'busca'=>$busca]);
+        }
+        public function destruirAluno($id)
+        {
+            $aluno=address::findOrFail($id);
+            if(empty($aluno)){
+                return redirect('/listarAlunos')->with('msg','Esse aluno não existe!');
+            }
+            $aluno->delete();
+            return redirect('/listarAlunos')->with('msg','excluido com sucesso!');
+        }
         //Biblioteca
         public function acervoBiblioteca()
         {
@@ -329,6 +365,15 @@ class ADMController extends Controller
              }
             }
             return view('ADM.biblioteca.listarEmprestimos',['emprestimoLivro'=>$emprestimoLivros,'alunoEmprestimos'=>$alunoEmprestimos,'livroEmprestimos'=>$livroEmprestimos,/*'busca'=>$busca*/]);
+        }
+        public function destruirLivro($id)
+        {
+            $livro=Livros::findOrFail($id);
+            if(empty($livro)){
+                return redirect('/acervoBiblioteca')->with('msg','Esse livro não existe!');
+            }
+            $livro->delete();
+            return redirect('/acervoBiblioteca')->with('msg','excluido com sucesso!');
         }
         //------------------------------Criar Professor------------------------------
         public function criarProfessor()
@@ -432,34 +477,102 @@ class ADMController extends Controller
             //redirecionando a página
             return redirect('homeAdm')->with('msg','Professor cadastrado com sucesso!');
         }
-        //Listar
-        public function listarAlunos()
+        public function editarProfessor($id)
         {
-            $busca=request('search'); 
-            if($busca){
-                if(!empty(User::where('matricula', 'like', '%'.$busca.'%')->first())){
-                    $entidades=User::where([
-                        ['matricula', 'like', '%'.$busca.'%']
-                        ])->get();
-                        foreach ($entidades as $aluno){
-                            $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
-                        }
-                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
-                        $entidades=User::where([
-                            ['name', 'like', '%'.$busca.'%']
-                            ])->get();
-                            foreach ($entidades as $aluno){
-                                $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
-                            }
-                }else{
-                    $entidades=null;
-                    $alunos=null;
-               }
-            }else{
-                $entidades=User::all();
-                $alunos=address::all();
+            $professor=professor::findOrFail($id);
+            if(empty($professor)){
+                return redirect('/listarProfessores')->with('msg','Esse Professor não existe!');
             }
-            return view('ADM.aluno.listarAlunos',['entidades'=>$entidades,'alunos'=>$alunos,'busca'=>$busca]);
+            $entidade=User::findOrFail($professor->id_usuario_to_professors);
+            return view('ADM.professor.editarProfessor',['professor'=>$professor, 'entidade'=>$entidade]);
+        }
+        public function editarProfessorForms(Request $request)
+        {
+            $alunoAtualizado = new address;
+            $usuarioAtualizado = new User;
+
+            $this->validate($request,[
+                'name'=>'required',
+                'nomeMae'=>'required',
+                'dataNascimento'=>'required',
+                'naturalidade'=>'required',
+                'etnia'=>'required',
+                'rg'=>'required',
+                'rgExpedicao'=>'required',
+                'ufExpeditor'=>'required',
+                'expeditorRg'=>'required',
+                'cpf'=>'required',
+                'email'=>'required',
+                'curso'=>'required',
+                'anoIngreso'=>'required',
+                'turno'=>'required',
+                'numeroCasa'=>'required'
+            ],[
+                //'required' => ':attribute é um campo obrigartorio!', //Idem do de cima
+                'name.required'=>'O campo Nome é obrigatorio',
+                'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
+                'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
+                'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
+                'etnia.required'=>'O campo Etina é obrigatorio',
+                'rg.required'=>'O campo RG é obrigatorio',
+                'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
+                'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
+                'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
+                'cpf.required'=>'O campo CPF é obrigatorio',
+                'email.required'=>'O campo E-Mail é obrigatorio',
+                'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
+                'turno.required'=>'O campo Turno é obrigatorio',
+                'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
+            ]);
+            $usuarioAtualizado->name=$request->name;
+            $usuarioAtualizado->email=$request->email;
+            $usuarioAtualizado->curso=$request->curso;
+            $usuarioAtualizado->matricula=$request->matricula;
+            User::findOrFail($request->id)->update($usuarioAtualizado);
+            $alunoAtualizado->sexo=$request->sexo;
+            $alunoAtualizado->estadoCivil=$request->estadoCivil;
+            $alunoAtualizado->nomeMae=$request->nomeMae;
+            $alunoAtualizado->TipoSanguineo=$request->TipoSanguineo;
+            $alunoAtualizado->dataNascimento=$request->dataNascimento;
+            $alunoAtualizado->naturalidade=$request->naturalidade;
+            $alunoAtualizado->nomeUsual=$request->nomeUsual;
+            $alunoAtualizado->etnia=$request->etnia;
+            $alunoAtualizado->rg=$request->rg;
+            $alunoAtualizado->rgExpedicao=$request->rgExpedicao;
+            $alunoAtualizado->ufExpeditor=$request->ufExpeditor;
+            $alunoAtualizado->expeditorRg=$request->expeditorRg;
+            $alunoAtualizado->cpf=$request->cpf;
+            $alunoAtualizado->numeroCelular=$request->numeroCelular;
+            $alunoAtualizado->cep=$request->cep;
+            $alunoAtualizado->UF=$request->UF;
+            $alunoAtualizado->cidade=$request->cidade;
+            $alunoAtualizado->bairro=$request->bairro;
+            $alunoAtualizado->rua=$request->rua;
+            $alunoAtualizado->numeroCasa=$request->numeroCasa;
+            $alunoAtualizado->complementoCasa=$request->complementoCasa;
+            $alunoAtualizado->grauInstrucao=$request->grauInstrucao;
+            $alunoAtualizado->turno=$request->turno;
+            $alunoAtualizado->anoIngreso=$request->anoIngreso-2000;
+            $anoAtual=date('Y')-2000;
+            $alunoAtualizado->anoCurso=($anoAtual-$alunoAtualizado->anoIngreso)+1;
+            $alunoAtualizadoTurma=salaAula::where('curso',$request->curso)->where('serie',$alunoAtualizado->anoCurso)->where('turno',$request->turno)->first();
+            
+            //Upload de imagem
+            if($request->hasfile('imagem') && $request->file('imagem')->isValid()){
+                $requestImagem=$request->imagem;
+                //Pega a imagem
+                $extension=$requestImagem->extension();
+                //pega a extensão
+                $imagemName=md5($requestImagem->getClientOriginalName().strtotime("now").".".$extension);
+                //cria o nome da imagem
+                $request->imagem->move(public_path('img/events'),$imagemName);
+                //salva no bd
+                $alunoAtualizado['imagem']=$imagemName;
+            }
+            $alunoAtualizado->id_usuario_to_aluno=$usuarioAtualizado->id;
+            address::where('id_usuario_to_aluno', 'like', '%'.$entidade->id.'%')->update($alunoAtualizado);
+            return redirect('/listarAlunos')->with('msg','Editado com sucesso!');
+            
         }
         public function listarProfessores()
         {
@@ -489,6 +602,16 @@ class ADMController extends Controller
             }
             return view('ADM.professor.listarProfessores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
         }
+        public function destruirProfessor($id)
+        {
+            $professor=professor::findOrFail($id);
+            if(empty($professor)){
+                return redirect('/listarProfessores')->with('msg','Esse professor não existe!');
+            }
+            $professor->delete();
+            return redirect('/listarProfessores')->with('msg','excluido com sucesso!');
+        }
+        //Listar
         public function listarTurmas()
         {   
             $busca=request('search');

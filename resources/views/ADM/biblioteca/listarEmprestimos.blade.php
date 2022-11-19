@@ -39,7 +39,13 @@
                     @else
                         <td>Emprestado</td>
                     @endif
-                    <td>destruirEmprestimo/{{$livros->id}}</td>
+                    <td>
+                        <form action="/destruirEmprestimo/{{$livros->id}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger delete-btn">Devolvido</button>
+                        </form> 
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

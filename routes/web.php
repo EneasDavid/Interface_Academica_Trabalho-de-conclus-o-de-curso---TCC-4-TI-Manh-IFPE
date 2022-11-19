@@ -33,29 +33,48 @@ Route::post('/Forms-Login-ADM',[ADMController::class, 'loginADM'])->name('ADM.lo
 
 /*******AfterLogin********/
 Route::get('/homeAdm', [ADMController::class, 'homeADM'])->middleware('auth');
+//===============================Aluno============================================
 //Criar aluno
 Route::get('/criarAluno', [ADMController::class, 'criarAluno'])->middleware('auth');
 Route::post('/Forms-Aluno-Criar',[ADMController::class, 'criarAlunoForms'])->name('ADM.criarAluno')->middleware('auth');
 //Editar aluno
 Route::get('/editarAluno/{id}', [ADMController::class, 'editarAluno'])->middleware('auth');
 Route::post('/Forms-Aluno-Editar/{id}',[ADMController::class, 'editarAlunoForms'])->name('ADM.editarAluno')->middleware('auth');
+//Listar
+Route::get('/listarAlunos', [ADMController::class, 'listarAlunos'])->name('ADM.listarAlunos')->middleware('auth');
+//Excluir
+Route::delete('/destruirAluno/{id}',[ADMController::class, 'destruirAluno'])->name('destruirAluno');
+
+//===============================Professor=========================================
 //Criar professor
 Route::get('/criarProfessor', [ADMController::class, 'criarProfessor'])->middleware('auth');
 Route::post('/Forms-Professor-Criar',[ADMController::class, 'criarProfessorForms'])->name('ADM.criarProfessor')->middleware('auth');
+//Editar professor
+Route::get('/editarProfessor/{id}', [ADMController::class, 'editarProfessor'])->middleware('auth');
+Route::post('/Forms-Professor-Editar/{id}',[ADMController::class, 'editarProfessorForms'])->name('ADM.editarProfessor')->middleware('auth');
+//Listar
+Route::get('/listarProfessores', [ADMController::class, 'listarProfessores'])->name('ADM.listarProfessores')->middleware('auth');
+//Excluir
+Route::delete('/destruirProfessor/{id}',[ADMController::class, 'destruirProfessor'])->name('destruirProfessor');
+
+//===============================Horario=========================================
 //Criar horario
 Route::get('/criarHorario', [ADMController::class, 'criarHorario'])->middleware('auth');
 Route::post('/Forms-Horario-Criar',[ADMController::class, 'criarHorarioForms'])->name('ADM.criarHorario')->middleware('auth');
-
 //Listar
-Route::get('/listarAlunos', [ADMController::class, 'listarAlunos'])->name('ADM.listarAlunos')->middleware('auth');
-Route::get('/listarProfessores', [ADMController::class, 'listarProfessores'])->name('ADM.listarProfessores')->middleware('auth');
 Route::get('/editarTurma', [ADMController::class, 'listarTurmas'])->name('ADM.listarTurmas')->middleware('auth');
+//===============================Livro=========================================
 //Livro
+//Listar
 Route::get('/acervoBiblioteca', [ADMController::class, 'acervoBiblioteca'])->name('ADM.acervoBiblioteca')->middleware('auth');
+//Cadastrar
 Route::post('/Forms-Livro-Criar',[ADMController::class, 'cadastrarLivro'])->name('ADM.cadastrarLivro')->middleware('auth');
+//Excluir
+Route::delete('/destruirLivro/{id}',[ADMController::class, 'destruirLivro'])->name('destruirLivro');
+//Emprestimo
 Route::get('/acervoBiblioteca-Emprestimos', [ADMController::class, 'emprestimosBiblioteca'])->name('ADM.acervoBiblioteca')->middleware('auth');
 
-//Editar
+//===============================Turma=========================================
 //Turma
 Route::get('/dadosTurma/{id}',[ADMController::class, 'editarTurma'])->middleware('auth');
 Route::get('/dadosTurma/listarAlunos/{id}',[ADMController::class, 'editarTurma_ListarAlunos'])->middleware('auth');
