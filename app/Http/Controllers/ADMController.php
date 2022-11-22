@@ -296,10 +296,11 @@ class ADMController extends Controller
         {
             $aluno=address::findOrFail($id);
             if(empty($aluno)){
-                return redirect('/listarAlunos')->with('msg','Esse aluno não existe!');
+                return redirect('/listarAlunos')->with('errors','Esse aluno não existe!');
             }
-            $aluno->delete();
-            return redirect('/listarAlunos')->with('msg','excluido com sucesso!');
+            $entidade=user::findOrFail($aluno->id_usuario_to_aluno);
+            $entidade->delete();
+            return redirect('/listarAlunos')->with('errors','excluido com sucesso!');
         }
         //Biblioteca
         public function acervoBiblioteca()
@@ -370,10 +371,10 @@ class ADMController extends Controller
         {
             $livro=Livros::findOrFail($id);
             if(empty($livro)){
-                return redirect('/acervoBiblioteca')->with('msg','Esse livro não existe!');
+                return redirect('/acervoBiblioteca')->with('errors','Esse livro não existe!');
             }
             $livro->delete();
-            return redirect('/acervoBiblioteca')->with('msg','excluido com sucesso!');
+            return redirect('/acervoBiblioteca')->with('errors','excluido com sucesso!');
         }
         //------------------------------Criar Professor------------------------------
         public function criarProfessor()
@@ -606,10 +607,11 @@ class ADMController extends Controller
         {
             $professor=professor::findOrFail($id);
             if(empty($professor)){
-                return redirect('/listarProfessores')->with('msg','Esse professor não existe!');
-            }
-            $professor->delete();
-            return redirect('/listarProfessores')->with('msg','excluido com sucesso!');
+                return redirect('/listarProfessores')->with('errors','Esse professor não existe!');
+            }          
+            $entidade=user::findOrFail($professor->id_usuario_to_professors);
+            $entidade->delete();
+            return redirect('/listarProfessores')->with('errors','excluido com sucesso!');
         }
         //Listar
         public function listarTurmas()

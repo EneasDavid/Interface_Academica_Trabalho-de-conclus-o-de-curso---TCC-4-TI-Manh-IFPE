@@ -20,7 +20,7 @@
             @if(count($salas)>0)
                  <a class="row" href="\criarAluno" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
-                         <div class="middle">
+                         <div class="middle" style="padding:10px">
                              <h1>Criar Aluno</h1>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
         @else
                  <a class="row" href="#" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo" title="ainda não há turmas, logo não pode inserir um estudante">
-                         <div class="middle">
+                         <div class="middle" style="padding:10px">
                              <h1>Criar Aluno</h1>
                         </div>
                     </div>
@@ -36,49 +36,49 @@
         @endif
                 <a class="row" href="\listarAlunos" style="margin-bottom: 1rem;">  
                     <div class="acaoAdministrativo">
-                        <div class="middle" >
+                        <div class="middle" style="padding:10px" >
                              <h1>Listar Alunos</h1>
                          </div>
                     </div>
                 </a>       
                 <a class="row" href="\criarProfessor" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" style="padding:10px">
                             <h1>Criar Professor</h1>
                         </div>
                     </div>
                 </a>
                 <a class="row" href="\listarProfessores" style="margin-bottom: 1rem;">    
                     <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" style="padding:10px">
                             <h1>Listar Professores</h1>    
                         </div>
                     </div>
                 </a>
                 <a class="row" href="\editarTurma" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" style="padding:10px">
                              <h1>Editar Turma</h1>
                         </div>
                     </div>
                 </a>
                 <a class="row" href="\criarMateria" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" style="padding:10px">
                              <h1>Criar Materia</h1>
                         </div>
                     </div>
                 </a>
                 <a class="row" href="\acervoBiblioteca" style="margin-bottom: 1rem;"> 
                     <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" style="padding:10px">
                                 <h1>Biblioteca</h1>
                         </div>
                     </div>
                 </a>
                 <a class="row" href="\acervoBiblioteca-Emprestimos" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
-                        <div class="middle">
+                        <div class="middle" style="">
                             <h1>Consultar Empréstimos</h1>
                         </div>
                     </div>

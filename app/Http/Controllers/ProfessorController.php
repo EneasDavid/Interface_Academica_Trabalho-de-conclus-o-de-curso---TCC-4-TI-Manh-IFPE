@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Professor;
-
+use App\Models\salaAula;
+use App\Models\materia;
 class ProfessorController extends Controller
 {
     public function indexProfessor()
@@ -38,8 +39,14 @@ class ProfessorController extends Controller
         //after login
         public function homeProfessor()
         {
-            $entidade=auth()->user();
-            $professor=Professor::where('id_usuario_to_professors',$entidade->id)->first();
-            return view('professor.homeProfessor',['professor'=>$professor,'entidade'=>$entidade]);
+             $entidade=auth()->user();
+             $professor=Professor::where('id_usuario_to_professors',$entidade->id)->first();
+             $materia=materia::where([
+                ['id_professor','like',$professor->id]
+                ])->get();
+             $salaAula=sala_aula::where([
+                 ['segundaUm',$professor->id]
+                 ])->get();
+            return view('professor.homeProfessor',['professor'=>$professor,'entidade'=>$entidade,'materia'=>$materia,'salaAula'=>$salaAula]);
         }
 }

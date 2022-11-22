@@ -14,15 +14,18 @@
     </div>
     <div class="container">
         <div style="height: 90%;display: flex; flex-wrap: wrap; justify-content: space-around;">
-        @foreach ($turmas as $turma)     
+        @foreach ($materia as $turma)     
             <a class="row" href="/turma/{{$turma->id}}" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
                          <div class="middle">
-                             <h1>$turma->materia</h1>
-                             <p>$sala->serie° $sala->curso $sala->turno</p>
+                             <h1>$turma->nomeMateria</h1>
+                             @foreach ($salaAula as $sala)     
+                                 <p>$sala->serie° $sala->curso $sala->turno</p>
+                             @endforeach
                         </div>
                     </div>
                 </a>
+            @endforeach
          </div>
      </div>
 </body>
