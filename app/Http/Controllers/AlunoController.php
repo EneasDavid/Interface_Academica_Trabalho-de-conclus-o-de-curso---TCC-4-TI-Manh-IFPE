@@ -332,7 +332,7 @@ class AlunoController extends Controller
         return view('Aluno.calendarioAcademico');
     }
     public function acervoBiblioteca()
-        {
+     {
              $busca=request('search'); 
              if($busca){
                  if(!empty(User::where('titulo', 'like', '%'.$busca.'%')->first())){
@@ -348,7 +348,17 @@ class AlunoController extends Controller
                  $livros=Livros::all();
              }
              return view('Aluno.bibliotecaAluno',['livro'=>$livros,'busca'=>$busca]);
-        }
+     }
+     public function emrpestimo($id)
+     {
+          $user=auth()->user();
+          $aluno=address::where('id_usuario_to_aluno','like',$user->id)->first();
+           if(!empty($aluno))
+           {
+                $aluno->emprestimoAlunoLivro()->attach($id);
+                return redirect('/acervoBibliotecaToAluno')->with('erros','emprestimo com sucesso');
+           }
+     }
      public function alterarSenha()
      {
           return view('Aluno.Senha.recSenhaAffter');

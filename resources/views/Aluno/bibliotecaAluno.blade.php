@@ -100,8 +100,8 @@
         </nav>
          <div class="container">
             <div style="display:flex;align-items: center;justify-content: space-between;">
-                <form class="forms-pesquisa" action="/listarAlunos" method="get">
-                <input type="text" name="search" style="border-right-width: 0px!important; border-bottom-right-radius: 0!important;border-top-right-radius: 0!important;" id="search" class="form-control" placeholder="Pesquisar Aluno">
+                <form class="forms-pesquisa" action="/listarLivros" method="get">
+                <input type="text" name="search" style="border-right-width: 0px!important; border-bottom-right-radius: 0!important;border-top-right-radius: 0!important;" id="search" class="form-control" placeholder="Pesquisar Livro">
                 <button class="btn" style="width:auto;height:2.3rem"><img src="/img/lupaBusca.png" class="selecionar-foto" style="padding:0 !important;width: 1.6rem;" alt=""></button>
                 </form>
             </div>
@@ -123,6 +123,7 @@
                  <th>Edição</th>
                  <th>Volume</th>
                  <th>Qtd. disponível</th>
+                 <th>Pegar</th>
              </tr>
          </thead>
          <tbody>
@@ -133,6 +134,17 @@
                      <td>{{$livros->edicao}}</td>
                      <td>{{$livros->volume}}</td>
                      <td>{{$livros->qtd_disponivel}}</td>
+                     <td> 
+                        <form action="/emprestimoLivro/{{$livros->id}}" method="POST">
+                            @csrf 
+                            <a href="/emprestimoLivro/{{$livros->id}}" 
+                                id="event-submit" 
+                                onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                                Emprestimo
+                            </a>
+                      </form>
+                    </td>
                  </tr>
              @endforeach
          </tbody>

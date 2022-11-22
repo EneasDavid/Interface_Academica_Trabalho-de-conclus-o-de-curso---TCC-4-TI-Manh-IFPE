@@ -11,7 +11,7 @@ use App\Models\professor;
 use App\Models\salaAula;
 use App\Models\materia;
 use App\Models\Livros;
-use App\Models\emprestimo;
+use App\Models\address_emprestimo;
 
 
 class ADMController extends Controller
@@ -302,7 +302,7 @@ class ADMController extends Controller
             $entidade->delete();
             return redirect('/listarAlunos')->with('errors','excluido com sucesso!');
         }
-        //Biblioteca
+       //------------------------------Biblioteca------------------------------
         public function acervoBiblioteca()
         {
             $busca=request('search'); 
@@ -350,7 +350,8 @@ class ADMController extends Controller
         }
         public function emprestimosBiblioteca()
         {
-             $emprestimoLivros=emprestimo::all();
+            //Pegar a matricula do aluno resolveria isso
+             $emprestimoLivros=address_emprestimo::all();
              $alunoEmprestimos=null;
              $livroEmprestimos=null;
              if(!empty($emprestimoLivros))

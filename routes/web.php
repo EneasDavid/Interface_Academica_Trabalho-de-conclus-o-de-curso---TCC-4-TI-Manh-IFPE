@@ -79,6 +79,7 @@ Route::get('/acervoBiblioteca-Emprestimos', [ADMController::class, 'emprestimosB
 Route::get('/dadosTurma/{id}',[ADMController::class, 'editarTurma'])->middleware('auth');
 Route::get('/dadosTurma/listarAlunos/{id}',[ADMController::class, 'editarTurma_ListarAlunos'])->middleware('auth');
 Route::get('/dadosTurma/listarProfessores/{id}',[ADMController::class, 'editarTurma_ListarProfessores'])->middleware('auth');
+Route::get('/criarMateria',[ADMController::class, 'criarMateria'])->middleware('auth');
 //=========================================================================================================================//
 //Rotas da entidade Aluno
 //******LOGIN********/
@@ -89,6 +90,7 @@ Route::get('/homeAluno', [AlunoController::class, 'homeAluno'])->middleware('aut
 Route::get('/calendarioAcademico', [AlunoController::class, 'calendarioA'])->middleware('auth');
 Route::get('/acervoBibliotecaToAluno', [AlunoController::class, 'acervoBiblioteca'])->middleware('auth');
 Route::get('/alterarSenhaToAluno', [AlunoController::class, 'alterarSenha'])->middleware('auth');
+Route::post('/emprestimoLivro/{id}',[AlunoController::class, 'emrpestimo'])->middleware('auth');
 //Rotas da entidade Aluno
 
 //******LOGIN********/
