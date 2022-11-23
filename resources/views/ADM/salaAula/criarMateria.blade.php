@@ -10,26 +10,50 @@
 </head>
 
 <body>
-
     <div style="display: flex;">
-        <a href="turma.html"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
+        <a href="/homeAdm"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
         <h4 style="padding-left: 55px">Criar matéria</h4>
     </div>
+    @if (count($professores)>0)
     <div class="container" style="display: block;">
         <div class="row">
-            <form action="">
-                <input type="text" name="nome-materia" class="input-home" placeholder="Nome da matéria: ">
-                <select name="professor-materia" id="Base_Combobox">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session('danger'))
+            <div class="alert alert-danger">
+                {{ session('danger') }}
+            </div>
+        @endif
+        <form class="container" action="{{route('ADM.cadastrarMateria')}}" method="POST">
+               @csrf
+                <input type="text" name="nomeMateria" class="input-home" placeholder="Nome da matéria: ">
+                <select name="id_professor" id="Base_Combobox">
                     <option disabled select>Professor</option>
-                    <option value="1">David Alain do Nascimento</option>
+                    <?php
+                            foreach($professores as $professor){
+                                foreach($entidade as $entidades){
+                                    if($professor->id_usuario_to_professors==$entidades->id)
+                                    {
+                                        echo '<option name="id_professor" value="'.$professor->id.'">'.$entidades->name.'</option>';
+                                    }
+                            }
+                        }
+                        ?>
                 </select>
-                <button class="btn" style="display: block; margin-top: 15px;text-align: center;">Salvar
-                    matéria</button>
-
+                <button class="btn" type="submit" style="display: block; margin-top: 15px;text-align: center;">Salvar matéria</button>
             </form>
         </div>
+        @else
+        <p style="margin: auto;width: max-content;">Não há professor cadastrado. <a href="\criarProfessor"><b>click aqui para cadastrar um</b></a></p>
+        @endif
     </div>
-
 </body>
 
 </html>

@@ -614,7 +614,7 @@ class ADMController extends Controller
             $entidade->delete();
             return redirect('/listarProfessores')->with('errors','excluido com sucesso!');
         }
-        //Listar
+        //-------------------------------------------Sala de aula------------------------
         public function listarTurmas()
         {   
             $busca=request('search');
@@ -642,7 +642,8 @@ class ADMController extends Controller
             $turma=salaAula::findOrFail($id);
             if(empty($turma)){
                 return redirect('/dashboard')->with('msg','Turma não existe');
-            }else{$turma=salaAula::findOrFail($id);
+            }else{
+                $turma=salaAula::findOrFail($id);
                 if(empty($turma)){
                     return redirect('/dashboard')->with('msg','Turma não existe');
                 }else{ 
@@ -994,5 +995,36 @@ class ADMController extends Controller
                 }
             return view('ADM.professor.listarProfesores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
         }
-
+        public function criarMateria()
+        {
+            $professores=professor::all('id','id_usuario_to_professors');
+            if(!empty($professores))
+            {
+                 foreach ($professores as $professor){
+                     $entidade=user::all('id','name');
+                 }
+             }else{
+                 $entidade=null;
+             }
+            //dd($entidade);
+            return view('ADM.salaAula.criarMateria',['professores'=>$professores,'entidade'=>$entidade]);
+        }
+        public function criarMateriaForms(Request $request)
+        {
+           $materiaNova=new materia;
+           $this->validate($request,[
+            'id_professor'=>'required',
+            'nomeMateria'=>'required'
+            ],[
+                'id_professor.required'=>'O campo Professor é obrigatorio',
+                'nomeMateria.required'=>'O campo materia é obrigatorio',
+                
+            ]);
+           $materiaNova->id_professor=$request->id_professor;
+           $materiaNova->nomeMateria=$request->nomeMateria;
+           $materiaNova->save();
+            //redirecionando a página
+            return redirect('homeAdm')->with('msg','Materia cadastrada com sucesso!');
+    
+        }
 }
