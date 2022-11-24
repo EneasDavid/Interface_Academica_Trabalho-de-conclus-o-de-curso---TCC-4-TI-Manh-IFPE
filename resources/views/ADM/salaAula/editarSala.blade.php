@@ -44,125 +44,128 @@
             </a>
             @endif
         </div>
+        <div class="modal pagina input" id="modalExemplo" tabindex="-1" role="dialog" style="margin: 0!important;" aria-labelledby="exampleModalLabel" aria-hidden="true" popUp-cadastrar-tag>
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Adicionar Aula </h5>
+                            </div>
+                            <div class="modal-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('danger'))
+                                <div class="alert alert-danger">
+                                    {{ session('danger') }}
+                                </div>
+                            @endif
+                            <form class="container" action="{{route('ADM.cadastrarLivro')}}" method="POST">
+                             @csrf      
+                                <select name="materiaAula" id="Base_Combobox">
+                                        <option disabled selected value="">Matéria</option>
+                                            <?php
+                                             foreach($materiaCadastradas as $materia){
+                                                 foreach($professores as $professor){
+                                                        foreach($entidade as $entidades){
+                                                            if($professor->id_usuario_to_professors==$entidades->id)
+                                                            {
+                                                                echo '<option name="materia" value="'.$materia->id.'">'.$materia->nomeMateria.' | '.$entidades->name.'</option>';
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ?>
+                                </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="removerPopUp()">Cancelar</button>
+                                    <button class="btn" type="submit">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
         <div class="col-sm-8">
         <p class="titulo">Horário do {{$turma->serie}}° {{$turma->curso}} {{$turma->turno}}</p>
             <div class="">
                 <div class="table-responsive" style="text-align: center;">
                 <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
                     <thead>
-                        <tr>
+                        <tr data-salvar onclick="chamaPopUp()">
                          <th scope="col" class="dia">Hora</th>
                         </tr>
                     </thead>
                     <tbody style="margin-top: 5px;">
                     @if($turma->turno=='Manhã')
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">07:30~08:14</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">08:15~08:59</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">09:00~09:45</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">10:00~10:44</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">10:45~11:29</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">11:30~12:15</p1>
                         </td>
                     </tr>
                     @else
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">13:00~13:44</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">13:45~14:29</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">14:30~15:15</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">15:30~16:14</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">16:15~16:59</p1>
                         </td>
                     </tr>
-                    <tr>
+                    <tr data-salvar onclick="chamaPopUp()">
                         <td>
                             <p1 class="materia">17:00~17:45</p1>
                         </td>
                     </tr>
                     @endif
                 </table>
-                <div class="modal pagina input" id="modalExemplo" tabindex="-1" role="dialog" style="margin: 0!important;" aria-labelledby="exampleModalLabel" aria-hidden="true" popUp-cadastrar-livro>
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Aula</h5>
-                        </div>
-                        <div class="modal-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        @if (session('danger'))
-                            <div class="alert alert-danger">
-                                {{ session('danger') }}
-                            </div>
-                        @endif
-                        <form class="container" action="{{route('ADM.cadastrarLivro')}}" method="POST">
-                        @csrf 
-                     {{--   <select name="id_professor" id="Base_Combobox">
-                            <option disabled selected value="">Professor</option>
-                            <?php
-                                    foreach($professores as $professor){
-                                        foreach($entidade as $entidades){
-                                            if($professor->id_usuario_to_professors==$entidades->id)
-                                            {
-                                                echo '<option name="id_professor" value="'.$professor->id.'">'.$entidades->name.'</option>';
-                                            }
-                                    }
-                                }
-                                ?>
-                        </select>--}}
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="removerPopUp()">Cancelar</button>
-                        <button class="btn" type="submit">Salvar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
                 <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
                         <thead>
                             <tr>
@@ -171,25 +174,23 @@
                         </thead>
                         <tbody style="margin-top: 5px;">
                             @if(!empty($aulaUmSegunda))
-                             <tr popUp-cadastrar-tag onclick="chamaPopUp()">
+                             <tr>
                                  <td>
-                                     <p1 class="materia">{{$aulaUmSegunda->nomeMateria}}</p1>
+                                     <p1 class="materia" id="td" value="segundaUm">{{$aulaUmSegunda->nomeMateria}}</p1>
                                      <p1 class="pofessor">{{$professorUmSegunda->name}}</p1>
                                  </td>
                              </tr>
                             @else
-                            <tr>
+                            <tr id="td" value="segundaUm" data-salvar onclick="chamaPopUp()">
                                 <td>
-                                 <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif                       
                             @if(!empty($professorDoisSegunda))
-                            <tr>
-                                <td>
+                            <tr id="td" value="segundaDois">
+                                 <td>
                                     <a href="diarioAula/{{$aulaDoisSegunda->id}}">
                                         <p1 class="materia">{{$aulaDoisSegunda->nomeMateria}}</p1>
                                         <p1 class="pofessor">{{$professorDoisSegunda->name}}</p1>
@@ -197,18 +198,16 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr id="td" value="segundaDois" data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif                            
                             @if(!empty($aulaTresSegunda))
-                            <tr>
-                                <td>
+                            <tr id="td" value="segundaTres">
+                                 <td>
                                     <a href="diarioAula/{{$aulaTresSegunda->id}}">
                                         <p1 class="materia">{{$aulaTresSegunda->nomeMateria}}</p1>
                                         <p1 class="pofessor">{{$professorTresSegunda->name}}</p1>
@@ -216,55 +215,49 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
-                                <td>
-                                    <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                            <tr id="td" value="segundaTres" data-salvar onclick="chamaPopUp()">
+                                 <td>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif                       
                             @if(!empty($aulaQuatroSegunda))
-                            <tr>
+                            <tr id="td" value="segundaQuatro">
                                 <td>
                                     <a href="diarioAula/{{$aulaQuatroSegunda->id}}">
-                                        <p1 class="materia">{{$aulaQuatroSegunda->nomeMateria}}</p1>
-                                        <p1 class="pofessor">{{$professorQuatroSegunda->name}}</p1>
+                                         <p1 class="materia">{{$aulaQuatroSegunda->nomeMateria}}</p1>
+                                         <p1 class="pofessor">{{$professorQuatroSegunda->name}}</p1>
                                     </a>
                                 </td>
                             </tr>
                             @else
-                            <tr> 
-                                <td>
-                                    <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                            <tr id="td" value="segundaQuatro" data-salvar onclick="chamaPopUp()"> 
+                                 <td>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif                            
                             @if(!empty($aulaCincoSegunda))
-                            <tr>
+                            <tr id="td" value="segundaCinco">
                                 <td>
-                                    <a href="diarioAula/{{$aulaCincoSegunda->id}}">
-                                        <p1 class="materia">{{$aulaCincoSegunda->nomeMateria}}</p1>
-                                        <p1 class="pofessor">{{$professorCincoSegunda->name}}</p1>
+                                     <a href="diarioAula/{{$aulaCincoSegunda->id}}">
+                                         <p1 class="materia">{{$aulaCincoSegunda->nomeMateria}}</p1>
+                                         <p1 class="pofessor">{{$professorCincoSegunda->name}}</p1>
                                     </a>
                                 </td>
                             </tr>
                             @else
-                            <tr>
-                                <td>
-                                    <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                            <tr id="td" value="segundaCinco" data-salvar onclick="chamaPopUp()">
+                                 <td>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif                       
                             @if(!empty($aulaSeisSegunda))
-                            <tr>
+                            <tr id="td" value="segundaSeis">
                                 <td>
                                     <a href="diarioAula/{{$aulaSeisSegunda->id}}">
                                         <p1 class="materia">{{$aulaSeisSegunda->nomeMateria}}</p1>
@@ -273,12 +266,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
-                                <td>
-                                    <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                            <tr id="td" value="segundaSeis" data-salvar onclick="chamaPopUp()">
+                                 <td>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif
@@ -286,7 +277,7 @@
                     </table>                    
                     <table class="dia" style="width: 100%; margin: 5px; text-align: center;">                        
                         <thead>
-                             <tr>
+                            <tr>
                                  <th scope="col" class="dia">Terça-feira</th>
                              </tr>
                         </thead>
@@ -301,12 +292,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                 <a href="#">
-                                        <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
-                                        <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+                                     <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
+                                     <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
                                 </td>
                             </tr>
                             @endif                       
@@ -320,12 +309,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -341,10 +328,8 @@
                             @else
                             <tr>
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -358,12 +343,11 @@
                                 </td>
                             </tr>
                             @else
-                            <tr> 
+                            <tr data-salvar onclick="chamaPopUp()"> 
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
+
                                 </td>
                             </tr>
                             @endif                            
@@ -377,12 +361,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -396,12 +378,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif
@@ -409,7 +389,7 @@
                     </table>                    
                     <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
                          <thead>
-                             <tr>
+                            <tr>
                                  <th scope="col" class="dia">Quarta-feira</th>
                              </tr>
                         </thead>
@@ -424,12 +404,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                 <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -443,12 +421,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -462,12 +438,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -481,12 +455,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr> 
+                            <tr data-salvar onclick="chamaPopUp()"> 
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -500,12 +472,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -519,12 +489,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif
@@ -532,7 +500,7 @@
                     </table>                    
                     <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
                          <thead>
-                             <tr>
+                            <tr>
                                  <th scope="col" class="dia">Quinta-feira</th>
                              </tr>
                         </thead>
@@ -547,12 +515,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                 <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -566,12 +532,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -585,12 +549,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -604,12 +566,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr> 
+                            <tr data-salvar onclick="chamaPopUp()"> 
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -623,12 +583,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -642,12 +600,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif
@@ -655,7 +611,7 @@
                     </table>                    
                     <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
                          <thead>
-                             <tr>
+                            <tr>
                                  <th scope="col" class="dia">Sexta-feira</th>
                              </tr>
                         </thead>
@@ -670,12 +626,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                 <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -689,12 +643,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -708,12 +660,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -727,12 +677,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr> 
+                            <tr data-salvar onclick="chamaPopUp()"> 
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                            
@@ -746,12 +694,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif                       
@@ -765,12 +711,10 @@
                                 </td>
                             </tr>
                             @else
-                            <tr>
+                            <tr data-salvar onclick="chamaPopUp()">
                                 <td>
-                                    <a href="#">
                                         <p1 class="materia" style="color: #c8c8c800;">Materia</p1>
                                         <p1 class="pofessor" style="color: #c8c8c800;">Professor</p1>
-                                    </a>
                                 </td>
                             </tr>
                             @endif

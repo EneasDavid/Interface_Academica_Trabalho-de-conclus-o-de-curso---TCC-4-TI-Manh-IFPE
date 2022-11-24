@@ -639,6 +639,7 @@ class ADMController extends Controller
         }
         public function editarTurma($id)
         {   
+            $professores=professor::all('id','id_usuario_to_professors');
             $turma=salaAula::findOrFail($id);
             if(empty($turma)){
                 return redirect('/dashboard')->with('msg','Turma não existe');
@@ -649,6 +650,20 @@ class ADMController extends Controller
                 }else{ 
                     //Aulas da segunda
                     $salaAluno=salaAula::where('id',$id)->first();
+                    $materiaCadastradas=materia::all('id','nomeMateria','id_professor');
+                    $professores=null;
+                    $entidade=null;
+                    if(!empty($materiaCadastradas))
+                    {
+                         foreach ($materiaCadastradas as $materias){
+                            $professores=professor::where([
+                                ['id', 'like', '%'.$materias->id_professor.'%'],
+                                ])->get();
+                            $entidade=user::all('id','name');
+                        }
+                     }else{
+                         $entidade=null;
+                     }
                     if(!empty($salaAluno)){
                         $segundaAulaUm=materia::where('id',$salaAluno->segundaUm)->first();
                         if(!empty($segundaAulaUm)){
@@ -864,8 +879,8 @@ class ADMController extends Controller
                            }else{
                                 $professorSextaSeis=null;
                            }
-                        }
-                        return view('ADM.salaAula.editarSala',['turma'=>$turma,'sala'=>$salaAluno,
+                    }
+                    return view('ADM.salaAula.editarSala',['turma'=>$turma,'sala'=>$salaAluno,'materiaCadastradas'=>$materiaCadastradas,'professores'=>$professores ,'entidade'=>$entidade,
                                   //Aulas e professores da Segunda
                                    'aulaUmSegunda'=>$segundaAulaUm,
                                    'professorUmSegunda'=>$professorSegundaUm,
@@ -931,7 +946,7 @@ class ADMController extends Controller
                                    'professorCincoSexta'=>$professorSextaCinco,
                                    'aulaSeisSexta'=>$sextaAulaSeis,
                                    'professorSeisSexta'=>$professorSextaSeis,
-                   ]);
+                    ]);
                 }    
             }
         }
@@ -995,6 +1010,7 @@ class ADMController extends Controller
                 }
             return view('ADM.professor.listarProfesores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
         }*/
+
         public function criarMateria()
         {
             $professores=professor::all('id','id_usuario_to_professors');
@@ -1006,7 +1022,6 @@ class ADMController extends Controller
              }else{
                  $entidade=null;
              }
-            //dd($entidade);
             return view('ADM.salaAula.criarMateria',['professores'=>$professores,'entidade'=>$entidade]);
         }
         public function criarMateriaForms(Request $request)
