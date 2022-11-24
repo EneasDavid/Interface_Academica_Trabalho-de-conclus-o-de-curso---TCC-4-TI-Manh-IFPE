@@ -142,11 +142,19 @@
                         @endif
                         <form class="container" action="{{route('ADM.cadastrarLivro')}}" method="POST">
                         @csrf 
-                        <input type="text" placeholder="Título" name="titulo" id="titulo" class="input-home" >
-                        <input type="text" placeholder="Autor" name="autor" id="autor" class="input-home">
-                        <input type="text" placeholder="Volume" name="volume" id="volume" class="input-home">
-                        <input type="text" placeholder="Edição" name="edicao" id="edicao" class="input-home">
-                        <input type="number" placeholder="Qtd. disponível" name="qtd_disponivel" id="qtd_livros" class="input-home">
+                     {{--   <select name="id_professor" id="Base_Combobox">
+                            <option disabled selected value="">Professor</option>
+                            <?php
+                                    foreach($professores as $professor){
+                                        foreach($entidade as $entidades){
+                                            if($professor->id_usuario_to_professors==$entidades->id)
+                                            {
+                                                echo '<option name="id_professor" value="'.$professor->id.'">'.$entidades->name.'</option>';
+                                            }
+                                    }
+                                }
+                                ?>
+                        </select>--}}
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="removerPopUp()">Cancelar</button>

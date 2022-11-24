@@ -965,7 +965,7 @@ class ADMController extends Controller
                 }
             return view('ADM.aluno.listarAlunos',['entidades'=>$entidades,'alunos'=>$alunos,'busca'=>$busca]);
         }
-        public function editarTurma_ListarProfessores($id)
+        /*public function editarTurma_ListarProfessores($id)
         {
             $busca=request('search'); 
             if($busca){
@@ -994,7 +994,7 @@ class ADMController extends Controller
                     }
                 }
             return view('ADM.professor.listarProfesores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
-        }
+        }*/
         public function criarMateria()
         {
             $professores=professor::all('id','id_usuario_to_professors');

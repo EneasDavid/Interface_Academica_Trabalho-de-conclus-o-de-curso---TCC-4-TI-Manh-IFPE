@@ -35,7 +35,7 @@
                @csrf
                 <input type="text" name="nomeMateria" class="input-home" placeholder="Nome da matéria: ">
                 <select name="id_professor" id="Base_Combobox">
-                    <option disabled select>Professor</option>
+                    <option disabled selected value="">Professor</option>
                     <?php
                             foreach($professores as $professor){
                                 foreach($entidade as $entidades){
