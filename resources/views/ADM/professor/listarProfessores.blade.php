@@ -22,10 +22,10 @@
         @elseif(count($professores)>0 && empty($busca))
             <h4>Todos os professores contratados</h4>
         @endif
-        @if (empty($professores) && $busca)
+        @if (count($professores)==0 && $busca)
             <p>Professor não encontrado</p>
-        @elseif (empty($professores))
-            <p>Nenhum Professor contratado</p>
+        @elseif (count($professores)==0)
+            <p>Nenhum Professor contratado <b><a href="/criarProfessor">click aqui para contratar um</a></b></p>
         @else
         <div style="width: auto;display: flex;align-items: center;flex-wrap: wrap;">
         @foreach ($professores as $professor)
@@ -64,8 +64,9 @@
         <div class="voltarTopo" >
             @if ($busca)
             <a href="/listarProfessores">Todas os professores</a>
-            @endif
+            @elseif(count($professores)>0)
             <a href="#topo">Voltar ao topo</a>
+            @endif
         </div>
         </div>
     </body>

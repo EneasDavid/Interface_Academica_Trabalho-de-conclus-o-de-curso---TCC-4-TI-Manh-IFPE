@@ -39,12 +39,12 @@
                 <p>Dados pessoais</p>
                 <input type="text" name="name" placeholder="Nome:" class="input-home" value="{{$entidade->name}}">
                 <select name="sexo" class="form-control" id="Base_Combobox" value="{{$professor->sexo}}">
-                    <option selected value="">Sexo:</option>
+                    <option selected disabled value="">Sexo:</option>
                     <option value="m" {{$professor->sexo=="m"?"selected='selected'":""}}>Masculino</option>
                     <option value="f" {{$professor->sexo=="f"?"selected='selected'":""}}>Feminino</option>
                 </select>
                 <select class="form-control" name="estadoCivil" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Estado civíl</option>
+                    <option selected disabled value="">Estado civíl</option>
                     <option value="solteiro" {{$professor->estadoCivil=="solteiro"?"selected='selected'":""}}>Solteiro(a)</option>
                     <option value="casado" {{$professor->estadoCivil=="casado"?"selected='selected'":""}}>Casado(a)</option>
                     <option value="divorciado" {{$professor->estadoCivil=="divorciado"?"selected='selected'":""}}>Divorciado(a)</option>
@@ -52,7 +52,7 @@
                 </select>
                 <input type="text" name="nomeMae" value="{{$professor->nomeMae}}" placeholder="Nome da mãe:" class="input-home">
                 <select type="text" name="TipoSanguineo"  class="form-control" id="Base_Combobox" style="display: block;">
-                     <option selected value="">Tipo Sanguineo</option>
+                     <option selected disabled value="">Tipo Sanguineo</option>
                      <option value="AB+" {{$professor->TipoSanguineo=="AB+"?"selected='selected'":""}}>AB+</option>
                      <option value="AB-" {{$professor->TipoSanguineo=="AB-"?"selected='selected'":""}}>AB-</option>
                      <option value="A+" {{$professor->TipoSanguineo=="A+"?"selected='selected'":""}}>A+</option>
@@ -67,7 +67,7 @@
                 <input type="text" name="naturalidade" value="{{$professor->naturalidade}}" placeholder="Naturalidade" class="input-home">
                 <input type="text" name="nomeUsual" value="{{$professor->nomeUsual}}" placeholder="Nome usual:" class="input-home">
                 <select name="etnia" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Etnia</option>
+                    <option selected disabled value="">Etnia</option>
                     <option value="branco" {{$professor->etnia=="branco"?"selected='selected'":""}}>Branco</option>
                     <option value="negro" {{$professor->etnia=="negro"?"selected='selected'":""}}>Negro</option>
                     <option value="pardo" {{$professor->etnia=="pardo"?"selected='selected'":""}}>Pardo</option>
@@ -80,7 +80,7 @@
                 <label for="" style="font-size: 12px; padding-left:5px ;">Data de expedição do RG:</label>
                 <input type="date"name="rgExpedicao"  value="{{$professor->rgExpedicao}}" placeholder="" class="input-home">
                 <select type="text" name="ufExpeditor" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Estado Expeditor</option>
+                    <option selected disabled value="">Estado Expeditor</option>
                     <option value="AC" {{$professor->ufExpeditor=="AC"?"selected='selected'":""}}>Acre</option>
                     <option value="AL" {{$professor->ufExpeditor=="AL"?"selected='selected'":""}}>Alagoas</option>
                     <option value="AP" {{$professor->ufExpeditor=="AP"?"selected='selected'":""}}>Amapá</option>
@@ -132,22 +132,27 @@
             <div class="col-sm-3">
                 <p>Dados acadêmicos</p>
                 <select name="modalidade" id="Base_Combobox" style="display: block;">
-                    <option selected>Modalidade de contratação</option>
+                    <option selected disabled>Modalidade de contratação</option>
                     <option value="efetivo" {{$professor->modalidade=="efetivo"?"selected='selected'":""}}>Efetivo</option>
                     <option value="substituto" {{$professor->modalidade=="substituto"?"selected='selected'":""}}Substituto>substituto</option>
                     <option value="terceirizado" {{$professor->modalidade=="terceirizado"?"selected='selected'":""}}>Terceirizado</option>
                 </select>
-                <select name="categoria" id="Base_Combobox" style="display: block;" disabled >
-                    <option>Professor</option>
+                <select value='Professor' name="categoria" id="Base_Combobox" style="display: block;">
+                    <option value='Professor'>Professor</option>
                 </select>
                 <select name="grauInstrucao" id="Base_Combobox" style="display: block;">
-                    <option selected>Grau de instrução</option>
+                    <option selected disabled>Grau de instrução</option>
                     <option value="graduacao" {{$professor->grauInstrucao=="graduacao"?"selected='selected'":""}}>Graduação</option>
                     <option value="tecnologo" {{$professor->grauInstrucao=="tecnologo"?"selected='selected'":""}}>Tecnólogo</option>
                     <option value="tecnico" {{$professor->grauInstrucao=="tecnico"?"selected='selected'":""}}>Técnico</option>
                     <option value="pos-graduacao" {{$professor->grauInstrucao=="pos-graduacao"?"selected='selected'":""}}>Pós-graduação</option>
                     <option value="mestrdo" {{$professor->grauInstrucao=="mestrdo"?"selected='selected'":""}}>Mestrado</option>
                     <option value="phd" {{$professor->grauInstrucao=="phd"?"selected='selected'":""}}>Doutorado</option>
+                </select>
+                <select name="profissao" id="Base_Combobox">
+                    <option selected disabled>Profissão</option>
+                    <option value="professor" {{$professor->profissao=="professor"?"selected='selected'":""}}>Professor</option>
+                    <option value="pesquisador" {{$professor->profissao=="pesquisador"?"selected='selected'":""}}>Pesquisador</option>
                 </select>
             </div>
            <button class="btn" type="submit">Alterar</button>

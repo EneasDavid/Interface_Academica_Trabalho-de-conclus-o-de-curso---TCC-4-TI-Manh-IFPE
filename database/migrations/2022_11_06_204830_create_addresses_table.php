@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('estadoCivil')->nullable();
             $table->string('nomeMae');
             $table->string('TipoSanguineo')->nullable();
-            $table->dateTime('dataNascimento');
+            $table->string('dataNascimento');
             $table->string('naturalidade');
             $table->string('nomeUsual')->nullable();
             $table->string('etnia');

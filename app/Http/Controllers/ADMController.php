@@ -76,24 +76,24 @@ class ADMController extends Controller
                 'anoIngreso'=>'required',
                 'turno'=>'required',
                 'numeroCasa'=>'required'
-            ],[
-                //'required' => ':attribute é um campo obrigartorio!', //Idem do de cima
-                'name.required'=>'O campo Nome é obrigatorio',
-                'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
-                'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
-                'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
-                'etnia.required'=>'O campo Etina é obrigatorio',
-                'rg.required'=>'O campo RG é obrigatorio',
-                'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
-                'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
-                'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
-                'cpf.required'=>'O campo CPF é obrigatorio',
-                'email.required'=>'O campo E-Mail é obrigatorio',
-                'senha.required'=>'O campo senha é obrigatorio',
-                'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
-                'turno.required'=>'O campo Turno é obrigatorio',
-                'anoCurso.required'=>'O campo ano do Curso é obrigatorio',
-                'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
+                ],[
+                    //'required' => ':attribute é um campo obrigartorio!', //Idem do de cima
+                    'name.required'=>'O campo Nome é obrigatorio',
+                    'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
+                    'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
+                    'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
+                    'etnia.required'=>'O campo Etina é obrigatorio',
+                    'rg.required'=>'O campo RG é obrigatorio',
+                    'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
+                    'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
+                    'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
+                    'cpf.required'=>'O campo CPF é obrigatorio',
+                    'email.required'=>'O campo E-Mail é obrigatorio',
+                    'senha.required'=>'O campo senha é obrigatorio',
+                    'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
+                    'turno.required'=>'O campo Turno é obrigatorio',
+                    'anoCurso.required'=>'O campo ano do Curso é obrigatorio',
+                    'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
             ]);
             //Passando os valores da web/request pro bd
             $novoUsuario->name = $request->name;
@@ -169,9 +169,9 @@ class ADMController extends Controller
         {
             $aluno=address::findOrFail($id);
             if(empty($aluno)){
-                return redirect('/listarAlunos')->with('msg','Esse aluno não existe!');
+                return redirect('/listarAlunos');
             }
-            $entidade=address::findOrFail($aluno->id_usuario_to_aluno);
+            $entidade=user::findOrFail($aluno->id_usuario_to_aluno);
             return view('ADM.aluno.editarAluno',['aluno'=>$aluno, 'entidade'=>$entidade]);
         }
         public function editarAlunoForms(Request $request)
@@ -182,7 +182,6 @@ class ADMController extends Controller
             $this->validate($request,[
                 'name'=>'required',
                 'nomeMae'=>'required',
-                'dataNascimento'=>'required',
                 'naturalidade'=>'required',
                 'etnia'=>'required',
                 'rg'=>'required',
@@ -192,7 +191,6 @@ class ADMController extends Controller
                 'cpf'=>'required',
                 'email'=>'required',
                 'curso'=>'required',
-                'anoIngreso'=>'required',
                 'turno'=>'required',
                 'numeroCasa'=>'required'
             ],[
@@ -212,38 +210,15 @@ class ADMController extends Controller
                 'turno.required'=>'O campo Turno é obrigatorio',
                 'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
             ]);
-            $usuarioAtualizado->name=$request->name;
-            $usuarioAtualizado->email=$request->email;
-            $usuarioAtualizado->curso=$request->curso;
-            $usuarioAtualizado->matricula=$request->matricula;
-            User::findOrFail($request->id)->update($usuarioAtualizado);
-            $alunoAtualizado->sexo=$request->sexo;
-            $alunoAtualizado->estadoCivil=$request->estadoCivil;
-            $alunoAtualizado->nomeMae=$request->nomeMae;
-            $alunoAtualizado->TipoSanguineo=$request->TipoSanguineo;
-            $alunoAtualizado->dataNascimento=$request->dataNascimento;
-            $alunoAtualizado->naturalidade=$request->naturalidade;
-            $alunoAtualizado->nomeUsual=$request->nomeUsual;
-            $alunoAtualizado->etnia=$request->etnia;
-            $alunoAtualizado->rg=$request->rg;
-            $alunoAtualizado->rgExpedicao=$request->rgExpedicao;
-            $alunoAtualizado->ufExpeditor=$request->ufExpeditor;
-            $alunoAtualizado->expeditorRg=$request->expeditorRg;
-            $alunoAtualizado->cpf=$request->cpf;
-            $alunoAtualizado->numeroCelular=$request->numeroCelular;
-            $alunoAtualizado->cep=$request->cep;
-            $alunoAtualizado->UF=$request->UF;
-            $alunoAtualizado->cidade=$request->cidade;
-            $alunoAtualizado->bairro=$request->bairro;
-            $alunoAtualizado->rua=$request->rua;
-            $alunoAtualizado->numeroCasa=$request->numeroCasa;
-            $alunoAtualizado->complementoCasa=$request->complementoCasa;
-            $alunoAtualizado->grauInstrucao=$request->grauInstrucao;
+            user::findOrFail($request->id)->update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'matricula'=>$request->matricula,
+            ]);
             $alunoAtualizado->turno=$request->turno;
-            $alunoAtualizado->anoIngreso=$request->anoIngreso-2000;
-            $anoAtual=date('Y')-2000;
-            $alunoAtualizado->anoCurso=($anoAtual-$alunoAtualizado->anoIngreso)+1;
-            $alunoAtualizadoTurma=salaAula::where('curso',$request->curso)->where('serie',$alunoAtualizado->anoCurso)->where('turno',$request->turno)->first();
+            $alunoAtualizado->curso=$request->curso;
+            $alunoAtualizado->anoCurso=$request->anoCurso;
+            $alunoAtualizado->turma=salaAula::where('curso',$alunoAtualizado->curso)->where('serie',$alunoAtualizado->anoCurso)->where('turno',$alunoAtualizado->turno)->first();
             
             //Upload de imagem
             if($request->hasfile('imagem') && $request->file('imagem')->isValid()){
@@ -257,8 +232,35 @@ class ADMController extends Controller
                 //salva no bd
                 $alunoAtualizado['imagem']=$imagemName;
             }
-            $alunoAtualizado->id_usuario_to_aluno=$usuarioAtualizado->id;
-            address::where('id_usuario_to_aluno', 'like', '%'.$entidade->id.'%')->update($alunoAtualizado);
+            address::where('id_usuario_to_aluno', 'like', '%'.$usuarioAtualizado->id.'%')->update([
+                'sexo'=>$request->sexo,
+                'curso'=>$alunoAtualizado->curso,
+                'estadoCivil'=>$request->estadoCivil,
+                'nomeMae'=>$request->nomeMae,
+                'TipoSanguineo'=>$request->TipoSanguineo,
+                'dataNascimento'=>$request->dataNascimento,
+                'naturalidade'=>$request->naturalidade,
+                'nomeUsual'=>$request->nomeUsual,  
+                'etnia'=>$request->etnia,                
+                'rg'=>$request->rg,
+                'rgExpedicao'=>$request->rgExpedicao,
+                'ufExpeditor'=>$request->ufExpeditor,
+                'expeditorRg'=>$request->expeditorRg,
+                'cpf'=>$request->cpf,
+                'numeroCelular'=>$request->numeroCelular,
+                'cep'=>$request->cep,
+                'UF'=>$request->UF,
+                'cidade'=>$request->cidade,
+                'bairro'=>$request->bairro,
+                'rua'=>$request->rua,
+                'numeroCasa'=>$request->numeroCasa,
+                'complementoCasa'=>$request->complementoCasa,
+                'grauInstrucao'=>$request->grauInstrucao,
+                'turno'=>$request->turno,
+                'anoIngreso'=>$request->anoIngreso,     
+                'anoCurso'=>$alunoAtualizado->anoCurso,
+                'id_salaAula'=>$alunoAtualizado->turma,
+            ]);
             return redirect('/listarAlunos')->with('msg','Editado com sucesso!');
             
         }
@@ -490,7 +492,7 @@ class ADMController extends Controller
         }
         public function editarProfessorForms(Request $request)
         {
-            $alunoAtualizado = new address;
+            $professorAtualizado = new professor;
             $usuarioAtualizado = new User;
 
             $this->validate($request,[
@@ -505,11 +507,8 @@ class ADMController extends Controller
                 'expeditorRg'=>'required',
                 'cpf'=>'required',
                 'email'=>'required',
-                'curso'=>'required',
-                'anoIngreso'=>'required',
-                'turno'=>'required',
                 'numeroCasa'=>'required'
-            ],[
+                ],[
                 //'required' => ':attribute é um campo obrigartorio!', //Idem do de cima
                 'name.required'=>'O campo Nome é obrigatorio',
                 'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
@@ -522,43 +521,13 @@ class ADMController extends Controller
                 'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
                 'cpf.required'=>'O campo CPF é obrigatorio',
                 'email.required'=>'O campo E-Mail é obrigatorio',
-                'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
-                'turno.required'=>'O campo Turno é obrigatorio',
                 'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
             ]);
-            $usuarioAtualizado->name=$request->name;
-            $usuarioAtualizado->email=$request->email;
-            $usuarioAtualizado->curso=$request->curso;
-            $usuarioAtualizado->matricula=$request->matricula;
-            User::findOrFail($request->id)->update($usuarioAtualizado);
-            $alunoAtualizado->sexo=$request->sexo;
-            $alunoAtualizado->estadoCivil=$request->estadoCivil;
-            $alunoAtualizado->nomeMae=$request->nomeMae;
-            $alunoAtualizado->TipoSanguineo=$request->TipoSanguineo;
-            $alunoAtualizado->dataNascimento=$request->dataNascimento;
-            $alunoAtualizado->naturalidade=$request->naturalidade;
-            $alunoAtualizado->nomeUsual=$request->nomeUsual;
-            $alunoAtualizado->etnia=$request->etnia;
-            $alunoAtualizado->rg=$request->rg;
-            $alunoAtualizado->rgExpedicao=$request->rgExpedicao;
-            $alunoAtualizado->ufExpeditor=$request->ufExpeditor;
-            $alunoAtualizado->expeditorRg=$request->expeditorRg;
-            $alunoAtualizado->cpf=$request->cpf;
-            $alunoAtualizado->numeroCelular=$request->numeroCelular;
-            $alunoAtualizado->cep=$request->cep;
-            $alunoAtualizado->UF=$request->UF;
-            $alunoAtualizado->cidade=$request->cidade;
-            $alunoAtualizado->bairro=$request->bairro;
-            $alunoAtualizado->rua=$request->rua;
-            $alunoAtualizado->numeroCasa=$request->numeroCasa;
-            $alunoAtualizado->complementoCasa=$request->complementoCasa;
-            $alunoAtualizado->grauInstrucao=$request->grauInstrucao;
-            $alunoAtualizado->turno=$request->turno;
-            $alunoAtualizado->anoIngreso=$request->anoIngreso-2000;
-            $anoAtual=date('Y')-2000;
-            $alunoAtualizado->anoCurso=($anoAtual-$alunoAtualizado->anoIngreso)+1;
-            $alunoAtualizadoTurma=salaAula::where('curso',$request->curso)->where('serie',$alunoAtualizado->anoCurso)->where('turno',$request->turno)->first();
-            
+            user::findOrFail($request->id)->update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'matricula'=>$request->matricula,
+            ]);
             //Upload de imagem
             if($request->hasfile('imagem') && $request->file('imagem')->isValid()){
                 $requestImagem=$request->imagem;
@@ -567,13 +536,38 @@ class ADMController extends Controller
                 //pega a extensão
                 $imagemName=md5($requestImagem->getClientOriginalName().strtotime("now").".".$extension);
                 //cria o nome da imagem
-                $request->imagem->move(public_path('img/events'),$imagemName);
+                $request->imagem->move(public_path('img/professores'),$imagemName);
                 //salva no bd
                 $alunoAtualizado['imagem']=$imagemName;
             }
-            $alunoAtualizado->id_usuario_to_aluno=$usuarioAtualizado->id;
-            address::where('id_usuario_to_aluno', 'like', '%'.$entidade->id.'%')->update($alunoAtualizado);
-            return redirect('/listarAlunos')->with('msg','Editado com sucesso!');
+            professor::where('id_usuario_to_professors', 'like', '%'.$usuarioAtualizado->id.'%')->update([
+                'sexo'=>$request->sexo,
+                'estadoCivil'=>$request->estadoCivil,
+                'nomeMae'=>$request->nomeMae,
+                'TipoSanguineo'=>$request->TipoSanguineo,
+                'dataNascimento'=>$request->dataNascimento,
+                'naturalidade'=>$request->naturalidade,
+                'nomeUsual'=>$request->nomeUsual,  
+                'etnia'=>$request->etnia,                
+                'rg'=>$request->rg,
+                'rgExpedicao'=>$request->rgExpedicao,
+                'ufExpeditor'=>$request->ufExpeditor,
+                'expeditorRg'=>$request->expeditorRg,
+                'cpf'=>$request->cpf,
+                'numeroCelular'=>$request->numeroCelular,
+                'cep'=>$request->cep,
+                'UF'=>$request->UF,
+                'cidade'=>$request->cidade,
+                'bairro'=>$request->bairro,
+                'rua'=>$request->rua,
+                'numeroCasa'=>$request->numeroCasa,
+                'complementoCasa'=>$request->complementoCasa,
+                'grauInstrucao'=>$request->grauInstrucao,
+                'profissao'=>$request->profissao,
+                'modalidade'=>$request->modalidade,
+                'categoria'=>$request->categoria,
+            ]);
+            return redirect('/listarProfessores')->with('msg','Editado com sucesso!');
             
         }
         public function listarProfessores()

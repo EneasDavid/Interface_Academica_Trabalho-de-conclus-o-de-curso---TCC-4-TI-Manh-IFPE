@@ -37,12 +37,12 @@
                 <p>Dados pessoais</p>
                 <input type="text" name="name" placeholder="Nome:" class="input-home">
                 <select name="sexo" class="form-control" id="Base_Combobox">
-                    <option selected>Sexo:</option>
+                    <option selected disabled>Sexo:</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                 </select>
                 <select class="form-control" name="estadoCivil" id="Base_Combobox" style="display: block;">
-                    <option selected>Estado civíl</option>
+                    <option selected disabled>Estado civíl</option>
                     <option value="casado">Casado(a)</option>
                     <option value="solteiro">Solteiro(a)</option>
                     <option value="divorciado">Divorciado(a)</option>
@@ -50,7 +50,7 @@
                 </select>
                 <input type="text" name="nomeMae" placeholder="Nome da mãe:" class="input-home">
                 <select type="text" name="TipoSanguineo" class="form-control" id="Base_Combobox" style="display: block;">
-                     <option selected>Tipo Sanguineo</option>
+                     <option selected disabled>Tipo Sanguineo</option>
                      <option value="AB+">AB+</option>
                      <option value="AB-">AB-</option>
                      <option value="A+">A+</option>
@@ -65,7 +65,7 @@
                 <input type="text" name="naturalidade" placeholder="Naturalidade" class="input-home">
                 <input type="text" name="nomeUsual" placeholder="Nome usual:" class="input-home">
                 <select name="etnia" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected>Etnia</option>
+                    <option selected disabled>Etnia</option>
                     <option value="branco">Branco</option>
                     <option value="negro">Negro</option>
                     <option value="pardo">Pardo</option>
@@ -78,7 +78,7 @@
                 <label for="" style="font-size: 12px; padding-left:5px ;">Data de expedição do RG:</label>
                 <input type="date"name="rgExpedicao"  placeholder="" class="input-home">
                 <select type="text" name="ufExpeditor" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected>Estado Expeditor</option>
+                    <option selected disabled>Estado Expeditor</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -130,7 +130,7 @@
             <div class="col-sm-3">
                 <p>Dados acadêmicos</p>
                 <select name="modalidade" id="Base_Combobox" style="display: block;">
-                    <option selected>Modalidade de contratação</option>
+                    <option selected disabled>Modalidade de contratação</option>
                     <option value="efetivo">Efetivo</option>
                     <option value="substituto">Substituto</option>
                     <option value="terceirizado">Terceirizado</option>
@@ -139,7 +139,7 @@
                     <option>Professor</option>
                 </select>
                 <select name="grauInstrucao" id="Base_Combobox" style="display: block;">
-                    <option selected>Grau de instrução</option>
+                    <option selected disabled>Grau de instrução</option>
                     <option value="ensino-medio">Ensino Médio</option>
                     <option value="graduacao">Graduação</option>
                     <option value="tecnologo">Tecnólogo</option>
@@ -149,7 +149,7 @@
                     <option value="phd">Doutorado</option>
                 </select>
                 <select name="profissao" id="Base_Combobox">
-                    <option selected>Profissão</option>
+                    <option selected disabled>Profissão</option>
                     <option value="professor">Professor</option>
                     <option value="pesquisador">Pesquisador</option>
                 </select>

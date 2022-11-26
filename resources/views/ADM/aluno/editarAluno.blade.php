@@ -39,12 +39,12 @@
                 <p>Dados pessoais</p>
                 <input type="text" name="name" placeholder="Nome:" class="input-home" value="{{$entidade->name}}">
                 <select name="sexo" class="form-control" id="Base_Combobox" value="{{$aluno->sexo}}">
-                    <option selected value="">Sexo:</option>
+                    <option selected disabled value="">Sexo:</option>
                     <option value="m" {{$aluno->sexo=="m"?"selected='selected'":""}}>Masculino</option>
                     <option value="f" {{$aluno->sexo=="f"?"selected='selected'":""}}>Feminino</option>
                 </select>
                 <select class="form-control" name="estadoCivil" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Estado civíl</option>
+                    <option selected disabled value="">Estado civíl</option>
                     <option value="solteiro" {{$aluno->estadoCivil=="solteiro"?"selected='selected'":""}}>Solteiro(a)</option>
                     <option value="casado" {{$aluno->estadoCivil=="casado"?"selected='selected'":""}}>Casado(a)</option>
                     <option value="divorciado" {{$aluno->estadoCivil=="divorciado"?"selected='selected'":""}}>Divorciado(a)</option>
@@ -52,7 +52,7 @@
                 </select>
                 <input type="text" name="nomeMae" value="{{$aluno->nomeMae}}" placeholder="Nome da mãe:" class="input-home">
                 <select type="text" name="TipoSanguineo"  class="form-control" id="Base_Combobox" style="display: block;">
-                     <option selected value="">Tipo Sanguineo</option>
+                     <option selected disabled value="">Tipo Sanguineo</option>
                      <option value="AB+" {{$aluno->TipoSanguineo=="AB+"?"selected='selected'":""}}>AB+</option>
                      <option value="AB-" {{$aluno->TipoSanguineo=="AB-"?"selected='selected'":""}}>AB-</option>
                      <option value="A+" {{$aluno->TipoSanguineo=="A+"?"selected='selected'":""}}>A+</option>
@@ -63,11 +63,11 @@
                      <option value="O-" {{$aluno->TipoSanguineo=="O-"?"selected='selected'":""}}>O-</option>
                 </select>
                 <label for="" style="font-size: 12px; padding: 5px;">Data de nascimento:</label>
-                <input type="date"  name="dataNascimento" value="{{$aluno->dataNascimento}}" placeholder="Data de nascimento" class="input-home">
+                <input type="date" name="dataNascimento" value="$aluno->dataNascimento" placeholder="{{date('d/m/Y', strtotime($aluno->dataNascimento))}}" class="input-home">
                 <input type="text" name="naturalidade" value="{{$aluno->naturalidade}}" placeholder="Naturalidade" class="input-home">
                 <input type="text" name="nomeUsual" value="{{$aluno->nomeUsual}}" placeholder="Nome usual:" class="input-home">
                 <select name="etnia" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Etnia</option>
+                    <option selected disabled value="">Etnia</option>
                     <option value="branco" {{$aluno->etnia=="branco"?"selected='selected'":""}}>Branco</option>
                     <option value="negro" {{$aluno->etnia=="negro"?"selected='selected'":""}}>Negro</option>
                     <option value="pardo" {{$aluno->etnia=="pardo"?"selected='selected'":""}}>Pardo</option>
@@ -80,7 +80,7 @@
                 <label for="" style="font-size: 12px; padding-left:5px ;">Data de expedição do RG:</label>
                 <input type="date"name="rgExpedicao"  value="{{$aluno->rgExpedicao}}" placeholder="" class="input-home">
                 <select type="text" name="ufExpeditor" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Estado Expeditor</option>
+                    <option selected disabled value="">Estado Expeditor</option>
                     <option value="AC" {{$aluno->ufExpeditor=="AC"?"selected='selected'":""}}>Acre</option>
                     <option value="AL" {{$aluno->ufExpeditor=="AL"?"selected='selected'":""}}>Alagoas</option>
                     <option value="AP" {{$aluno->ufExpeditor=="AP"?"selected='selected'":""}}>Amapá</option>
@@ -134,19 +134,20 @@
                 <input class="input-home" name="nivelAcesso" style="background: #c1c8cf;" value="aluno" readonly>
                 <input class="input-home" name="grauInstrucao" style="background: #c1c8cf;" value="ensino-medio" readonly>
                 <select name="curso" class="form-control" id="Base_Combobox" style="display: block;">
-                    <option selected value="">Curso</option>
+                    <option selected disabled value="">Curso</option>
                     <option value="TMA" {{$aluno->curso=="TMA"?"selected='selected'":""}} >TMA</option>
                     <option value="TI" {{$aluno->curso=="TI"?"selected='selected'":""}} >TI</option>
                     <option value="TEE" {{$aluno->curso=="TEE"?"selected='selected'":""}} >TEE</option>
                 </select>
-                <select name="anoIngreso"  class="form-control" id="Base_Combobox" data-ano style="display: block;">
-                    <option value="">Ano de ingreso</option>
-                        <?php
-                            for ($anoInicio = date('Y') - 10; $anoInicio <= date('Y'); $anoInicio++){
-                                echo '<option name="ano_ingreso" value="'.$anoInicio.'">'.$anoInicio.'</option>';
-                                //{{$aluno->anoIngresso=='.$anoInicio.'?"selected='selected'":""}}*/
-                            }
-                        ?>
+                <select name="anoIngreso" readonly class="form-control" id="Base_Combobox" data-ano style="display: block;">
+                    <option value="{{$aluno->anoIngreso}}">20{{$aluno->anoIngreso}}</option>
+                </select>
+                <select name="anoCurso" class="form-control" id="Base_Combobox" style="display: block;">
+                    <option disabled selected value="">Ano do curso</option>
+                    <option value="1" {{$aluno->anoCurso==1?"selected='selected'":""}}>1 ano</option>
+                    <option value="2" {{$aluno->anoCurso==2?"selected='selected'":""}}>2 ano</option>
+                    <option value="3" {{$aluno->anoCurso==3?"selected='selected'":""}}>3 ano</option>
+                    <option value="4" {{$aluno->anoCurso==4?"selected='selected'":""}}>4 ano</option>
                 </select>
                 <div id="anoCurso"></div>
                 <label for="internaSelecao" >Turno:</label>
@@ -154,7 +155,7 @@
                     <div class="internaSelecao">
                         <label class="container" style="display: flex;flex-direction: column;align-items: center;">Manhã
                             <input name="turno" type="radio" checked="checked" value="Manhã">
-                                <span class="checkmark" {{$aluno->truno=="Manhã"?"checkmark='checkmark'":""}}></span>
+                                <span class="checkmark"></span>
                             </label>
                         <label class="container" style="display: flex;flex-direction: column;align-items: center;">Tarde
                             <input name="turno" type="radio" checked="checked" value="Tarde">
@@ -169,15 +170,5 @@
     {{--Importanto o freamework para achar o endereço pelo cep--}}
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="/js/consultaCEP.js"></script>
-  {{-- <script type="text/javascript">
-            var anoIngreso = document.querySelector('[data-ano]').value;
-            //anoIngreso=anoIngreso-2000;
-            var now = new Date;
-            var anoAtual=now.getFullYear()-2000;
-            anoCurso=(anoAtual-anoIngreso)+1;
-            if(anoCurso>4){
-                $("#anoCurso").append('<input type="text" class="input-home" placeholder="Ano do curso:" name="anoCurso">');
-            }
-</script>--}}
 </body>
 </html>
