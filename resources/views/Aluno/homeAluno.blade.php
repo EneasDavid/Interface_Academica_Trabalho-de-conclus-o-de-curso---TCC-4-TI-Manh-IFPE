@@ -92,13 +92,13 @@
                  <p class="img" style="display: flex;justify-content: space-around;"><img src="img/upload-foto.png" class="selecionar-foto" alt="selecionar foto"></p>
              @endif
                  <div class="entrada">
-                     <label for="nome-aluno"><b>Nome do aluno:</b></label>
+                     <label for="nome-aluno"><strong>Nome do aluno:</strong></label>
                      @if(empty($aluno->nomeUsual))
                          <p type="text" class="input-home" disabled>{{$entidade->name}}</p>
                      @else
                          <p type="text" class="input-home" disabled>{{$aluno->nomeUsual}}</p>
                      @endif
-                     <label for="matricula"><b>Matrícula:</b></label>
+                     <label for="matricula"><strong>Matrícula:</strong></label>
                      <p type="text" class="input-home" disabled>  {{$entidade->matricula}}</p>
                      <button class="btn" style="margin-top: 10px">Editar</button>
                  </div>

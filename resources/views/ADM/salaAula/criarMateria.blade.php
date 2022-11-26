@@ -51,7 +51,7 @@
             </form>
         </div>
         @else
-        <p style="margin: auto;width: max-content;">Não há professor cadastrado. <a href="\criarProfessor"><b>click aqui para cadastrar um</b></a></p>
+        <p style="margin: auto;width: max-content;">Não há professor cadastrado. <a href="\criarProfessor"><strong>click aqui para cadastrar um</strong></a></p>
         @endif
     </div>
 </body>

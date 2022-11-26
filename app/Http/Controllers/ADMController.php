@@ -42,8 +42,8 @@ class ADMController extends Controller
         //after login
         public function homeADM()
         {
-            $sala_aula=salaAula::all();
-            return view('ADM.homeAdm',['salas'=>$sala_aula]);
+            $salaAula=salaAula::all();
+            return view('ADM.homeAdm',['salas'=>$salaAula]);
         }
         
         //------------------------------Criar Aluno------------------------------
@@ -311,7 +311,7 @@ class ADMController extends Controller
                     $livro=Livros::where([
                         ['titulo', 'like', '%'.$busca.'%']
                         ])->get();
-                }else if(!empty(Livros::where('autor', 'like', '%'.$busca.'%')->first())){
+                }elseif(!empty(Livros::where('autor', 'like', '%'.$busca.'%')->first())){
                      $livro=Livros::where([
                              ['autor', 'like', '%'.$busca.'%']
                              ])->get();
@@ -581,7 +581,7 @@ class ADMController extends Controller
                         foreach ($entidades as $professors){
                             $professores=professor::where([['id_usuario_to_professors','like',$professors->id]])->get();
                         }
-                }else if(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
+                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
                          $entidades=User::where([
                              ['name', 'like', '%'.$busca.'%']
                              ])->get();
@@ -955,7 +955,7 @@ class ADMController extends Controller
                         foreach ($entidades as $aluno){
                             $alunos=address::where([['id_usuario_to_aluno','like',$aluno->id]])->get();
                         }
-                }else if(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
+                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
                         $entidades=User::where([
                             ['name', 'like', '%'.$busca.'%']
                             ])->get();

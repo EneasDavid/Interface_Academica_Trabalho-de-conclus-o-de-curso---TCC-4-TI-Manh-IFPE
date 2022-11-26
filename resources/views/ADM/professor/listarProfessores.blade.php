@@ -25,7 +25,7 @@
         @if (count($professores)==0 && $busca)
             <p>Professor não encontrado</p>
         @elseif (count($professores)==0)
-            <p>Nenhum Professor contratado <b><a href="/criarProfessor">click aqui para contratar um</a></b></p>
+            <p>Nenhum Professor contratado <strong><a href="/criarProfessor">click aqui para contratar um</a></strong></p>
         @else
         <div style="width: auto;display: flex;align-items: center;flex-wrap: wrap;">
         @foreach ($professores as $professor)
@@ -41,8 +41,8 @@
                         @foreach($entidades as $entidade)
                             @if($entidade->id==$professor->id_usuario_to_professors)
                             <div class="pesquisa">
-                            <p><b>Nome: </b>{{$entidade->name}}</p>     
-                            <p><b>Matricula: </b>{{$entidade->matricula}}</p>    
+                            <p><strong>Nome: </strong>{{$entidade->name}}</p>     
+                            <p><strong>Matricula: </strong>{{$entidade->matricula}}</p>    
                             </div>
                             @endif
                         @endforeach

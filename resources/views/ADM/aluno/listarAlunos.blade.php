@@ -25,7 +25,7 @@
         @if (count($alunos)==0 && $busca)
              <p>Aluno não encontrado</p>
         @elseif (count($alunos)==0)
-             <p>Nenhum aluno matriculado <b><a href="/criarAluno">click aqui para matricular um</a></b></p>
+             <p>Nenhum aluno matriculado <strong><a href="/criarAluno">click aqui para matricular um</a></strong></p>
         @else
              <div style="display: flex;align-items: center;flex-wrap: wrap;">
         @foreach ($alunos as $aluno)
@@ -42,16 +42,16 @@
                             @if($entidade->id==$aluno->id_usuario_to_aluno)
                                 <div class="pesquisa">
                             @if(empty($aluno->nomeUsual))
-                                <p><b>Nome: </b>{{$entidade->name}}</p>     
+                                <p><strong>Nome: </strong>{{$entidade->name}}</p>     
                             @else
-                                <p><b>Nome: </b>{{$aluno->nomeUsual}}</p>     
+                                <p><strong>Nome: </strong>{{$aluno->nomeUsual}}</p>     
                             @endif
-                            <p><b>Matricula: </b>{{$entidade->matricula}}</p>    
+                            <p><strong>Matricula: </strong>{{$entidade->matricula}}</p>    
                             </div>
                             @endif
                         @endforeach
                         <div class="pesquisa">
-                            <p><b>Turma: </b>{{$aluno->anoCurso}} {{$aluno->curso}} {{$aluno->turno}}</p>
+                            <p><strong>Turma: </strong>{{$aluno->anoCurso}} {{$aluno->curso}} {{$aluno->turno}}</p>
                         </div>
                         <div style="display: flex;align-items: center;justify-content: space-between;flex-direction: row;">
                             <a href="editarAluno/{{$aluno->id}}" class="btn" style="height: auto">Editar Aluno</a>    

@@ -339,7 +339,7 @@ class AlunoController extends Controller
                         $livros=Livros::where([
                         ['titulo', 'like', '%'.$busca.'%']
                         ])->get();
-                    }else if(!empty(User::where('autor', 'like', '%'.$busca.'%')->first())){
+                    }elseif(!empty(User::where('autor', 'like', '%'.$busca.'%')->first())){
                          $livros=Livros::where([
                          ['name', 'like', '%'.$busca.'%']
                      ])->get();
