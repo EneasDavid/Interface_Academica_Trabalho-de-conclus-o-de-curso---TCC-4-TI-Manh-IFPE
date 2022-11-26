@@ -18,14 +18,17 @@
             <a class="row" href="/turma/{{$turma->id}}" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
                          <div class="middle">
-                             <h1>$turma->nomeMateria</h1>
-                             @foreach ($salaAula as $sala)     
-                                 <p>$sala->serie° $sala->curso $sala->turno</p>
+                             <h1>{{$turma->nomeMateria}}</h1>
+                             @foreach ($salaAula as $sala)
+                             @dd($sala->toArray())
+                                @if($sala->segundaUm==$turma->id or $sala->segundaDois==$turma->id or $sala->segundaTres==$turma->id or $sala->segundaQuatro==$turma->id or $sala->segundaCinco==$turma->id or $sala->segundaSeis==$turma->id)     
+                                    <p>{{$sala->serie}}° {{$sala->curso}} {{$sala->turno}}</p>
+                                @endif
                              @endforeach
                         </div>
                     </div>
                 </a>
-            @endforeach
+        @endforeach
          </div>
      </div>
 </body>

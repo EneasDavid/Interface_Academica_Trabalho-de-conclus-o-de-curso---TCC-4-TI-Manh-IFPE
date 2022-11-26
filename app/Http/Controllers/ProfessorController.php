@@ -44,9 +44,12 @@ class ProfessorController extends Controller
              $materia=materia::where([
                 ['id_professor','like',$professor->id]
                 ])->get();
-             $salaAula=sala_aula::where([
-                 ['segundaUm',$professor->id]
+             $salaAula=salaAula::where([
+                
+                 ['segundaDois',$professor->id],
+                
                  ])->get();
+                 dd($salaAula);
             return view('professor.homeProfessor',['professor'=>$professor,'entidade'=>$entidade,'materia'=>$materia,'salaAula'=>$salaAula]);
         }
 }

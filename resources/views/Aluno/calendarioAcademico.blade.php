@@ -20,7 +20,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav" style="color: #000;">
             <ul class="navbar-nav aluno">
-                <a class="nav-link aluno" style="width: auto;" href="/alterarSenhaToAluno">
+                <a class="nav-link aluno" style="width: auto;" href="alterarSenhaToAluno">
                     <li class="nav-item" style="height: 100%;">
                         <div class="">
                             Alterar senha
@@ -62,24 +62,6 @@
                         </div>
                     </li>
                 </a>
-                @if(!empty($aluno->medidasDiciplinares))
-                <a class="nav-link aluno" style="width: auto;" href="#">
-                    <li class="nav-item" style="height: 100%;">
-                        <div class="">
-                            Medidas disciplinares
-                        </div>
-                    </li>
-                </a>
-                @endif
-                @if(!empty($aluno->premicoes))
-                <a class="nav-link aluno" style="width: auto;" href="#">
-                    <li class="nav-item" style="height: 100%;">
-                        <div class="">
-                            Premiações
-                        </div>
-                    </li>
-                </a>
-                @endif
                 @if(!empty($aluno->renovarMatricula))
                 <a class="nav-link aluno" style="width: auto;" href="#">
                     <li class="nav-item" style="height: 100%;">
