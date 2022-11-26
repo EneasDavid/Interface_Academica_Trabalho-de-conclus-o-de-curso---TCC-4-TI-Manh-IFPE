@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('address_emprestimo', function (Blueprint $table) {
+        Schema::create('address_livros', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('address_id')->nullable();
-            $table->unsignedBigInteger('emprestimo_id')->nullable();
+            $table->unsignedBigInteger('livros_id')->nullable();
             $table->boolean('vencido')->nullable();
             $table->timestamps();
         });
 
-        Schema::table('address_emprestimo', function (Blueprint $table) {
-            $table->foreign('address_id')->references('id')->on('Livros')->onDelete('cascade');
-            $table->foreign('emprestimo_id')->references('id')->on('addresses')->onDelete('cascade');
+        Schema::table('address_livros', function (Blueprint $table) {
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
+            $table->foreign('livros_id')->references('id')->on('Livros')->onDelete('cascade');
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address_emprestimo');
+        Schema::dropIfExists('address_livros');
     }
 };

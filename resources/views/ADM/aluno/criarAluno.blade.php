@@ -34,8 +34,8 @@
                 <input type="file" name="fotoAluno" style="height: 2.5rem; background-color: transparent;" id="fotoAluno" placeholder="Foto:" class="form-control input-home">
                 <p>Dados pessoais</p>
                 <input type="text" name="name" placeholder="Nome:" class="input-home">
-                <select name="sexo" disabled class="form-control" id="Base_Combobox">
-                    <option selected value="">Sexo:</option>
+                <select name="sexo" class="form-control" id="Base_Combobox">
+                    <option selected disabled value="">Sexo:</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                 </select>
@@ -143,6 +143,13 @@
                             }
                         ?>
                 </select>
+                <select name="anoCurso" class="form-control" id="Base_Combobox" style="display: block;">
+                    <option disabled selected value="">Ano do curso</option>
+                    <option value="1">1 ano</option>
+                    <option value="2">2 ano</option>
+                    <option value="3">3 ano</option>
+                    <option value="4">4 ano</option>
+                </select>
                 <div id="anoCurso"></div>
                 <label for="internaSelecao" >Turno:</label>
                 <div class="matricula selecao">
@@ -164,15 +171,5 @@
     {{--Importanto o freamework para achar o endereço pelo cep--}}
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="/js/consultaCEP.js"></script>
-   <!-- <script type="text/javascript">
-            var anoIngreso = document.querySelector('[data-ano]').value;
-            //anoIngreso=anoIngreso-2000;
-            var now = new Date;
-            var anoAtual=now.getFullYear()-2000;
-            anoCurso=(anoAtual-anoIngreso)+1;
-            if(anoCurso>4){
-                $("#anoCurso").append('<input type="text" class="input-home" placeholder="Ano do curso:" name="anoCurso">');
-            }
-</script>-->
 </body>
 </html>

@@ -15,8 +15,8 @@
         <h4 style="padding-left: 55px">Criar matéria</h4>
     </div>
     @if (count($professores)>0)
-    <div class="container" style="display: block;">
-        <div class="row">
+    <div class="container" style="display: flex;justify-content: space-around;">
+        <div class="row" style="margin-top: 13rem;">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

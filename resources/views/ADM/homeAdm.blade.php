@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="row" href="\acervoBiblioteca-Emprestimos" style="margin-bottom: 1rem;">
+                <a class="row" href="\acervoBiblioteca-consultar-Emprestimos" style="margin-bottom: 1rem;">
                     <div class="acaoAdministrativo">
                         <div class="middle" style="">
                             <h1>Consultar Empréstimos</h1>

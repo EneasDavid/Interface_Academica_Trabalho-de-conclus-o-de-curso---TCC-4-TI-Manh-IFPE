@@ -89,12 +89,12 @@
                   <td>{{$livros->volume}}</td>
                   <td>{{$livros->qtd_disponivel}}</td>
                   <td>
-                    {{--Corrigir metodo delete--}}
-                    <form action="/destruirLivro/{{$livros->id}}" method="post">
+                    {{--Corrigir metodo delete
+                    <form action="/destruirLivro/{{$livros->id}}" method="POST">
                         @csrf
                         @method('DELETE')
                             <button type="submit" class="btn btn-danger delete-btn">Deletar</button>
-                      </form>
+                      </form>--}}
               </tr>
             @endforeach
           </tbody>

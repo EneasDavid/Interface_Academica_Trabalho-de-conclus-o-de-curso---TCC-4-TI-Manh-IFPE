@@ -10,11 +10,17 @@
 <body>
     <div style="display: flex;">
         <a href="/homeAdm"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
-        <h4 style="padding-left: 55px">Consulta emprestimos</h4>
+        <h4 style="padding-left: 55px">Consulta emprestimos de um aluno</h4>
     </div>
-    <div class="table-responsive">
-        @if(!empty($emprestimoLivro))
-        <table class="table">
+    @if(empty($emprestimoLivro))
+    <div class="table-responsive" style="margin-top: 15rem;justify-content: space-around!important;">
+        <form class="forms-pesquisa" style="display: flex;flex-direction: column;align-items: flex-end;"action="/acervoBiblioteca-consultar-Emprestimos" method="get">
+             <input type="text" name="matricula" placeholder="Matricula do aluno:" class="input-home">
+             <button class="btn" style="margin-top: 1rem;">Consultar</button>
+        </form>
+    </div>
+    @elseif(!empty($emprestimoLivro))
+    <table class="table">
             <thead>
                 <tr>
                     <th>ID emprestimo</th>
@@ -30,9 +36,9 @@
                 @foreach ($emprestimoLivro as $livros)
                 <tr>
                     <td>{{$livros->id}}</td>
-                    <td>{{$livroEmprestimos->titulo}}</td>
-                    <td>{{$alunoEmprestimos->name}}</td>
-                    <td>{{$alunoEmprestimos->matricula}}</td>
+                    <td>{{$livros->titulo}}</td>
+                    <td>{{$entidade->name}}</td>
+                    <td>{{$entidade->matricula}}</td>
                     <td>{{$livros->created_at}}</td>
                     @if ($livros->vencido)
                         <td>Vencido</td>
@@ -40,7 +46,7 @@
                         <td>Emprestado</td>
                     @endif
                     <td>
-                        <form action="/destruirEmprestimo/{{$livros->id}}" method="POST">
+                        <form action="/destruirEmprestimo/{{$livros->pivot}}" method="post">
                               @csrf
                               @method('DELETE')
                               <button type="submit" class="btn btn-danger delete-btn">Devolvido</button>
@@ -50,9 +56,8 @@
                 @endforeach
             </tbody>
         </table>
-        @else
-            <p style="margin:auto">Não há emprestimos</p>
-        @endif
-    </div>
+    @elseif(!empty($matricula) && empty($aluno))
+        <p>matricula não encontrada</p>
+    @endif
 </body>
 </html>

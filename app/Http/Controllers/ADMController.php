@@ -11,8 +11,6 @@ use App\Models\professor;
 use App\Models\salaAula;
 use App\Models\materia;
 use App\Models\Livros;
-use App\Models\address_emprestimo;
-
 
 class ADMController extends Controller
 {
@@ -94,6 +92,7 @@ class ADMController extends Controller
                 'senha.required'=>'O campo senha é obrigatorio',
                 'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
                 'turno.required'=>'O campo Turno é obrigatorio',
+                'anoCurso.required'=>'O campo ano do Curso é obrigatorio',
                 'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
             ]);
             //Passando os valores da web/request pro bd
@@ -137,8 +136,7 @@ class ADMController extends Controller
                 $novoAluno->grauInstrucao=$request->grauInstrucao;
                 $novoAluno->turno=$request->turno;
                 $novoAluno->anoIngreso=$request->anoIngreso-2000;
-                $anoAtual=date('Y')-2000;
-                $novoAluno->anoCurso=($anoAtual-$novoAluno->anoIngreso)+1;
+                $novoAluno->anoCurso=$request->anoCurso;
                 //Nível de acesso de aluno é o acesso dois
                 $novoAlunoTurma=salaAula::where('curso',$request->curso)->where('serie',$novoAluno->anoCurso)->where('turno',$request->turno)->first();
                 //tosql pra vê o código no dd
@@ -348,25 +346,27 @@ class ADMController extends Controller
             $novoLivro->save();
             return redirect('/acervoBiblioteca')->with('msg','Livro criado!');
         }
-        public function emprestimosBiblioteca()
+        public function emprestimosBibliotecaToAluno()
         {
-            //Pegar a matricula do aluno resolveria isso
-             $emprestimoLivros=address_emprestimo::all();
-             $alunoEmprestimos=null;
-             $livroEmprestimos=null;
-             if(!empty($emprestimoLivros))
-             {
-                foreach($emprestimoLivros as $alunosEmprestimo)
-                {
-                     $consignatario=User::where([
-                                 ['id','like',$alunosEmprestimo->id_aluno_emprestimo]
-                                 ])->get();
-                     $livroEmprestimos=Livros::where([
-                         ['id','like',$alunosEmprestimo->id_livro_emprestimo]
-                         ])->get();
-             }
+            $matricula=request('matricula');
+            $livroEmprestimos=null;
+            $alunoEmprestimo=null;
+            $aluno=null;
+            if($matricula){
+                $aluno=User::where('matricula',$matricula)->first();
+                if(!empty($aluno)){ 
+                    $alunoEmprestimo=address::where('id_usuario_to_aluno','like',$aluno->id)->first();
+                        if(!empty($alunoEmprestimo)){
+                          $livroEmprestimos=$alunoEmprestimo->emprestimoAlunoLivro;
+                        }
+                }
             }
-            return view('ADM.biblioteca.listarEmprestimos',['emprestimoLivro'=>$emprestimoLivros,'alunoEmprestimos'=>$alunoEmprestimos,'livroEmprestimos'=>$livroEmprestimos,/*'busca'=>$busca*/]);
+            return view('ADM.biblioteca.consultarEmprestimoMatricula',['entidade'=>$aluno,''=>$alunoEmprestimo,'emprestimoLivro'=>$livroEmprestimos]);
+        }
+        public function destruirEmprestimo($id){
+            $alunoRemover=address::findOrFail($id[14]);
+            $alunoRemover->emprestimoAlunoLivro()->detach($id[28]);           
+            return redirect('/acervoBiblioteca-consultar-Emprestimos');
         }
         public function destruirLivro($id)
         {

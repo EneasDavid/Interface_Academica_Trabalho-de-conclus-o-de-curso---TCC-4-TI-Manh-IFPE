@@ -72,7 +72,9 @@ Route::post('/Forms-Livro-Criar',[ADMController::class, 'cadastrarLivro'])->name
 //Excluir
 Route::delete('/destruirLivro/{id}',[ADMController::class, 'destruirLivro'])->name('destruirLivro');
 //Emprestimo
-Route::get('/acervoBiblioteca-Emprestimos', [ADMController::class, 'emprestimosBiblioteca'])->name('ADM.acervoBiblioteca')->middleware('auth');
+Route::get('/acervoBiblioteca-consultar-Emprestimos', [ADMController::class, 'emprestimosBibliotecaToAluno'])->name('ADM.emprestimosBiblioteca')->middleware('auth');
+//Devolução
+Route::delete('/destruirEmprestimo/{pivot}', [ADMController::class, 'destruirEmprestimo'])->name('ADM.destruirEmprestimo')->middleware('auth');
 
 //===============================Turma=========================================
 //Turma

@@ -16,6 +16,6 @@ class Livros extends Model
         'qtd_disponivel',
     ];
     public function emprestimoLivro(){
-        return $this->belongsTo('App\Models\emprestimo');
+        return $this->belongsToMany('App\Models\address');
     }
 }

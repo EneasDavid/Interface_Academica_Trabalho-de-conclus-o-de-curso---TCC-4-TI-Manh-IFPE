@@ -46,6 +46,6 @@ class Address extends Model
         }
         
         public function emprestimoAlunoLivro(){
-            return $this->belongsToMany('App\Models\emprestimo');
+            return $this->belongsToMany('App\Models\Livros');
         }
 }
