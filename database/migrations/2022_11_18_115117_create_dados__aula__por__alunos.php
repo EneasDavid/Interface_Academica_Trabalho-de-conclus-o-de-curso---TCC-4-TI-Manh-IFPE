@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dados__aula__por__aluno', function (Blueprint $table) {
+        Schema::create('dados__aula__por__alunos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_aluno');
-            $table->unsignedBigInteger('id_materia');
+            $table->unsignedBigInteger('id_materia')->nullable();
             $table->unsignedBigInteger('qtd_falta_geral');
             $table->unsignedBigInteger('qtd_falta_Um');
             $table->unsignedBigInteger('qtd_falta_Dois');
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        Schema::table('dados__aula__por__aluno', function (Blueprint $table) {
+        Schema::table('dados__aula__por__alunos', function (Blueprint $table) {
             $table->foreign('id_aluno')->references('id')->on('addresses')->onDelete('cascade');
             $table->foreign('id_materia')->references('id')->on('materias')->onDelete('cascade');
         });

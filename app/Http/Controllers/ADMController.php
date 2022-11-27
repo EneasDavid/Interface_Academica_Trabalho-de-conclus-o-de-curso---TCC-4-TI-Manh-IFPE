@@ -11,6 +11,7 @@ use App\Models\professor;
 use App\Models\salaAula;
 use App\Models\materia;
 use App\Models\Livros;
+use App\Models\dados__aula__por__aluno;
 
 class ADMController extends Controller
 {
@@ -101,7 +102,7 @@ class ADMController extends Controller
             $novoUsuario->password = Hash::make($request->senha);
             $novoAluno->curso=$request->curso;
             /*    2019         1D12GR         0692
-            anoIntreso    curso    valores aleatorios*/
+            anoIntreso          curso      valores aleatorios*/
             if($request->curso=="TEE"){
                 $codCurso="1F2";
             }elseif($request->curso=="TI"){
@@ -162,6 +163,15 @@ class ADMController extends Controller
                 
                 //Adicionando aluno na turma
                 $novoAluno->save();
+                $dadosAluno=new dados__aula__por__aluno;
+                $dadosAluno->id_aluno=$novoAluno->id;
+                $dadosAluno->situacao=0;
+                $dadosAluno->qtd_falta_geral=0;
+                $dadosAluno->qtd_falta_Um=0;
+                $dadosAluno->qtd_falta_Dois=0;
+                $dadosAluno->qtd_falta_Tres=0;
+                $dadosAluno->qtd_falta_Quatro=0;
+                $dadosAluno->save();
                 //redirecionando a página
                 return redirect('homeAdm')->with('msg','Aluno cadastrado com sucesso!');
         }
@@ -259,7 +269,7 @@ class ADMController extends Controller
                 'turno'=>$request->turno,
                 'anoIngreso'=>$request->anoIngreso,     
                 'anoCurso'=>$alunoAtualizado->anoCurso,
-                'id_salaAula'=>$alunoAtualizado->turma,
+                //'id_salaAula'=>salaAula::where('curso',$request->curso)->where('serie',$request->anoCurso)->where('turno',$request->turno)->first(),
             ]);
             return redirect('/listarAlunos')->with('msg','Editado com sucesso!');
             

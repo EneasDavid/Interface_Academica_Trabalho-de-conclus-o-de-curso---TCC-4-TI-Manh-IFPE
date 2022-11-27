@@ -100,7 +100,7 @@
                      @endif
                      <label for="matricula"><strong>Matrícula:</strong></label>
                      <p type="text" class="input-home" disabled>  {{$entidade->matricula}}</p>
-                     <button class="btn" style="margin-top: 10px">Editar</button>
+                     {{--<button class="btn" style="margin-top: 10px">Editar</button>--}}
                  </div>
              </div>
             </div>

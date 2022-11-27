@@ -63,7 +63,7 @@
                      <option value="O-" {{$aluno->TipoSanguineo=="O-"?"selected='selected'":""}}>O-</option>
                 </select>
                 <label for="" style="font-size: 12px; padding: 5px;">Data de nascimento:</label>
-                <input type="date" name="dataNascimento" value="$aluno->dataNascimento" placeholder="{{date('d/m/Y', strtotime($aluno->dataNascimento))}}" class="input-home">
+                <input type="date" name="dataNascimento" value="{{$aluno->dataNascimento}}" placeholder="Data de nascimento" class="input-home">
                 <input type="text" name="naturalidade" value="{{$aluno->naturalidade}}" placeholder="Naturalidade" class="input-home">
                 <input type="text" name="nomeUsual" value="{{$aluno->nomeUsual}}" placeholder="Nome usual:" class="input-home">
                 <select name="etnia" class="form-control" id="Base_Combobox" style="display: block;">

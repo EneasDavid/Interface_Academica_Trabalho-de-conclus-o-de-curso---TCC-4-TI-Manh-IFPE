@@ -22,7 +22,7 @@
                      </div>
                  </div>
              </a>
-             <a class="row" href="#" style="margin-bottom: 1rem;">
+             <a class="row" href="/turma/{{$sala->id}}/notas" style="margin-bottom: 1rem;">
                  <div class="acaoAdministrativo">
                      <div class="middle">
                          <h1>Inserir nota</h1>

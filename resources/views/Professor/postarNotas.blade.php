@@ -13,7 +13,7 @@
 
     <div style="display: flex;">
         <a href="/turma/{{$sala->id}}" style="padding-right: .8rem;"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
-        <h4 style="padding-left: 55px">Chamada</h4>
+        <h4 style="padding-left: 55px">Inserir nota</h4>
     </div>
     <div class="container-fluid">
         <form action="" style="width: max-content;margin: auto;">
@@ -25,13 +25,11 @@
                     <option value="qtd_falta_Tres">3° Unidade</option>
                     <option value="qtd_falta_Quatro">4° Unidade</option>
                 </select>
-            <textarea name="conteudo" id="" cols="30" rows="10" style="width: 95%;display: block; background-color:#dbdbdb; font: 12px sans-serif; margin: 5px;"></textarea>
             <table class="table">
             <thead>
               <tr>
                   <th>Aluno</th>
-                  <th>Falta unidade</th>
-                  <th>Falta atual</th>
+                  <th>Nota</th>
               </tr>
           </thead>
           <tbody>
@@ -44,14 +42,9 @@
                              @else
                                  <td type="text" value="{{$entidades->id}}" disabled>{{$alunos->nomeUsual}}</td>
                              @endif
-                             @foreach($dadosAluno as $dadosAlunos)
-                                 @if($dadosAlunos->id_aluno==$alunos->id)
-                                     <td type="text" value="{{$dadosAlunos->qtd_falta_Um}}" disabled>{{$dadosAlunos->qtd_falta_Um}}</td>
-                                     <td><input type="number" class="input-home" placeholder="Qtd. de faltas: " style="font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
-                                 @endif
-                            @endforeach
-                       @endif
-                 @endforeach
+                                 <td><input type="number" class="input-home" placeholder="Digite a nota:" style="font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
+                        @endif
+                    @endforeach
                  </tr>
              @endforeach
         </tbody>
