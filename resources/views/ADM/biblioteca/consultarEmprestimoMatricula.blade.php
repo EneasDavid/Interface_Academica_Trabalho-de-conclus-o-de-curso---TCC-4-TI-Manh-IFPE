@@ -37,7 +37,13 @@
                 <tr>
                     <td>{{$livros->id}}</td>
                     <td>{{$livros->titulo}}</td>
-                    <td>{{$entidade->name}}</td>
+                    @if($entidade->id==$alunos->id_usuario_to_aluno)
+                         @if(empty($alunos->nomeUsual))
+                             <td>{{$entidade->name}}</td>
+                         @else
+                             <td>{{$alunos->nomeUsual}}</td>     
+                         @endif
+                    @endif
                     <td>{{$entidade->matricula}}</td>
                     <td>{{$livros->created_at}}</td>
                     @if ($livros->vencido)

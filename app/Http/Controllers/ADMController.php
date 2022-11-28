@@ -373,7 +373,7 @@ class ADMController extends Controller
                         }
                 }
             }
-            return view('ADM.biblioteca.consultarEmprestimoMatricula',['entidade'=>$aluno,''=>$alunoEmprestimo,'emprestimoLivro'=>$livroEmprestimos]);
+            return view('ADM.biblioteca.consultarEmprestimoMatricula',['entidade'=>$aluno,'alunos'=>$alunoEmprestimo,'emprestimoLivro'=>$livroEmprestimos]);
         }
         public function destruirEmprestimo($id){
             $alunoRemover=address::findOrFail($id[14]);
