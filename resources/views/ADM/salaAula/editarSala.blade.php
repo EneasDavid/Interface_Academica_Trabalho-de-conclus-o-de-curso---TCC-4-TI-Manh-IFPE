@@ -158,8 +158,8 @@
                                     <button type="button" style="margin: 1rem;" class="btn btn-secondary" data-dismiss="modal" onclick="removerPopUp()">Cancelar</button>
                                     <button class="btn" type="submit" style="margin: 1rem;">Salvar</button>
                                 </div>
-                            </div>
                             </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,77 +167,78 @@
         <p class="titulo">Horário do {{$turma->serie}}° {{$turma->curso}} {{$turma->turno}}</p>
             <div class="">
                 <div class="table-responsive" style="text-align: center;">
-                <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
-                    <thead>
-                        <tr>
-                         <th scope="col" class="dia">Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody style="margin-top: 5px;">
-                    @if($turma->turno=='Manhã')
-                    <tr>
-                        <td>
-                            <p1 class="materia">07:30~08:14</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">08:15~08:59</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">09:00~09:45</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">10:00~10:44</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">10:45~11:29</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">11:30~12:15</p1>
-                        </td>
-                    </tr>
-                    @else
-                    <tr>
-                        <td>
-                            <p1 class="materia">13:00~13:44</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">13:45~14:29</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">14:30~15:15</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">15:30~16:14</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">16:15~16:59</p1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p1 class="materia">17:00~17:45</p1>
-                        </td>
-                    </tr>
-                    @endif
-                </table>
+                    <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
+                        <thead>
+                            <tr>
+                            <th scope="col" class="dia">Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody style="margin-top: 5px;">
+                            @if($turma->turno=='Manhã')
+                            <tr>
+                                <td>
+                                    <p1 class="materia">07:30~08:14</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">08:15~08:59</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">09:00~09:45</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">10:00~10:44</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">10:45~11:29</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">11:30~12:15</p1>
+                                </td>
+                            </tr>
+                            @else
+                            <tr>
+                                <td>
+                                    <p1 class="materia">13:00~13:44</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">13:45~14:29</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">14:30~15:15</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">15:30~16:14</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">16:15~16:59</p1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p1 class="materia">17:00~17:45</p1>
+                                </td>
+                            </tr>
+                            @endif
+                        </tbody>
+                    </table>
                     <table class="dia" style="width: 100%; margin: 5px; text-align: center;">
                         <thead>
                             <tr>

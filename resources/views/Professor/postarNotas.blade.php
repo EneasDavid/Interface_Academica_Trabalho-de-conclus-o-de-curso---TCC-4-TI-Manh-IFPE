@@ -42,7 +42,7 @@
                              @else
                                  <td type="text" value="{{$entidades->id}}" disabled>{{$alunos->nomeUsual}}</td>
                              @endif
-                                 <td><input type="number" class="input-home" placeholder="Digite a nota:" style="font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
+                                 <td><input type="number" class="input-home" style="width: 20%;font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
                         @endif
                     @endforeach
                  </tr>

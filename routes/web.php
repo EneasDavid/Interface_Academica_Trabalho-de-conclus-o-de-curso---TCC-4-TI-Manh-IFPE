@@ -94,6 +94,7 @@ Route::get('/calendarioAcademico', [AlunoController::class, 'calendarioA'])->mid
 Route::get('/acervoBibliotecaToAluno', [AlunoController::class, 'acervoBiblioteca'])->middleware('auth');
 Route::get('/alterarSenhaToAluno', [AlunoController::class, 'alterarSenha'])->middleware('auth');
 Route::post('/emprestimoLivro/{id}',[AlunoController::class, 'emrpestimo'])->middleware('auth');
+Route::get('/emprestimoLivro',[AlunoController::class, 'emprestimosBibliotecaToAluno'])->middleware('auth');
 //Rotas da entidade Aluno
 
 //******LOGIN********/

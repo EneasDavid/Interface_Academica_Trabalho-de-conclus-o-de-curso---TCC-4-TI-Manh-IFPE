@@ -32,6 +32,13 @@
                                 </div>
                             </li>
                         </a>
+                        <a class="nav-link aluno" style="width: auto;" href="/emprestimoLivro">
+                            <li class="nav-item" style="height: 100%;">
+                                <div class="">
+                                    Emprestimos
+                                </div>
+                            </li>
+                        </a>
                         <a class="nav-link aluno" style="width: auto;" href="/calendarioAcademico">
                             <li class="nav-item" style="height: 100%;">
                                 <div class="">
@@ -77,7 +84,7 @@
                             </li>
                         </a>
                     </ul>
-                </div>
+            </div>
             </div>
         </nav>
          <div class="container">

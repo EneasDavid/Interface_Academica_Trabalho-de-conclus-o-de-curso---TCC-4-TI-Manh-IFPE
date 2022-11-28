@@ -359,6 +359,16 @@ class AlunoController extends Controller
                 return redirect('/acervoBibliotecaToAluno')->with('erros','emprestimo com sucesso');
            }
      }
+     public function emprestimosBibliotecaToAluno()
+     {
+         $aluno=auth()->user();
+         $livroEmprestimos=null;
+         $alunoEmprestimo=address::where('id_usuario_to_aluno','like',$aluno->id)->first();
+         if(!empty($alunoEmprestimo)){
+           $livroEmprestimos=$alunoEmprestimo->emprestimoAlunoLivro;
+          }
+         return view('Aluno.consultarEmprestimo',['entidade'=>$aluno,'alunos'=>$alunoEmprestimo,'emprestimoLivro'=>$livroEmprestimos]);
+     }
      public function alterarSenha()
      {
           return view('Aluno.Senha.recSenhaAffter');

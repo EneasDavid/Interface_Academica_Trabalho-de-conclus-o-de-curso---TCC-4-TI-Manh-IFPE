@@ -1,16 +1,13 @@
-<html lang="pt-bt">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/style.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <title>Sistema Acadêmico</title>
-</head>
-
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/style.css" rel="stylesheet">
+        <title>Sistema Acadêmico</title>
+    </head>
 <body>
-<!--menu-->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="navAjuste">
             <a class="navbar-text" href="/homeAluno">Home</a>
@@ -90,24 +87,48 @@
         </div>
     </nav>
     <div style="display: flex;">
-        <a href="home.html"><img src="img/voltar.png" alt="clique para voltar" height="21px"></a>
-        <h4 style="padding-left: 55px">Calendário Acadêmico</h4>
+        <a href="/homeAdm"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
+        <h4 style="padding-left: 55px">Consulta emprestimos 
+            @if(empty($alunos->nomeUsual))
+                 {{$entidade->name}}
+            @else
+                 {{$alunos->nomeUsual}}     
+            @endif</h4>
     </div>
-    <div class="container" style="display: block;height: 80%;">
-        <div class="row" style="justify-content: center;height: 30%;">
-            <div class="col-sm">
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%239ee1ad&ctz=America%2FSao_Paulo&showTitle=1&showNav=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&title=Calend%C3%A1rio%20acad%C3%AAmico&showDate=1&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043"
-                    width="100%" height="300%" frameborder="0" scrolling="no"></iframe>
-            </div>
-
-        </div>
+    @if(empty($emprestimoLivro))
+    <div class="table-responsive" style="margin-top: 15rem;justify-content: space-around!important;">
+        <form class="forms-pesquisa" style="display: flex;flex-direction: column;align-items: flex-end;"action="/acervoBiblioteca-consultar-Emprestimos" method="get">
+             <input type="text" name="matricula" placeholder="Matricula do aluno:" class="input-home">
+             <button class="btn" style="margin-top: 1rem;">Consultar</button>
+        </form>
     </div>
-    </div>
-    </div>
-    <script src="/js/jquery.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/js/script.js"></script>
+    @elseif(!empty($emprestimoLivro))
+    <table class="table">
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Autor</th>
+                    <th>Data do Emprestimo</th>
+                    <th>Situação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($emprestimoLivro as $livros)
+                <tr>
+                    <td>{{$livros->titulo}}</td>
+                    <td>{{$livros->autor}}</td>
+                    <td>{{$livros->created_at}}</td>
+                    @if ($livros->vencido)
+                        <td>Vencido</td>
+                    @else
+                        <td>Emprestado</td>
+                    @endif
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @elseif(!empty($matricula) && empty($aluno))
+        <p>matricula não encontrada</p>
+    @endif
 </body>
-
 </html>

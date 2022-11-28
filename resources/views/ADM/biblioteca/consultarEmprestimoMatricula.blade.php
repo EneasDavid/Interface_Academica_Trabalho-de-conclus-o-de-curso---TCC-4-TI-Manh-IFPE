@@ -10,7 +10,17 @@
 <body>
     <div style="display: flex;">
         <a href="/homeAdm"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
-        <h4 style="padding-left: 55px">Consulta emprestimos de um aluno</h4>
+        <h4 style="padding-left: 55px">Consulta emprestimos de 
+            @if(!empty($alunos))
+                @if(empty($alunos->nomeUsual))
+                    {{$entidade->name}}
+                @else
+                    {{$alunos->nomeUsual}}     
+                @endif
+            @else
+            um aluno
+            @endif
+        </h4>
     </div>
     @if(empty($emprestimoLivro))
     <div class="table-responsive" style="margin-top: 15rem;justify-content: space-around!important;">
@@ -23,9 +33,8 @@
     <table class="table">
             <thead>
                 <tr>
-                    <th>ID emprestimo</th>
                     <th>Livro</th>
-                    <th>consignatário</th>
+                    <th>autor</th>
                     <th>matricula</th>
                     <th>Data do Emprestimo</th>
                     <th>Situação</th>
@@ -35,15 +44,8 @@
             <tbody>
                 @foreach ($emprestimoLivro as $livros)
                 <tr>
-                    <td>{{$livros->id}}</td>
                     <td>{{$livros->titulo}}</td>
-                    @if($entidade->id==$alunos->id_usuario_to_aluno)
-                         @if(empty($alunos->nomeUsual))
-                             <td>{{$entidade->name}}</td>
-                         @else
-                             <td>{{$alunos->nomeUsual}}</td>     
-                         @endif
-                    @endif
+                    <td>{{$livros->autor}}</td>
                     <td>{{$entidade->matricula}}</td>
                     <td>{{$livros->created_at}}</td>
                     @if ($livros->vencido)
