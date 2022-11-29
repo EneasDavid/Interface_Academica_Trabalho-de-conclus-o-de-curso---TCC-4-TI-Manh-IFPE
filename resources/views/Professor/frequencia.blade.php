@@ -16,7 +16,7 @@
         <h4 style="padding-left: 55px">Chamada</h4>
     </div>
     <div class="container-fluid">
-        <form action="" style="width: max-content;margin: auto;">
+        <form action="{{route('Professor.chamada')}}" method="POST" style="width: max-content;margin: auto;">
         @csrf
         <select data-unidade name="unidade" class="form-control" id="Base_Combobox" style="display: block;">
              <option disabled selected value="">Unidade</option>

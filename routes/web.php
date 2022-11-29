@@ -105,5 +105,7 @@ Route::post('/Forms-Login-Professor',[ProfessorController::class, 'loginProfesso
 Route::get('/homeProfessor', [ProfessorController::class, 'homeProfessor'])->middleware('auth');
 Route::get('/turma/{id}', [ProfessorController::class, 'TurmaMateria'])->middleware('auth');
 Route::get('/turma/{id}/chamada', [ProfessorController::class, 'TurmaMateriaChamada'])->middleware('auth');
+Route::post('/turma-salvar-chamada', [ProfessorController::class, 'TurmaChamada'])->name('Professor.chamada')->middleware('auth');
 Route::get('/turma/{id}/notas', [ProfessorController::class, 'TurmaMateriaInserirNota'])->middleware('auth');
+Route::post('/turma-salvar-notas', [ProfessorController::class, 'InserirNota'])->name('Professor.nota')->middleware('auth');
 //Rotas da entidade Professor

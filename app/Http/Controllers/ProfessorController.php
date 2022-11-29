@@ -63,6 +63,10 @@ class ProfessorController extends Controller
          }
          return view('Professor.frequencia',['sala'=>$salaDeAula,'aluno'=>$alunos,'entidade'=>$entidades,'dadosAluno'=>$informacoes]);
     }
+    public function TurmaChamada(Request $request)
+    {
+        dd('Enéas é foda');
+    }
     public function TurmaMateriaInserirNota($id)
     {
          $salaDeAula=salaAula::findOrFail($id);
@@ -74,5 +78,9 @@ class ProfessorController extends Controller
              return redirect('/turma/'.$id.'');
          }
          return view('Professor.postarNotas',['sala'=>$salaDeAula,'aluno'=>$alunos,'entidade'=>$entidades,'dadosAluno'=>$informacoes]);
+    }
+    public function InserirNota(Request $request)
+    {
+        dd('David é foda');
     }
 }
