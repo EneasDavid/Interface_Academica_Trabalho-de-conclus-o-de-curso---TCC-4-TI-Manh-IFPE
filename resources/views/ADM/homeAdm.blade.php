@@ -7,6 +7,13 @@
         <link href="/css/style.css" rel="stylesheet">
         <title>Sistema Acadêmico</title>
     </head>
+    <style>
+        .col-sm-3 {
+            padding-top: 1rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+    </style>
 <body>
     <div style="display: flex;justify-content: space-between;">
         <h4 style="padding-left: 55px">Home</h4>
@@ -15,76 +22,94 @@
     @if (session('msg'))
         <p class="alert alert-success">{{session('msg')}}</p>
     @endif
-    <div class="container">
-        <div style="height: 90%;display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <div style="">
+        <div class="row" >
             @if(count($salas)>0)
-                 <a class="row" href="\criarAluno" style="margin-bottom: 1rem;">
-                     <div class="acaoAdministrativo">
-                         <div class="middle" style="padding:10px">
-                             <h1>Criar Aluno</h1>
+                <div class="col-sm-3">
+                    <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                        <a href="\criarAluno">
+                            <div class="middle">
+                                <h1>Criar Aluno</h1>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            @else
+                <div class="col-sm-3">
+                    <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                        <h1>Criar Aluno</h1>
+                    </div>
+                </div>
+            @endif
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\listarAlunos">
+                     <div class="middle">  
+                        <h1>Listar Alunos</h1>
+                    </div>
+                    </a>
+                 </div>
+            </div>
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\criarProfessor">  
+                     <div class="middle">  
+    
+                        <h1>Criar Professor</h1>
                         </div>
-                    </div>
-                </a>
-        @else
-                 <a class="row" href="#" style="margin-bottom: 1rem;">
-                     <div class="acaoAdministrativo" title="ainda não há turmas, logo não pode inserir um estudante">
-                         <div class="middle" style="padding:10px">
-                             <h1>Criar Aluno</h1>
+                    </a>
+                 </div>
+            </div>
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\listarProfessores">  
+                     <div class="middle">  
+    
+                        <h1>Listar Professores</h1>
                         </div>
-                    </div>
-                </a>
-        @endif
-                <a class="row" href="\listarAlunos" style="margin-bottom: 1rem;">  
-                    <div class="acaoAdministrativo">
-                        <div class="middle" style="padding:10px" >
-                             <h1>Listar Alunos</h1>
-                         </div>
-                    </div>
-                </a>       
-                <a class="row" href="\criarProfessor" style="margin-bottom: 1rem;">
-                     <div class="acaoAdministrativo">
-                        <div class="middle" style="padding:10px">
-                            <h1>Criar Professor</h1>
+                    </a>
+                 </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 2rem;">
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\editarTurma">  
+                     <div class="middle">  
+    
+                        <h1>Editar Turma</h1>
                         </div>
-                    </div>
-                </a>
-                <a class="row" href="\listarProfessores" style="margin-bottom: 1rem;">    
-                    <div class="acaoAdministrativo">
-                        <div class="middle" style="padding:10px">
-                            <h1>Listar Professores</h1>    
-                        </div>
-                    </div>
-                </a>
-                <a class="row" href="\editarTurma" style="margin-bottom: 1rem;">
-                    <div class="acaoAdministrativo">
-                        <div class="middle" style="padding:10px">
-                             <h1>Editar Turma</h1>
-                        </div>
-                    </div>
-                </a>
-                <a class="row" href="\criarMateria" style="margin-bottom: 1rem;">
-                    <div class="acaoAdministrativo">
-                        <div class="middle" style="padding:10px">
+                    </a>
+                 </div>
+            </div>
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\criarMateria">  
+                        <div class="middle">  
                              <h1>Criar Materia</h1>
                         </div>
-                    </div>
-                </a>
-                <a class="row" href="\acervoBiblioteca" style="margin-bottom: 1rem;"> 
-                    <div class="acaoAdministrativo">
-                        <div class="middle" style="padding:10px">
-                                <h1>Biblioteca</h1>
+                    </a>
+                 </div>
+            </div>
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\acervoBiblioteca">  
+                        <div class="middle">  
+                             <h1>Biblioteca</h1>
                         </div>
-                    </div>
-                </a>
-                <a class="row" href="\acervoBiblioteca-consultar-Emprestimos" style="margin-bottom: 1rem;">
-                    <div class="acaoAdministrativo">
-                        <div class="middle" style="">
+                    </a>
+                 </div>
+            </div>
+            <div class="col-sm-3">
+                 <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
+                     <a href="\acervoBiblioteca-consultar-Emprestimos">
+                        <div class="middle">  
                             <h1>Consultar Empréstimos</h1>
-                        </div>
-                    </div>
-                </a>
+                        </div>  
+                    </a>
+                 </div>
+            </div>
         </div>
     </div>
-
 </body>
 </html>

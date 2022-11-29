@@ -83,6 +83,7 @@ Route::get('/dadosTurma/listarAlunos/{id}',[ADMController::class, 'editarTurma_L
 Route::get('/dadosTurma/listarProfessores/{id}',[ADMController::class, 'editarTurma_ListarProfessores'])->middleware('auth');
 Route::get('/criarMateria',[ADMController::class, 'criarMateria'])->middleware('auth');
 Route::post('/criar-Materia-Forms',[ADMController::class, 'criarMateriaForms'])->name('ADM.cadastrarMateria')->middleware('auth');
+Route::post('/adicionar-Materia-turma',[ADMController::class, 'materiaToHorario'])->name('ADM.materiaToHorario')->middleware('auth');
 //=========================================================================================================================//
 //Rotas da entidade Aluno
 //******LOGIN********/

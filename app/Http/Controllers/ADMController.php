@@ -15,6 +15,7 @@ use App\Models\dados__aula__por__aluno;
 
 class ADMController extends Controller
 {
+        //Login
         public function indexADM()
         {
             //dd(Hash::make('.'));
@@ -312,6 +313,235 @@ class ADMController extends Controller
             $entidade->delete();
             return redirect('/listarAlunos')->with('errors','excluido com sucesso!');
         }
+         //------------------------------Criar Professor------------------------------
+         public function criarProfessor()
+         {
+             return view('ADM.professor.criarProfessor');
+         }
+         public function criarProfessorForms(Request $request)
+         {
+            //Criadno a entidade
+             $novoUsuario = new User;
+             $novoProfessor = new professor;
+             $this->validate($request,[
+                 'name'=>'required',
+                 'nomeMae'=>'required',
+                 'dataNascimento'=>'required',
+                 'naturalidade'=>'required',
+                 'etnia'=>'required',
+                 'rg'=>'required',
+                 'rgExpedicao'=>'required',
+                 'ufExpeditor'=>'required',
+                 'expeditorRg'=>'required',
+                 'cpf'=>'required',
+                 'email'=>'required',
+                 'cep'=>'required',
+                 'senha'=>'required',
+                 'rua'=>'required',
+                 'numeroCasa'=>'required',
+                 'grauInstrucao'=>'required',
+                 'modalidade'=>'required',
+                 'profissao'=>'required',
+             ],[
+                 //'required' => ':attribute é um campo obrigartorio!', //idem
+                 'name.required'=>'O campo Nome é obrigatorio',
+                 'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
+                 'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
+                 'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
+                 'etnia.required'=>'O campo Etina é obrigatorio',
+                 'rg.required'=>'O campo RG é obrigatorio',
+                 'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
+                 'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
+                 'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
+                 'cpf.required'=>'O campo CPF é obrigatorio',
+                 'email.required'=>'O campo E-Mail é obrigatorio',
+                 'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
+                 'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
+                 'turno.required'=>'O campo Turno é obrigatorio',
+                 'grauInstrucao.required'=>'O campo Grau de Instrução é obrigatorio',
+                 'modalidade.required'=>'O campo Modalidade é obrigatorio',
+                 'profissao.required'=>'O campo Profissão é obrigatorio',
+                 'senha.required'=>'O campo senha é obrigatorio',
+             ]);
+             //Passando os valores da web/request pro bd
+             $novoUsuario->name = $request->name;
+             $novoUsuario->email = $request->email;
+             $novoUsuario->password =Hash::make($request->senha);
+             $novoUsuario->matricula=rand(00000000, 99999999);
+             $novoUsuario->save();
+             //Adicionando os valores referente a tabela professor
+             $novoProfessor->sexo=$request->sexo;
+             $novoProfessor->estadoCivil=$request->estadoCivil;
+             $novoProfessor->nomeMae=$request->nomeMae;
+             $novoProfessor->TipoSanguineo=$request->TipoSanguineo;
+             $novoProfessor->dataNascimento=$request->dataNascimento;
+             $novoProfessor->naturalidade=$request->naturalidade;
+             $novoProfessor->nomeUsual=$request->nomeUsual;
+             $novoProfessor->etnia=$request->etnia;
+             $novoProfessor->rg=$request->rg;
+             $novoProfessor->rgExpedicao=$request->rgExpedicao;
+             $novoProfessor->ufExpeditor=$request->ufExpeditor;
+             $novoProfessor->expeditorRg=$request->expeditorRg;
+             $novoProfessor->cpf=$request->cpf;
+             $novoProfessor->numeroCelular=$request->numeroCelular;
+             $novoProfessor->cep=$request->cep;
+             $novoProfessor->UF=$request->UF;
+             $novoProfessor->cidade=$request->cidade;
+             $novoProfessor->bairro=$request->bairro;
+             $novoProfessor->rua=$request->rua;
+             $novoProfessor->numeroCasa=$request->numeroCasa;
+             $novoProfessor->complementoCasa=$request->complementoCasa;
+             $novoProfessor->grauInstrucao=$request->grauInstrucao;
+             $novoProfessor->profissao=$request->profissao;
+             $novoProfessor->modalidade=$request->modalidade;
+             $novoProfessor->categoria='Professor';
+             //Nível de acesso de professor é o acesso três
+             $novoProfessor->nivelAcesso=3;
+             //Upload de imagem
+             if($request->hasFile('fotoProfessor') && $request->file('fotoProfessor')->isValid()){
+                 //Pega a imagem
+                 $requestImagem=$request->fotoProfessor;
+                 //pega a extensão
+                 $extension=$requestImagem->extension();
+                 //cria o nome da imagem
+                 $imagemName=md5($requestImagem->getClientOriginalName().strtotime("now").".".$extension);
+                 //move para a pasta das imagens
+                 $requestImagem->move(public_path('img/professores'),$imagemName);
+                 //salva no bd
+                 $novoProfessor->fotoProfessor=$imagemName;
+             }
+             $novoProfessor->id_usuario_to_professors=$novoUsuario->id;
+             $novoProfessor->save();
+             //redirecionando a página
+             return redirect('homeAdm')->with('msg','Professor cadastrado com sucesso!');
+         }
+         public function editarProfessor($id)
+         {
+             $professor=professor::findOrFail($id);
+             if(empty($professor)){
+                 return redirect('/listarProfessores')->with('msg','Esse Professor não existe!');
+             }
+             $entidade=User::findOrFail($professor->id_usuario_to_professors);
+             return view('ADM.professor.editarProfessor',['professor'=>$professor, 'entidade'=>$entidade]);
+         }
+         public function editarProfessorForms(Request $request)
+         {
+             $professorAtualizado = new professor;
+             $usuarioAtualizado = new User;
+ 
+             $this->validate($request,[
+                 'name'=>'required',
+                 'nomeMae'=>'required',
+                 'dataNascimento'=>'required',
+                 'naturalidade'=>'required',
+                 'etnia'=>'required',
+                 'rg'=>'required',
+                 'rgExpedicao'=>'required',
+                 'ufExpeditor'=>'required',
+                 'expeditorRg'=>'required',
+                 'cpf'=>'required',
+                 'email'=>'required',
+                 'numeroCasa'=>'required'
+                 ],[
+                 //'required' => ':attribute é um campo obrigartorio!', //Idem do de cima
+                 'name.required'=>'O campo Nome é obrigatorio',
+                 'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
+                 'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
+                 'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
+                 'etnia.required'=>'O campo Etina é obrigatorio',
+                 'rg.required'=>'O campo RG é obrigatorio',
+                 'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
+                 'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
+                 'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
+                 'cpf.required'=>'O campo CPF é obrigatorio',
+                 'email.required'=>'O campo E-Mail é obrigatorio',
+                 'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
+             ]);
+             user::findOrFail($request->id)->update([
+                 'name'=>$request->name,
+                 'email'=>$request->email,
+                 'matricula'=>$request->matricula,
+             ]);
+             //Upload de imagem
+             if($request->hasfile('imagem') && $request->file('imagem')->isValid()){
+                 $requestImagem=$request->imagem;
+                 //Pega a imagem
+                 $extension=$requestImagem->extension();
+                 //pega a extensão
+                 $imagemName=md5($requestImagem->getClientOriginalName().strtotime("now").".".$extension);
+                 //cria o nome da imagem
+                 $request->imagem->move(public_path('img/professores'),$imagemName);
+                 //salva no bd
+                 $alunoAtualizado['imagem']=$imagemName;
+             }
+             professor::where('id_usuario_to_professors', 'like', '%'.$usuarioAtualizado->id.'%')->update([
+                 'sexo'=>$request->sexo,
+                 'estadoCivil'=>$request->estadoCivil,
+                 'nomeMae'=>$request->nomeMae,
+                 'TipoSanguineo'=>$request->TipoSanguineo,
+                 'dataNascimento'=>$request->dataNascimento,
+                 'naturalidade'=>$request->naturalidade,
+                 'nomeUsual'=>$request->nomeUsual,  
+                 'etnia'=>$request->etnia,                
+                 'rg'=>$request->rg,
+                 'rgExpedicao'=>$request->rgExpedicao,
+                 'ufExpeditor'=>$request->ufExpeditor,
+                 'expeditorRg'=>$request->expeditorRg,
+                 'cpf'=>$request->cpf,
+                 'numeroCelular'=>$request->numeroCelular,
+                 'cep'=>$request->cep,
+                 'UF'=>$request->UF,
+                 'cidade'=>$request->cidade,
+                 'bairro'=>$request->bairro,
+                 'rua'=>$request->rua,
+                 'numeroCasa'=>$request->numeroCasa,
+                 'complementoCasa'=>$request->complementoCasa,
+                 'grauInstrucao'=>$request->grauInstrucao,
+                 'profissao'=>$request->profissao,
+                 'modalidade'=>$request->modalidade,
+                 'categoria'=>$request->categoria,
+             ]);
+             return redirect('/listarProfessores')->with('msg','Editado com sucesso!');
+             
+         }
+         public function listarProfessores()
+         {
+             $busca=request('search'); 
+             if($busca){
+                 if(!empty(User::where('matricula', 'like', '%'.$busca.'%')->first())){
+                     $entidades=User::where([
+                         ['matricula', 'like', '%'.$busca.'%']
+                         ])->get();
+                         foreach ($entidades as $professors){
+                             $professores=professor::where([['id_usuario_to_professors','like',$professors->id]])->get();
+                         }
+                 }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
+                          $entidades=User::where([
+                              ['name', 'like', '%'.$busca.'%']
+                              ])->get();
+                          foreach ($entidades as $professors){
+                              $professores=professor::where([['id_usuario_to_professors','like',$professors->id]])->get();
+                          }
+                 }else{
+                     $entidades=null;
+                     $professores=null;
+                 }
+             }else{
+                 $entidades=User::all();
+                 $professores=professor::all();
+             }
+             return view('ADM.professor.listarProfessores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
+         }
+         public function destruirProfessor($id)
+         {
+             $professor=professor::findOrFail($id);
+             if(empty($professor)){
+                 return redirect('/listarProfessores')->with('errors','Esse professor não existe!');
+             }          
+             $entidade=user::findOrFail($professor->id_usuario_to_professors);
+             $entidade->delete();
+             return redirect('/listarProfessores')->with('errors','excluido com sucesso!');
+         }
        //------------------------------Biblioteca------------------------------
         public function acervoBiblioteca()
         {
@@ -388,235 +618,6 @@ class ADMController extends Controller
             }
             $livro->delete();
             return redirect('/acervoBiblioteca')->with('errors','excluido com sucesso!');
-        }
-        //------------------------------Criar Professor------------------------------
-        public function criarProfessor()
-        {
-            return view('ADM.professor.criarProfessor');
-        }
-        public function criarProfessorForms(Request $request)
-        {
-           //Criadno a entidade
-            $novoUsuario = new User;
-            $novoProfessor = new professor;
-            $this->validate($request,[
-                'name'=>'required',
-                'nomeMae'=>'required',
-                'dataNascimento'=>'required',
-                'naturalidade'=>'required',
-                'etnia'=>'required',
-                'rg'=>'required',
-                'rgExpedicao'=>'required',
-                'ufExpeditor'=>'required',
-                'expeditorRg'=>'required',
-                'cpf'=>'required',
-                'email'=>'required',
-                'cep'=>'required',
-                'senha'=>'required',
-                'rua'=>'required',
-                'numeroCasa'=>'required',
-                'grauInstrucao'=>'required',
-                'modalidade'=>'required',
-                'profissao'=>'required',
-            ],[
-                //'required' => ':attribute é um campo obrigartorio!', //idem
-                'name.required'=>'O campo Nome é obrigatorio',
-                'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
-                'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
-                'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
-                'etnia.required'=>'O campo Etina é obrigatorio',
-                'rg.required'=>'O campo RG é obrigatorio',
-                'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
-                'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
-                'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
-                'cpf.required'=>'O campo CPF é obrigatorio',
-                'email.required'=>'O campo E-Mail é obrigatorio',
-                'anoIngreso.required'=>'O campo Ano de Ingresso é obrigatorio',
-                'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
-                'turno.required'=>'O campo Turno é obrigatorio',
-                'grauInstrucao.required'=>'O campo Grau de Instrução é obrigatorio',
-                'modalidade.required'=>'O campo Modalidade é obrigatorio',
-                'profissao.required'=>'O campo Profissão é obrigatorio',
-                'senha.required'=>'O campo senha é obrigatorio',
-            ]);
-            //Passando os valores da web/request pro bd
-            $novoUsuario->name = $request->name;
-            $novoUsuario->email = $request->email;
-            $novoUsuario->password =Hash::make($request->senha);
-            $novoUsuario->matricula=rand(00000000, 99999999);
-            $novoUsuario->save();
-            //Adicionando os valores referente a tabela professor
-            $novoProfessor->sexo=$request->sexo;
-            $novoProfessor->estadoCivil=$request->estadoCivil;
-            $novoProfessor->nomeMae=$request->nomeMae;
-            $novoProfessor->TipoSanguineo=$request->TipoSanguineo;
-            $novoProfessor->dataNascimento=$request->dataNascimento;
-            $novoProfessor->naturalidade=$request->naturalidade;
-            $novoProfessor->nomeUsual=$request->nomeUsual;
-            $novoProfessor->etnia=$request->etnia;
-            $novoProfessor->rg=$request->rg;
-            $novoProfessor->rgExpedicao=$request->rgExpedicao;
-            $novoProfessor->ufExpeditor=$request->ufExpeditor;
-            $novoProfessor->expeditorRg=$request->expeditorRg;
-            $novoProfessor->cpf=$request->cpf;
-            $novoProfessor->numeroCelular=$request->numeroCelular;
-            $novoProfessor->cep=$request->cep;
-            $novoProfessor->UF=$request->UF;
-            $novoProfessor->cidade=$request->cidade;
-            $novoProfessor->bairro=$request->bairro;
-            $novoProfessor->rua=$request->rua;
-            $novoProfessor->numeroCasa=$request->numeroCasa;
-            $novoProfessor->complementoCasa=$request->complementoCasa;
-            $novoProfessor->grauInstrucao=$request->grauInstrucao;
-            $novoProfessor->profissao=$request->profissao;
-            $novoProfessor->modalidade=$request->modalidade;
-            $novoProfessor->categoria='Professor';
-            //Nível de acesso de professor é o acesso três
-            $novoProfessor->nivelAcesso=3;
-            //Upload de imagem
-            if($request->hasFile('fotoProfessor') && $request->file('fotoProfessor')->isValid()){
-                //Pega a imagem
-                $requestImagem=$request->fotoProfessor;
-                //pega a extensão
-                $extension=$requestImagem->extension();
-                //cria o nome da imagem
-                $imagemName=md5($requestImagem->getClientOriginalName().strtotime("now").".".$extension);
-                //move para a pasta das imagens
-                $requestImagem->move(public_path('img/professores'),$imagemName);
-                //salva no bd
-                $novoProfessor->fotoProfessor=$imagemName;
-            }
-            $novoProfessor->id_usuario_to_professors=$novoUsuario->id;
-            $novoProfessor->save();
-            //redirecionando a página
-            return redirect('homeAdm')->with('msg','Professor cadastrado com sucesso!');
-        }
-        public function editarProfessor($id)
-        {
-            $professor=professor::findOrFail($id);
-            if(empty($professor)){
-                return redirect('/listarProfessores')->with('msg','Esse Professor não existe!');
-            }
-            $entidade=User::findOrFail($professor->id_usuario_to_professors);
-            return view('ADM.professor.editarProfessor',['professor'=>$professor, 'entidade'=>$entidade]);
-        }
-        public function editarProfessorForms(Request $request)
-        {
-            $professorAtualizado = new professor;
-            $usuarioAtualizado = new User;
-
-            $this->validate($request,[
-                'name'=>'required',
-                'nomeMae'=>'required',
-                'dataNascimento'=>'required',
-                'naturalidade'=>'required',
-                'etnia'=>'required',
-                'rg'=>'required',
-                'rgExpedicao'=>'required',
-                'ufExpeditor'=>'required',
-                'expeditorRg'=>'required',
-                'cpf'=>'required',
-                'email'=>'required',
-                'numeroCasa'=>'required'
-                ],[
-                //'required' => ':attribute é um campo obrigartorio!', //Idem do de cima
-                'name.required'=>'O campo Nome é obrigatorio',
-                'nomeMae.required'=>'O campo Nome da Mãe é obrigatorio',
-                'dataNascimento.required'=>'O campo Data de Nascimento é obrigatorio',
-                'naturalidade.required'=>'O campo Naturalidade é obrigatorio',
-                'etnia.required'=>'O campo Etina é obrigatorio',
-                'rg.required'=>'O campo RG é obrigatorio',
-                'rgExpedicao.required'=>'O campo Data de expedição do RG é obrigatorio',
-                'ufExpeditor.required'=>'O campo UF do Expeditor é obrigatorio',
-                'expeditorRg.required'=>'O campo Expeditor do RG é obrigatorio',
-                'cpf.required'=>'O campo CPF é obrigatorio',
-                'email.required'=>'O campo E-Mail é obrigatorio',
-                'numeroCasa.required'=>'O campo Número da casa é obrigatorio',
-            ]);
-            user::findOrFail($request->id)->update([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'matricula'=>$request->matricula,
-            ]);
-            //Upload de imagem
-            if($request->hasfile('imagem') && $request->file('imagem')->isValid()){
-                $requestImagem=$request->imagem;
-                //Pega a imagem
-                $extension=$requestImagem->extension();
-                //pega a extensão
-                $imagemName=md5($requestImagem->getClientOriginalName().strtotime("now").".".$extension);
-                //cria o nome da imagem
-                $request->imagem->move(public_path('img/professores'),$imagemName);
-                //salva no bd
-                $alunoAtualizado['imagem']=$imagemName;
-            }
-            professor::where('id_usuario_to_professors', 'like', '%'.$usuarioAtualizado->id.'%')->update([
-                'sexo'=>$request->sexo,
-                'estadoCivil'=>$request->estadoCivil,
-                'nomeMae'=>$request->nomeMae,
-                'TipoSanguineo'=>$request->TipoSanguineo,
-                'dataNascimento'=>$request->dataNascimento,
-                'naturalidade'=>$request->naturalidade,
-                'nomeUsual'=>$request->nomeUsual,  
-                'etnia'=>$request->etnia,                
-                'rg'=>$request->rg,
-                'rgExpedicao'=>$request->rgExpedicao,
-                'ufExpeditor'=>$request->ufExpeditor,
-                'expeditorRg'=>$request->expeditorRg,
-                'cpf'=>$request->cpf,
-                'numeroCelular'=>$request->numeroCelular,
-                'cep'=>$request->cep,
-                'UF'=>$request->UF,
-                'cidade'=>$request->cidade,
-                'bairro'=>$request->bairro,
-                'rua'=>$request->rua,
-                'numeroCasa'=>$request->numeroCasa,
-                'complementoCasa'=>$request->complementoCasa,
-                'grauInstrucao'=>$request->grauInstrucao,
-                'profissao'=>$request->profissao,
-                'modalidade'=>$request->modalidade,
-                'categoria'=>$request->categoria,
-            ]);
-            return redirect('/listarProfessores')->with('msg','Editado com sucesso!');
-            
-        }
-        public function listarProfessores()
-        {
-            $busca=request('search'); 
-            if($busca){
-                if(!empty(User::where('matricula', 'like', '%'.$busca.'%')->first())){
-                    $entidades=User::where([
-                        ['matricula', 'like', '%'.$busca.'%']
-                        ])->get();
-                        foreach ($entidades as $professors){
-                            $professores=professor::where([['id_usuario_to_professors','like',$professors->id]])->get();
-                        }
-                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
-                         $entidades=User::where([
-                             ['name', 'like', '%'.$busca.'%']
-                             ])->get();
-                         foreach ($entidades as $professors){
-                             $professores=professor::where([['id_usuario_to_professors','like',$professors->id]])->get();
-                         }
-                }else{
-                    $entidades=null;
-                    $professores=null;
-                }
-            }else{
-                $entidades=User::all();
-                $professores=professor::all();
-            }
-            return view('ADM.professor.listarProfessores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
-        }
-        public function destruirProfessor($id)
-        {
-            $professor=professor::findOrFail($id);
-            if(empty($professor)){
-                return redirect('/listarProfessores')->with('errors','Esse professor não existe!');
-            }          
-            $entidade=user::findOrFail($professor->id_usuario_to_professors);
-            $entidade->delete();
-            return redirect('/listarProfessores')->with('errors','excluido com sucesso!');
         }
         //-------------------------------------------Sala de aula------------------------
         public function listarTurmas()
@@ -1045,5 +1046,20 @@ class ADMController extends Controller
             //redirecionando a página
             return redirect('homeAdm')->with('msg','Materia cadastrada com sucesso!');
     
+        }
+        public function materiaToHorario(Request $request)
+        {
+            $id=$request->id;
+            $this->validate($request,[
+                'materiaAula'=>'required',
+                'horarioAula'=>'required',
+                ],[
+                'materiaAula.required'=>'O campo Materia é obrigatorio',
+                'horarioAula.required'=>'O campo horario é obrigatorio',
+                ]);
+            salaAula::findOrFail($id)->update([
+                 $request->horarioAula=>$request->materiaAula,
+            ]);
+            return redirect('/dadosTurma/'.$id);
         }
 }

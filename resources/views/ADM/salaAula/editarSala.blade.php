@@ -65,8 +65,9 @@
                                     {{ session('danger') }}
                                 </div>
                             @endif
-                            <form class="container" action="{{route('ADM.cadastrarLivro')}}" style="display: grid;justify-items: center;justify-content: space-around;"method="POST">
-                             @csrf      
+                            <form class="container" action="{{route('ADM.materiaToHorario')}}" style="display: grid;justify-items: center;justify-content: space-around;" method="POST">
+                             @csrf
+                                <input type="hidden" name="id" value="{{$turma->id}}"></input>      
                                 <select name="materiaAula" style="width: inherit;" id="Base_Combobox">
                                         <option disabled selected value="">Matéria</option>
                                         <?php
@@ -86,7 +87,7 @@
                                         ?>
                                 </select>
                                 @if($turma->turno=="Manhã")
-                                <select name="horarioAula" id="Base_Combobox">
+                                <select name="horarioAula" style="width: inherit;" id="Base_Combobox">
                                         <option disabled selected value="">Horario</option>
                                         <option name="horarioAula" value="segundaUm">Segunda | 07:30~08:14</option>
                                         <option name="horarioAula" value="segundaDois">Segunda | 08:15~08:59</option>
@@ -120,7 +121,7 @@
                                         <option name="horarioAula" value="sextaSeis">Sexta | 11:30~12:15</option>
                                 </select>
                                 @else
-                                <select name="horarioAula" id="Base_Combobox">
+                                <select name="horarioAula" style="width: inherit;" id="Base_Combobox">
                                      <option disabled selected value="">Horario</option>
                                      <option name="horarioAula" value="segundaUm">Segunda | 13:00~13:44</option>
                                      <option name="horarioAula" value="segundaDois">Segunda | 13:45~14:29</option>

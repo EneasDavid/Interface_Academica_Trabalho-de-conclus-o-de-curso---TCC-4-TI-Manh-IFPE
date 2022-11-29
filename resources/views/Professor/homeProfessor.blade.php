@@ -13,7 +13,7 @@
         <a href="logout" style="padding-right: .8rem;"><img src="img/sair.png" alt="clique para voltar" height="21px"></a>
     </div>
     <div class="container">
-        <div style="height: 90%;display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <div style="height: 90%;display: flex; flex-wrap: wrap; justify-content: space-around;">
         @foreach ($materia as $turma)     
         @foreach ($salaAula as $sala)
         @if($sala->segundaUm==$turma->id or $sala->segundaDois==$turma->id or $sala->segundaTres==$turma->id or $sala->segundaQuatro==$turma->id or $sala->segundaCinco==$turma->id or $sala->segundaSeis==$turma->id
@@ -24,7 +24,7 @@
                 <a class="row" href="/turma/{{$sala->id}}" style="margin-bottom: 1rem;">
                      <div class="acaoAdministrativo">
                          <div class="middle">
-                             <h1>{{$turma->nomeMateria}}</h1>
+                             <h1 style="font-size:2.1rem!important ">{{$turma->nomeMateria}}</h1>
                                     <p>{{$sala->serie}}° {{$sala->curso}} {{$sala->turno}}</p>
                             </div>
                         </div>
