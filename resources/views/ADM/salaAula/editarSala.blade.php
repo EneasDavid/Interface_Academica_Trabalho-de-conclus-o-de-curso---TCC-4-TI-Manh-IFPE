@@ -73,15 +73,14 @@
                                         <?php
                                             foreach($materiaCadastradas as $materia)
                                             {
-                                                foreach($professores as $professor)
-                                                {
+                                                 foreach($professores as $professor)
+                                                 {
                                                     foreach($entidade as $entidades)
                                                     {
-                                                        if($professor->id_usuario_to_professors==$entidades->id)
-                                                        {
-                                                            echo '<option name="materia" value="'.$materia->id.'">'.$materia->nomeMateria.' | '.$entidades->name.'</option>';
-                                                        }
-                                                    }
+                                                         if($professor->id_usuario_to_professors==$entidades->id){
+                                                             echo '<option name="materia" value="'.$materia->id.'">'.$materia->nomeMateria.' | '.$entidades->name.'</option>';
+                                                         }
+                                                   }  
                                                 }
                                             }
                                         ?>
@@ -591,7 +590,7 @@
                             @endif                       
                             @if(!empty($aulaQuatroQuinta))
                             <tr>
-                                <td>>
+                                <td>
                                         <p1 class="materia">{{$aulaQuatroQuinta->nomeMateria}}</p1>
                                         <p1 class="pofessor">{{$professorQuatroQuinta->name}}</p1>
                                 </td>
@@ -722,7 +721,7 @@
                             <tr>
                                 <td>
                                      <p1 class="materia">{{$aulaSeisSexta->nomeMateria}}</p1>
-                                     <p1 class="pofessor">{{$professorSeisSext->name}}</p1>
+                                     <p1 class="pofessor">{{$professorSeisSexta->name}}</p1>
                                 </td>
                             </tr>
                             @else

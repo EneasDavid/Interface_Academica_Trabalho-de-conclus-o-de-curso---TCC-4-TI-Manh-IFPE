@@ -1,5 +1,5 @@
 --teste ADM--
-insert into users (name, email, matricula, password) values ('test','test@test.com','111','$2y$10$Ai6Aw3Qomihtz8Pf5FhUUOOF9iW7Un9vXBLmMnCBu74xGeqe8bn5K');
+insert into users (name, email, matricula, password) values ('test','test@test.com','111','$2y$10$lwm8Pfxv9NWK/34FQ716SOUZdIalRjmGyadT3c3EGxCXhZmGxkysu');
 --Senha descriptografada = .
 --Manhã
 

@@ -56,7 +56,6 @@ class ADMController extends Controller
         public function criarAlunoForms(Request $request)
         {
            //Criadno a entidade
-            $codCurso;
             $novoUsuario = new User;
             $novoAlunoTurma = new salaAula;
             $novoAluno = new address;
@@ -112,7 +111,6 @@ class ADMController extends Controller
                 $codCurso="1E12";
             }
                 $novoUsuario->matricula=$request->anoIngreso.$codCurso."GR".rand(0000, 9999);
-                $novoUsuario->save();
                 //Salvar o usuario e depois lincar com o aluno
                 $novoAluno->sexo=$request->sexo;
                 $novoAluno->estadoCivil=$request->estadoCivil;
@@ -140,11 +138,6 @@ class ADMController extends Controller
                 $novoAluno->anoIngreso=$request->anoIngreso-2000;
                 $novoAluno->anoCurso=$request->anoCurso;
                 //Nível de acesso de aluno é o acesso dois
-                $novoAlunoTurma=salaAula::where('curso',$request->curso)->where('serie',$novoAluno->anoCurso)->where('turno',$request->turno)->first();
-                //tosql pra vê o código no dd
-                if(!empty($novoAlunoTurma)){
-                    $novoAluno->id_salaAula=$novoAlunoTurma->id;
-                }
                 $novoAluno->nivelAcesso=2;
                 //Upload de imagem
                 if($request->hasfile('fotoAluno') && $request->file('fotoAluno')->isValid()){
@@ -160,19 +153,16 @@ class ADMController extends Controller
                     $novoAluno->fotoAluno=$imagemName;
                 }
                 
-                $novoAluno->id_usuario_to_aluno=$novoUsuario->id;
                 
                 //Adicionando aluno na turma
-                $novoAluno->save();
-                $dadosAluno=new dados__aula__por__aluno;
-                $dadosAluno->id_aluno=$novoAluno->id;
-                $dadosAluno->situacao=0;
-                $dadosAluno->qtd_falta_geral=0;
-                $dadosAluno->qtd_falta_Um=0;
-                $dadosAluno->qtd_falta_Dois=0;
-                $dadosAluno->qtd_falta_Tres=0;
-                $dadosAluno->qtd_falta_Quatro=0;
-                $dadosAluno->save();
+                $novoAlunoTurma=salaAula::where('curso',$request->curso)->where('serie',$novoAluno->anoCurso)->where('turno',$request->turno)->first();
+                //tosql pra vê o código no dd
+                if(!empty($novoAlunoTurma)){
+                    $novoUsuario->save();
+                    $novoAluno->id_usuario_to_aluno=$novoUsuario->id;
+                    $novoAluno->id_salaAula=$novoAlunoTurma->id;
+                    $novoAluno->save();
+                }
                 //redirecionando a página
                 return redirect('homeAdm')->with('msg','Aluno cadastrado com sucesso!');
         }
@@ -985,37 +975,6 @@ class ADMController extends Controller
                 }
             return view('ADM.aluno.listarAlunos',['entidades'=>$entidades,'alunos'=>$alunos,'busca'=>$busca]);
         }
-        /*public function editarTurma_ListarProfessores($id)
-        {
-            $busca=request('search'); 
-            if($busca){
-                if(!empty(User::where('matricula', 'like', '%'.$busca.'%')->first())){
-                    $entidades=User::where([
-                        ['matricula', 'like', '%'.$busca.'%']
-                        ])->get();
-                        foreach ($entidades as $professor){
-                            $professores=professor::where([['id_usuario_to_professors','like',$professor->id]])->get();
-                        }
-                }elseif(!empty(User::where('name', 'like', '%'.$busca.'%')->first())){
-                        $entidades=User::where([
-                            ['name', 'like', '%'.$busca.'%']
-                            ])->get();   
-                            foreach ($entidades as $professor){
-                                $professores=professor::where([['id_usuario_to_professors','like',$professor->id]])->get();
-                            }
-                }
-            }else{
-                $entidades=null;
-                $entidades=User::where([
-                    ['name', 'like', '%'.$busca.'%']
-                    ])->get();   
-                    foreach ($entidades as $professor){
-                        $professores=professor::where([['id_usuario_to_professors','like',$professor->id]])->get();
-                    }
-                }
-            return view('ADM.professor.listarProfesores',['entidades'=>$entidades,'professores'=>$professores,'busca'=>$busca]);
-        }*/
-
         public function criarMateria()
         {
             $professores=professor::all('id','id_usuario_to_professors');
@@ -1050,6 +1009,7 @@ class ADMController extends Controller
         public function materiaToHorario(Request $request)
         {
             $id=$request->id;
+            $dadosAluno=new dados__aula__por__aluno;
             $this->validate($request,[
                 'materiaAula'=>'required',
                 'horarioAula'=>'required',
@@ -1057,9 +1017,26 @@ class ADMController extends Controller
                 'materiaAula.required'=>'O campo Materia é obrigatorio',
                 'horarioAula.required'=>'O campo horario é obrigatorio',
                 ]);
+            $materia=$request->materiaAula;
             salaAula::findOrFail($id)->update([
-                 $request->horarioAula=>$request->materiaAula,
+                 $request->horarioAula=>$materia,
             ]);
+            $alunos=address::all();
+            foreach ($alunos as $aluno)
+            {
+                if(empty(dados__aula__por__aluno::where('id_aluno',$aluno->id)->orWhere('id_materia',$materia)->first()))
+                {
+                     $dadosAluno->id_aluno=$aluno->id;
+                     $dadosAluno->id_materia=$materia;
+                     $dadosAluno->situacao=0;
+                     $dadosAluno->qtd_falta_geral=0;
+                     $dadosAluno->qtd_falta_Um=0;
+                     $dadosAluno->qtd_falta_Dois=0;
+                     $dadosAluno->qtd_falta_Tres=0;
+                     $dadosAluno->qtd_falta_Quatro=0;
+                     $dadosAluno->save();
+                }
+            }
             return redirect('/dadosTurma/'.$id);
         }
 }

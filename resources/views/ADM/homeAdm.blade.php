@@ -35,9 +35,11 @@
                     </div>
                 </div>
             @else
-                <div class="col-sm-3">
+            <div class="col-sm-3">
                     <div class=" bg-light" style="height: 200px; border-radius: 3%; text-align:center; margin-top: 10px;">
-                        <h1>Criar Aluno</h1>
+                            <div class="middle">
+                                <h1>Criar Aluno</h1>
+                            </div>
                     </div>
                 </div>
             @endif
