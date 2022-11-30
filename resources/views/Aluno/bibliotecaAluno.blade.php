@@ -96,48 +96,52 @@
             </div>
             @if ($busca)
             <p>Procurando por {{$busca}}</p>
-            @elseif(!empty($livros) && empty($busca))
+            @elseif(!empty($livro) && empty($busca))
             <h5>Todos os livros</h5>
             @endif
-            @if (empty($livros) && $busca)
+            @if (empty($livro) && !empty($busca))
             <p>livros não encontrado</p>
-            @elseif (empty($livros))
-            <p>Nenhum livros cadastrado</p>
+            @elseif (empty($livro))
+            <p>Nenhum livro cadastrado</p>
             @endif
-            <table class="table">
-         <thead>
-             <tr>
-                 <th>Título</th>
-                 <th>Autor</th>
-                 <th>Edição</th>
-                 <th>Volume</th>
-                 <th>Qtd. disponível</th>
-                 <th>Pegar</th>
-             </tr>
-         </thead>
-         <tbody>
-             @foreach ($livro as $livros)
-                 <tr>
-                     <td>{{$livros->titulo}}</td>
-                     <td>{{$livros->autor}}</td>
-                     <td>{{$livros->edicao}}</td>
-                     <td>{{$livros->volume}}</td>
-                     <td>{{$livros->qtd_disponivel}}</td>
-                     <td> 
-                        <form action="/emprestimoLivro/{{$livros->id}}" method="POST">
-                            @csrf 
-                            <a href="/emprestimoLivro/{{$livros->id}}" 
-                                id="event-submit" 
-                                onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                                Emprestimo
-                            </a>
-                      </form>
-                    </td>
-                 </tr>
-             @endforeach
-         </tbody>
-        </table>
+            <div class="col-sm-12" style="">
+                <div class="table-responsive" style="text-align: center;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Autor</th>
+                                <th>Edição</th>
+                                <th>Volume</th>
+                                <th>Qtd. disponível</th>
+                                <th>Pegar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($livro as $livros)
+                                <tr>
+                                    <td>{{$livros->titulo}}</td>
+                                    <td>{{$livros->autor}}</td>
+                                    <td>{{$livros->edicao}}</td>
+                                    <td>{{$livros->volume}}</td>
+                                    <td>{{$livros->qtd_disponivel}}</td>
+                                    <td> 
+                                        <form action="/emprestimoLivro/{{$livros->id}}" method="POST">
+                                            @csrf 
+                                            <a href="/emprestimoLivro/{{$livros->id}}" 
+                                                id="event-submit" 
+                                                onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                Emprestimo
+                                            </a>
+                                    </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
          </div>
          <script src="/js/jquery.js"></script>
          <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

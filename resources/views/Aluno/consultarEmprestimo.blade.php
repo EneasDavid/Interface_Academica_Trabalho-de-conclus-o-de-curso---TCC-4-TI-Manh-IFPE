@@ -87,7 +87,6 @@
         </div>
     </nav>
     <div style="display: flex;">
-        <a href="/homeAdm"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
         <h4 style="padding-left: 55px">Consulta emprestimos 
             @if(empty($alunos->nomeUsual))
                  {{$entidade->name}}
@@ -130,5 +129,8 @@
     @elseif(!empty($matricula) && empty($aluno))
         <p>matricula não encontrada</p>
     @endif
+<script src="/js/jquery.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/js/script.js"></script>
 </body>
 </html>

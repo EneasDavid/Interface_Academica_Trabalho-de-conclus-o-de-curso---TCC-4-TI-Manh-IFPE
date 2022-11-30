@@ -571,7 +571,7 @@ class ADMController extends Controller
             ]);
             $novoLivro->titulo=$request->titulo;
             $novoLivro->autor=$request->autor;
-            $novoLivro->edicao=$request->autor;
+            $novoLivro->edicao=$request->edicao;
             $novoLivro->volume=$request->volume;
             $novoLivro->qtd_disponivel=$request->qtd_disponivel;
             //dd($request->all());

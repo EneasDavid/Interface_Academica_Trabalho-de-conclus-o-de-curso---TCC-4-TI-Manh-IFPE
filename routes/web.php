@@ -5,6 +5,7 @@ use App\Http\Controllers\ADMController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\Geral;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 
 /*
@@ -17,6 +18,9 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//inset teste
+Route::get('/insert', [Controller::class, 'cadastrarTestes']);
+
 //geral
 Route::get('/logout',function(){
     Auth::logout();

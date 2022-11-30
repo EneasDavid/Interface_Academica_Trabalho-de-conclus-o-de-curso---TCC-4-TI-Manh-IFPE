@@ -29,19 +29,6 @@
                     </div>
                 </div>
             </a>
-            <a href="/dadosTurma/listarProfessores/{{$turma->id}}">
-                <div class="container" style="display: flex;">
-                    <div class="row" style="width: -webkit-fill-available;">
-                        <div class="col-sm-3" style="width: inherit;">
-                            <div class="turma midlle2" >
-                                <div class="" style="    padding: 0.4rem;">
-                                    <h1>Professores</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
             @endif
         </div>
         <div class="modal pagina input" id="modalExemplo" tabindex="-1" role="dialog" style="margin: 0!important;" aria-labelledby="exampleModalLabel" aria-hidden="true" popUp-cadastrar-tag>

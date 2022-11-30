@@ -90,7 +90,6 @@
         </div>
     </nav>
     <div style="display: flex;">
-        <a href="home.html"><img src="img/voltar.png" alt="clique para voltar" height="21px"></a>
         <h4 style="padding-left: 55px">Calendário Acadêmico</h4>
     </div>
     <div class="container" style="display: block;height: 80%;">
