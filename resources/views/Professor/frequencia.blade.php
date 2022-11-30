@@ -10,12 +10,26 @@
 </head>
 
 <body>
-
     <div style="display: flex;">
         <a href="/turma/{{$sala->id}}" style="padding-right: .8rem;"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
         <h4 style="padding-left: 55px">Chamada</h4>
     </div>
     <div class="container-fluid">
+    @if ($errors->any())
+                            <div>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div></div>
+                            @endif
+                            @if (session('danger'))
+                            <div class="alert alert-danger">
+                                {{ session('danger') }}
+                            </div>
+                            @endif
         <form action="{{route('Professor.chamada')}}" method="POST" style="width: max-content;margin: auto;">
         @csrf
         <select data-unidade name="unidade" class="form-control" id="Base_Combobox" style="display: block;">
@@ -38,22 +52,24 @@
               @foreach($entidade as $entidades)
               <tr>
                      @foreach($aluno as $alunos)
+                     @foreach($dadosAluno as $dadosAlunos)
                        @if($entidades->id==$alunos->id_usuario_to_aluno)
                              @if(empty($alunos->nomeUsual))
-                                 <td type="text" value="{{$entidades->id}}" disabled>{{$entidades->name}}</td>
+                                 <td type="text" value="{{$dadosAlunos->id}}" disabled>{{$entidades->name}}</td>
                              @else
-                                 <td type="text" value="{{$entidades->id}}" disabled>{{$alunos->nomeUsual}}</td>
+                                 <td type="text" value="{{$dadosAlunos->id}}" disabled>{{$alunos->nomeUsual}}</td>
                              @endif
-                             @foreach($dadosAluno as $dadosAlunos)
-                                 @if($dadosAlunos->id_aluno==$alunos->id)
-                                    <script type="text/Javascript">
-                                         let unidade=document.querySelector('[data-unidade]').value;
-                                     </script>
-                                     <td type="text" value="{{$dadosAlunos->qtd_falta_Um}}" disabled>{{$dadosAlunos->qtd_falta_Um}}</td>
-                                     <td><input type="number" class="input-home" placeholder="Qtd. de faltas: " style="font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
-                                 @endif
-                            @endforeach
-                       @endif
+                             <input type="hidden" value="{{$dadosAlunos->id}}" name="aluno">
+                             @if($dadosAlunos->id_aluno==$alunos->id)
+                                 <script type="text/Javascript">
+                                     let unidade=document.querySelector('[data-unidade]').value;
+                                 </script>
+                                 <input type="hidden" value="{{$dadosAlunos->qtd_falta_Um}}" name="faltaAtuais" name="aluno">
+                                 <td type="text" disabled>{{$dadosAlunos->qtd_falta_Um}}</td>
+                                 <td><input type="number" class="input-home" name="faltas" placeholder="Qtd. de faltas: " style="font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
+                             @endif
+                         @endif
+                     @endforeach
                  @endforeach
                  </tr>
                 @endforeach

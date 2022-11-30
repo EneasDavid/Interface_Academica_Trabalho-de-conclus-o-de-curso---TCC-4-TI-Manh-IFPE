@@ -49,8 +49,8 @@
              @endforeach
         </tbody>
     </table>
-   <button class="btn" style="float: right;">Salvar</button>
-        </form>
+        <button class="btn" style="float: right;">Salvar</button>
+    </form>
     </div>
 </body>
 

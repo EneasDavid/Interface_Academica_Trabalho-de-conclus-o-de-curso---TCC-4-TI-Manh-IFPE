@@ -65,7 +65,26 @@ class ProfessorController extends Controller
     }
     public function TurmaChamada(Request $request)
     {
-        dd('Enéas é foda');
+        $this->validate($request,[
+            'unidade'=>'required'
+        ],[
+            'unidade.required'=>'O campo Unidade é obrigatorio',
+        ]);
+        $unidade=$request->unidade;
+        $dadosAluno=$request->aluno;
+        $dados=dados__aula__por__aluno::all();
+        foreach($dados as $aula)
+        {
+            $faltaTotais=$aula->qtd_falta_geral;
+            if($aula->id==$dadosAluno)
+            {
+                dados__aula__por__aluno::findOrFail($dadosAluno)->update([
+                    'qtd_falta_geral'=>$aula->qtd_falta_Um+$aula->qtd_falta_Dois+$aula->qtd_falta_Tres+$aula->qtd_falta_Quatro+$request->faltas,
+                    $unidade=>$aula->$unidade+$request->faltas,
+                ]);
+            }
+        }
+        return redirect('/homeProfessor');
     }
     public function TurmaMateriaInserirNota($id)
     {

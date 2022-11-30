@@ -69,15 +69,15 @@ Route::post('/Forms-Horario-Criar',[ADMController::class, 'criarHorarioForms'])-
 Route::get('/editarTurma', [ADMController::class, 'listarTurmas'])->name('ADM.listarTurmas')->middleware('auth');
 //===============================Livro=========================================
 //Livro
-//Listar
+    //Listar
 Route::get('/acervoBiblioteca', [ADMController::class, 'acervoBiblioteca'])->name('ADM.acervoBiblioteca')->middleware('auth');
-//Cadastrar
+    //Cadastrar
 Route::post('/Forms-Livro-Criar',[ADMController::class, 'cadastrarLivro'])->name('ADM.cadastrarLivro')->middleware('auth');
-//Excluir
+    //Excluir
 Route::delete('/destruirLivro/{id}',[ADMController::class, 'destruirLivro'])->name('destruirLivro');
-//Emprestimo
+    //Emprestimo
 Route::get('/acervoBiblioteca-consultar-Emprestimos', [ADMController::class, 'emprestimosBibliotecaToAluno'])->name('ADM.emprestimosBiblioteca')->middleware('auth');
-//Devolução
+    //Devolução
 Route::delete('/destruirEmprestimo/{pivot}', [ADMController::class, 'destruirEmprestimo'])->name('ADM.destruirEmprestimo')->middleware('auth');
 
 //===============================Turma=========================================
