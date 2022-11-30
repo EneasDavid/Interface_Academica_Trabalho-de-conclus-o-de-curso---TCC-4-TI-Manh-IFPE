@@ -100,6 +100,23 @@ class ProfessorController extends Controller
     }
     public function InserirNota(Request $request)
     {
-        dd('David é foda');
+        $this->validate($request,[
+            'unidade'=>'required'
+        ],[
+            'unidade.required'=>'O campo Unidade é obrigatorio',
+        ]);
+        $unidade=$request->unidade;
+        $dadosAluno=$request->aluno;
+        $dados=dados__aula__por__aluno::all();
+        foreach($dados as $aula)
+        {
+            if($aula->id==$dadosAluno)
+            {
+                dados__aula__por__aluno::findOrFail($dadosAluno)->update([
+                    $unidade=>$request->nota,
+                ]);
+            }
+        }
+        return redirect('/homeProfessor');
     }
 }

@@ -156,8 +156,8 @@ class Controller extends BaseController
         //Fim criar ADM
 
         //Inicio criar Aluno
-            $novoEstudante->name = 'Maria Emanuele';
-            $novoEstudante->email = 'maria@emanuele.com';
+            $novoEstudante->name = 'Emanuele Maria';
+            $novoEstudante->email = 'emanuele@maria.com';
             $novoEstudante->matricula = '20191D12GR0617';
             $novoEstudante->password = Hash::make('.');
             $novoEstudante->save();
