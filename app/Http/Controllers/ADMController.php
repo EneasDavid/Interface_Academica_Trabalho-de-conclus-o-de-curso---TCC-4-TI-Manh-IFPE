@@ -1034,6 +1034,11 @@ class ADMController extends Controller
                      $dadosAluno->qtd_falta_Dois=0;
                      $dadosAluno->qtd_falta_Tres=0;
                      $dadosAluno->qtd_falta_Quatro=0;
+                     $dadosAluno->notaUm=0;
+                     $dadosAluno->notaDois=0;
+                     $dadosAluno->notaTres=0;
+                     $dadosAluno->notaQuatro=0;
+                     $dadosAluno->situacao=1;
                      $dadosAluno->save();
                 }
             }

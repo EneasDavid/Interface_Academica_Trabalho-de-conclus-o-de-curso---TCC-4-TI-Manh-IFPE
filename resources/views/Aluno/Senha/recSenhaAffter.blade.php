@@ -59,13 +59,6 @@
                     <a class="nav-link aluno" style="width: auto;" href="#">
                         <li class="nav-item" style="height: 100%;">
                             <div class="">
-                                Solicitar Documentos
-                            </div>
-                        </li>
-                    </a>
-                    <a class="nav-link aluno" style="width: auto;" href="#">
-                        <li class="nav-item" style="height: 100%;">
-                            <div class="">
                                 Matrizes curriculares
                             </div>
                         </li>

@@ -48,24 +48,24 @@
               </tr>
           </thead>
           <tbody>
-              @foreach($entidade as $entidades)
-              <tr>
-              @foreach($aluno as $alunos)
-                     @foreach($dadosAluno as $dadosAlunos)
-                       @if($entidades->id==$alunos->id_usuario_to_aluno)
-                             @if(empty($alunos->nomeUsual))
-                                 <td type="text" value="{{$entidades->id}}" disabled>{{$entidades->name}}</td>
-                             @else
-                                 <td type="text" value="{{$entidades->id}}" disabled>{{$alunos->nomeUsual}}</td>
-                             @endif
-                             <input type="hidden" value="{{$dadosAlunos->id}}" name="aluno">
-                             <td><input type="number" name="nota" class="input-home" style="width: 20%;font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
-                        @endif
-                    @endforeach
-                    @endforeach
-                 </tr>
-             @endforeach
-        </tbody>
+                     @foreach($entidade as $entidades)
+                         <tr>
+                            @foreach($dadosAluno as $dadosAlunos)
+                                @foreach($aluno as $alunos)
+                                    @if($entidades->id==$alunos->id_usuario_to_aluno && $dadosAlunos->id_aluno==$alunos->id)
+                                         @if(empty($alunos->nomeUsual))
+                                             <td type="text" value="{{$dadosAlunos->id}}" disabled>{{$entidades->name}}</td>
+                                         @else
+                                             <td type="text" value="{{$dadosAlunos->id}}" disabled>{{$alunos->nomeUsual}}</td>
+                                         @endif
+                                         <input type="hidden" value="{{$dadosAlunos->id}}" name="aluno">
+                                         <td><input type="number" name="nota" class="input-home" style="width: 20%;font-weight: bold;display: flex;justify-content: space-around;flex-direction: row;align-items: center;margin-left: 5px;"></td>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                         </tr>
+                     @endforeach
+                    </tbody>
     </table>
         <button class="btn" style="float: right;">Salvar</button>
     </form>

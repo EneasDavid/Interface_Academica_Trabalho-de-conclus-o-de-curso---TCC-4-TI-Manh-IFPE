@@ -11,6 +11,7 @@ use App\Models\materia;
 use App\Models\salaAula;
 use App\Models\professor;
 use App\Models\Livros;
+use App\Models\dados__aula__por__aluno;
 
 
 class AlunoController extends Controller
@@ -373,5 +374,16 @@ class AlunoController extends Controller
      {
           $entidade=auth()->user();
           return view('Aluno.Senha.recSenhaAffter',['entidade'=>$entidade]);
+     }
+     public function boletim()
+     {        
+          $entidade=auth()->user();
+          $aluno=address::where('id_usuario_to_aluno',$entidade->id)->first();
+          $dados=dados__aula__por__aluno::all();
+          foreach($dados as $materiaId)
+          {
+               $materias=materia::findOrfail($materiaId->id_materia)->get();
+          }
+          return view('Aluno.boletim',['aluno'=>$aluno,'dadosBoletim'=>$dados,'entidade'=>$entidade,'materia'=>$materias]);
      }
 }

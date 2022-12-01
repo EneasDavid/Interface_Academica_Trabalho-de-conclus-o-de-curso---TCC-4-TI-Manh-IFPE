@@ -57,11 +57,15 @@ class ProfessorController extends Controller
          $alunos=address::where([['id_salaAula','like',$id]])->get();
          $entidades=user::all();
          $informacoes=dados__aula__por__aluno::all();
+         $unidadeTela=request('unidade'); 
          if(empty($alunos))
          {
              return redirect('/turma/'.$id.'');
          }
-         return view('Professor.frequencia',['sala'=>$salaDeAula,'aluno'=>$alunos,'entidade'=>$entidades,'dadosAluno'=>$informacoes]);
+         elseif(!empty($unidadeTela) && !empty($alunos)){
+            return view('Professor.frequencia',['sala'=>$salaDeAula,'aluno'=>$alunos,'entidade'=>$entidades,'dadosAluno'=>$informacoes,'unidadeTela'=>$unidadeTela]);
+         }
+         return view('Professor.frequencia',['sala'=>$salaDeAula,'aluno'=>$alunos,'entidade'=>$entidades,'dadosAluno'=>$informacoes,'unidadeTela'=>'qtd_falta_Um']);
     }
     public function TurmaChamada(Request $request)
     {
@@ -78,7 +82,7 @@ class ProfessorController extends Controller
             $faltaTotais=$aula->qtd_falta_geral;
             if($aula->id==$dadosAluno)
             {
-                dados__aula__por__aluno::findOrFail($dadosAluno)->update([
+                dados__aula__por__aluno::where('id_aluno',$dadosAluno)->update([
                     'qtd_falta_geral'=>$aula->qtd_falta_Um+$aula->qtd_falta_Dois+$aula->qtd_falta_Tres+$aula->qtd_falta_Quatro+$request->faltas,
                     $unidade=>$aula->$unidade+$request->faltas,
                 ]);
@@ -114,6 +118,15 @@ class ProfessorController extends Controller
             {
                 dados__aula__por__aluno::findOrFail($dadosAluno)->update([
                     $unidade=>$request->nota,
+                ]);
+                if(($aula->notaUm+$aula->notaDois+$aula->notaTres+$aula->notaQuatro)/4>=6)
+                {
+                    $situacao=1;
+                }else{
+                    $situacao=0;
+                }
+                dados__aula__por__aluno::findOrFail($dadosAluno)->update([
+                    'situacao'=>$situacao,
                 ]);
             }
         }

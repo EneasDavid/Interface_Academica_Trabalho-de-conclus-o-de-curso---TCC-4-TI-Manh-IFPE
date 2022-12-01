@@ -100,6 +100,7 @@ Route::get('/acervoBibliotecaToAluno', [AlunoController::class, 'acervoBibliotec
 Route::post('/emprestimoLivro/{id}',[AlunoController::class, 'emrpestimo'])->middleware('auth');
 Route::get('/emprestimoLivro',[AlunoController::class, 'emprestimosBibliotecaToAluno'])->middleware('auth');
 Route::get('/alterarSenhaToAluno', [AlunoController::class, 'alterarSenha'])->middleware('auth');
+Route::get('/boletim', [AlunoController::class, 'boletim'])->middleware('auth');
 //Rotas da entidade Aluno
 
 //******LOGIN********/

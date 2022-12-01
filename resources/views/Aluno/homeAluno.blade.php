@@ -48,7 +48,7 @@
                         </div>
                     </li>
                 </a>
-                <a class="nav-link aluno" style="width: auto;" href="#">
+                <a class="nav-link aluno" style="width: auto;" href="/boletim">
                     <li class="nav-item" style="height: 100%;">
                         <div class="">
                             Boletim
@@ -62,13 +62,7 @@
                         </div>
                     </li>
                 </a>
-                <a class="nav-link aluno" style="width: auto;" href="#">
-                    <li class="nav-item" style="height: 100%;">
-                        <div class="">
-                            Matrizes curriculares
-                        </div>
-                    </li>
-                </a>
+
                 @if(!empty($aluno->renovarMatricula))
                 <a class="nav-link aluno" style="width: auto;" href="#">
                     <li class="nav-item" style="height: 100%;">
