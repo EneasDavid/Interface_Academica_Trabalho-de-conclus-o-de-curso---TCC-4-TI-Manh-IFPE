@@ -371,6 +371,7 @@ class AlunoController extends Controller
      }
      public function alterarSenha()
      {
-          return view('Aluno.Senha.recSenhaAffter');
+          $entidade=auth()->user();
+          return view('Aluno.Senha.recSenhaAffter',['entidade'=>$entidade]);
      }
 }

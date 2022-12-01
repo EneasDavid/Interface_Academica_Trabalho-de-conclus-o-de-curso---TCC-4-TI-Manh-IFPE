@@ -24,12 +24,18 @@ class Geral extends Controller
     public function esqueceuSenhaForms (Request $request)
     {
         $this->validate($request,[
-            'senhaAtualizada'=>'required',],[
+            'senhaAtualizada'=>'required',
+            ],[
             'senhaAtualizada.required'=>'O campo confirmar senha é obrigatorio',        
             ]);
             User::findOrFail($request->entidade)->update([
                 'password'=>Hash::make($request->senhaAtualizada),
-           ]);            
+           ]);
+            if(!empty(auth()->user()))
+            {
+
+               return redirect('/homeAluno');
+            }                  
            return redirect('/');
      }
 }

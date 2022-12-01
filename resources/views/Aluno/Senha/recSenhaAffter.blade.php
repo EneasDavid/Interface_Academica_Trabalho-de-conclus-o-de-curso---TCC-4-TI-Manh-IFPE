@@ -93,9 +93,9 @@
     <div style="display: flex; flex-direction: column; height: 70%; text-align: center;">
         <div class="middle">
             
-            <form action="" style="display: flex;align-items: center;flex-direction: column;">
-                <p>Insira a senha atual: </p>
-                <input type="password" class="input" placeholder="Senha atual: ">
+        <form action="{{route('recSenhaEntidade')}}" method="POST" style="display: flex;align-items: center;flex-direction: column;">
+                @csrf  
+                <input type="hidden" name="entidade" value="{{$entidade->id}}">
                 <p>Insira a nova senha: </p>
                 <input type="password" class="input" placeholder="Nova senha: ">
                 <input type="password" class="input" name="senhaAtualizada" placeholder="Confirmar nova senha: ">
