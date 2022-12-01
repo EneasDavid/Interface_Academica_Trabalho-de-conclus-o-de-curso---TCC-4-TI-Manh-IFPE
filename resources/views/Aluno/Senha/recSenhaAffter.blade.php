@@ -98,7 +98,7 @@
                 <input type="password" class="input" placeholder="Senha atual: ">
                 <p>Insira a nova senha: </p>
                 <input type="password" class="input" placeholder="Nova senha: ">
-                <input type="password" class="input" placeholder="Confirmar nova senha: ">
+                <input type="password" class="input" name="senhaAtualizada" placeholder="Confirmar nova senha: ">
                 <button type="submit" class="btn">Salvar senha</button>
             </form>
         </div>

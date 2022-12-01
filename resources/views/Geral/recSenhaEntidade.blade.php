@@ -15,21 +15,18 @@
         <a href="/"><img src="/img/voltar.png" alt="clique para voltar" height="21px"></a>
         <h4 style="padding-left: 55px">Recuperar senha</h4>
     </div>
-
     <div style="display: flex; flex-direction: column; height: 70%; text-align: center;">
-        <div class="middle">
-            <p>Insira a nova senha: </p>
-
-            <form action="{{route(recSenhaEntidade)}}" method="POST">
-                <input type="hidden" value="{{$entidade->id}}">
+        <div class="middle">     
+            <form action="{{route('recSenhaEntidade')}}" method="POST" style="display: flex;align-items: center;flex-direction: column;">
+                @csrf    
+                <p>Insira a nova senha: </p>
+                <input type="hidden" name="entidade" value="{{$entidade->id}}">
                 <input type="password" class="input" placeholder="Nova senha: ">
-                <input type="password" class="input" placeholder="Confirmar nova senha: ">
+                <input type="password" class="input" name="senhaAtualizada" placeholder="Confirmar nova senha: ">
                 <button type="submit" class="btn">Salvar senha</button>
             </form>
-
         </div>
     </div>
-
 </body>
 
 </html>
