@@ -19,12 +19,12 @@
         </form>
         @if ($busca)
             <p>Procurando por {{$busca}}</p>
-        @elseif(count($professores)>0 && empty($busca))
+        @elseif(!empty($professores) && empty($busca))
             <h4>Todos os professores contratados</h4>
         @endif
-        @if (count($professores)==0 && $busca)
+        @if (empty($professores) && $busca)
             <p>Professor não encontrado</p>
-        @elseif (count($professores)==0)
+        @elseif (empty($professores))
             <p>Nenhum Professor contratado <strong><a href="/criarProfessor">click aqui para contratar um</a></strong></p>
         @else
         <div style="width: auto;display: flex;align-items: center;flex-wrap: wrap;">
@@ -62,11 +62,14 @@
         </div>
         @endif
         <div class="voltarTopo" >
-            @if ($busca)
-            <a href="/listarProfessores">Todas os professores</a>
-            @elseif(count($professores)>0)
+        @if (!empty($busca) && empty($professores))
+            <div style="display: contents;">
+                <a href="/listarProfessores">Ver todos os professores</a>
+                <a href="#topo">Voltar ao topo</a>
+            </div>
+        @elseif(!empty($professores))
             <a href="#topo">Voltar ao topo</a>
-            @endif
+        @endif
         </div>
         </div>
     </body>

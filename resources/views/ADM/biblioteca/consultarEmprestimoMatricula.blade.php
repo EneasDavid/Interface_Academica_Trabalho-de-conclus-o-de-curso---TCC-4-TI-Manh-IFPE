@@ -22,6 +22,11 @@
             @endif
         </h4>
     </div>
+    @if (!empty($matricula) && empty($emprestimoLivro))
+        <div class="alert alert-danger">
+           Aluno não possui emprestimos
+        </div>
+    @endif
     @if(empty($emprestimoLivro))
     <div class="table-responsive" style="margin-top: 15rem;justify-content: space-around!important;">
         <form class="forms-pesquisa" style="display: flex;flex-direction: column;align-items: flex-end;"action="/acervoBiblioteca-consultar-Emprestimos" method="get">

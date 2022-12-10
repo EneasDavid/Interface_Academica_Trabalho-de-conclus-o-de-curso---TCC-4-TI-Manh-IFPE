@@ -584,6 +584,7 @@ class ADMController extends Controller
             $livroEmprestimos=null;
             $alunoEmprestimo=null;
             $aluno=null;
+            $errors=null;
             if($matricula){
                 $aluno=User::where('matricula',$matricula)->first();
                 if(!empty($aluno)){ 
@@ -593,9 +594,10 @@ class ADMController extends Controller
                         }
                 }
             }
-            return view('ADM.biblioteca.consultarEmprestimoMatricula',['entidade'=>$aluno,'alunos'=>$alunoEmprestimo,'emprestimoLivro'=>$livroEmprestimos]);
+            return view('ADM.biblioteca.consultarEmprestimoMatricula',['matricula'=>$matricula,'entidade'=>$aluno,'alunos'=>$alunoEmprestimo,'emprestimoLivro'=>$livroEmprestimos]);
         }
-        public function destruirEmprestimo($id){
+        public function destruirEmprestimo($id)
+        {
             $alunoRemover=address::findOrFail($id[14]);
             $alunoRemover->emprestimoAlunoLivro()->detach($id[28]);           
             return redirect('/acervoBiblioteca-consultar-Emprestimos');
@@ -1024,7 +1026,7 @@ class ADMController extends Controller
             $alunos=address::all();
             foreach ($alunos as $aluno)
             {
-                if(empty(dados__aula__por__aluno::where('id_aluno',$aluno->id)->orWhere('id_materia',$materia)->first()))
+                if(empty(dados__aula__por__aluno::where('id_aluno',$aluno->id)))
                 {
                      $dadosAluno->id_aluno=$aluno->id;
                      $dadosAluno->id_materia=$materia;
@@ -1040,6 +1042,21 @@ class ADMController extends Controller
                      $dadosAluno->notaQuatro=0;
                      $dadosAluno->situacao=1;
                      $dadosAluno->save();
+                }elseif(empty(dados__aula__por__aluno::where('id_materia',$materia)->first())){
+                    $dadosAluno->id_aluno=$aluno->id;
+                    $dadosAluno->id_materia=$materia;
+                    $dadosAluno->situacao=0;
+                    $dadosAluno->qtd_falta_geral=0;
+                    $dadosAluno->qtd_falta_Um=0;
+                    $dadosAluno->qtd_falta_Dois=0;
+                    $dadosAluno->qtd_falta_Tres=0;
+                    $dadosAluno->qtd_falta_Quatro=0;
+                    $dadosAluno->notaUm=0;
+                    $dadosAluno->notaDois=0;
+                    $dadosAluno->notaTres=0;
+                    $dadosAluno->notaQuatro=0;
+                    $dadosAluno->situacao=1;
+                    $dadosAluno->save();
                 }
             }
             return redirect('/dadosTurma/'.$id);

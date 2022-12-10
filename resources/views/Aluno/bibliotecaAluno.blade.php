@@ -10,7 +10,7 @@
     <body>
         <!--menu-->
         <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="navAjuste">
+    <div class="navAjuste">
         <a class="navbar-text" href="/homeAluno">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
@@ -53,13 +53,14 @@
                         </div>
                     </li>
                 </a>
-                <a class="nav-link aluno" style="width: auto;" href="#">
+                <a class="nav-link aluno" style="width: auto;" href="/solicitarDoc">
                     <li class="nav-item" style="height: 100%;">
                         <div class="">
                             Solicitar Documentos
                         </div>
                     </li>
                 </a>
+
                 @if(!empty($aluno->renovarMatricula))
                 <a class="nav-link aluno" style="width: auto;" href="#">
                     <li class="nav-item" style="height: 100%;">
@@ -77,9 +78,9 @@
                     </li>
                 </a>
             </ul>
-        </div>
-        </div>
-    </nav>
+    </div>
+    </div>
+</nav>
          <div class="container">
             <div style="display:flex;align-items: center;justify-content: space-between;">
                 <form class="forms-pesquisa" action="/listarLivros" method="get">

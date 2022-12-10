@@ -28,11 +28,12 @@ class ProfessorController extends Controller
         ]);
         $professor=User::where('matricula',$request->matricula)->first(); 
         if($professor && Hash::check($request->password,$professor->password)){
-            Auth::loginUsingId($professor->id);
-            return redirect('/homeProfessor');
-        }else{
-            return redirect()->back()->with('danger','Matricula ou senha invalida!');
-        }
+                 Auth::loginUsingId($professor->id);
+                 return redirect('/homeProfessor');
+            }else{
+                 return redirect()->back()->with('danger','Matricula ou senha invalida!');
+            }
+        
     }
     //after login
     public function homeProfessor()

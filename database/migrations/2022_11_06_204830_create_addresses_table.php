@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('naturalidade');
             $table->string('nomeUsual')->nullable();
             $table->string('etnia');
-            $table->string('rg')->unique();
+            $table->string('rg');
             $table->string('rgExpedicao');
             $table->string('ufExpeditor');
             $table->string('expeditorRg');

@@ -156,6 +156,7 @@ class Controller extends BaseController
         //Fim criar ADM
 
         //Inicio criar Aluno
+            //Aluno
             $novoEstudante->name = 'Emanuele Maria';
             $novoEstudante->email = 'emanuele@maria.com';
             $novoEstudante->matricula = '20191D12GR0617';
@@ -163,13 +164,13 @@ class Controller extends BaseController
             $novoEstudante->save();
             $novoAluno->sexo='f';
             $novoAluno->nivelAcesso=2;
-            $novoAluno->estadoCivil='solteira';
+            $novoAluno->estadoCivil='solteiro';
             $novoAluno->nomeMae='Paula';
             $novoAluno->TipoSanguineo='';
             $novoAluno->dataNascimento='2004-04-20';
             $novoAluno->naturalidade='brasileira';
             $novoAluno->nomeUsual='';
-            $novoAluno->etnia='branca';
+            $novoAluno->etnia='branco';
             $novoAluno->rg='111222333';
             $novoAluno->rgExpedicao='2018-12-03';
             $novoAluno->ufExpeditor='PE';
@@ -192,6 +193,7 @@ class Controller extends BaseController
             $novoAluno->id_usuario_to_aluno=$novoEstudante->id;
             $novoAluno->id_salaAula=$novoAlunoTurma->id;
             $novoAluno->save();
+        
         //Fim criar Aluno
         
         //Inicio criar Professor
@@ -208,7 +210,7 @@ class Controller extends BaseController
             $novoProfessor->dataNascimento='2004-12-03';
             $novoProfessor->naturalidade='brasileiro';
             $novoProfessor->nomeUsual='';
-            $novoProfessor->etnia='Pardo';
+            $novoProfessor->etnia='pardo';
             $novoProfessor->rg='111222333';
             $novoProfessor->rgExpedicao='2018-12-03';
             $novoProfessor->ufExpeditor='PE';

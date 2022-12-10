@@ -101,6 +101,8 @@ Route::post('/emprestimoLivro/{id}',[AlunoController::class, 'emrpestimo'])->mid
 Route::get('/emprestimoLivro',[AlunoController::class, 'emprestimosBibliotecaToAluno'])->middleware('auth');
 Route::get('/alterarSenhaToAluno', [AlunoController::class, 'alterarSenha'])->middleware('auth');
 Route::get('/boletim', [AlunoController::class, 'boletim'])->middleware('auth');
+Route::get('/solicitarDoc', [AlunoController::class, 'solicitarDocumento'])->middleware('auth');
+Route::post('/gerarPDF', [AlunoController::class, 'gerarPDF'])->middleware('auth');
 //Rotas da entidade Aluno
 
 //******LOGIN********/

@@ -53,7 +53,7 @@
                                 </div>
                             </li>
                         </a>
-                        <a class="nav-link aluno" style="width: auto;" href="#">
+                        <a class="nav-link aluno" style="width: auto;" href="/solicitarDoc">
                             <li class="nav-item" style="height: 100%;">
                                 <div class="">
                                     Solicitar Documentos
@@ -90,22 +90,19 @@
                         <thead>
                             <tr>
                                 <th scope="col">Matéria</th>
-                                <th scope="col">CH</th>
-                                <th scope="col">TURMA</th>
-                                <th scope="col">T. FALTAS</th>
-                                <th scope="col">M. FINAL</th>
-                                <th scope="col">UNID. 1</th>
-                                <th scope="col">F</th>
-                                <th scope="col">UNID. 2</th>
-                                <th scope="col">F</th>
-                                <th scope="col">UNID. 3</th>
-                                <th scope="col">F</th>
-                                <th scope="col">UNID. 4</th>
-                                <th scope="col">F</th>
-                                <th scope="col">M.P</th>
-                                <th scope="col">EXAME FINAL</th>
-                                <th scope="col">M.F</th>
-                                <th scope="col">SITUAÇÃO</th>
+                                <th scope="col" title="carga horária">CH</th>
+                                <th scope="col" title="turma">TURMA</th>
+                                <th scope="col" title="total de faltas">T. FALTAS</th>
+                                <th scope="col" title="média final">M. FINAL</th>
+                                <th scope="col" title="nota da unidade 1">UNID. 1</th>
+                                <th scope="col" title="falta da unidade 1">F</th>
+                                <th scope="col" title="nota da unidade 2">UNID. 2</th>
+                                <th scope="col" title="falta da unidade 2">F</th>
+                                <th scope="col" title="nota da unidade 3">UNID. 3</th>
+                                <th scope="col" title="falta da unidade 3">F</th>
+                                <th scope="col" title="nota da unidade 4">UNID. 4</th>
+                                <th scope="col" title="falta da unidade 4">F</th>
+                                <th scope="col" title="">SITUAÇÃO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,9 +129,6 @@
                                         <td>{{$boletim->qtd_falta_Tres}}</td>
                                         <td>{{$boletim->notaQuatro}}</td>
                                         <td>{{$boletim->qtd_falta_Quatro}}</td>
-                                        <td>z</td>
-                                        <td>p</td>
-                                        <td>h</td>
                                         @if ($boletim->situacao)
                                              <td>Aprovado</td>
                                         @else

@@ -63,9 +63,9 @@
       <h5>Todos os livros cadastrados</h5>
       @endif
       @if (empty($livros) && $busca)
-      <p>Livro não encontrado</p>
+      <p><a href="/acervoBiblioteca">Livro não encontrado</a></p>
       @elseif(empty($livros))
-      <p>Nenhum livro cadastrado </p>
+      <p>Nenhum livro cadastrado</p>
       @else
       <div class="col-sm-12" style="">
          <div class="table-responsive" style="text-align: center;">

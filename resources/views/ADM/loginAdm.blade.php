@@ -41,7 +41,7 @@
 
 
     <!--corpo-->
-    <main style=" height: 90%;">
+    <m ain style=" height: 90%;">
     <div class="container">
         <div class="row" style="height: 100%;">
             <div class="col-sm-6" style="padding-top: 2rem;">
@@ -65,7 +65,7 @@
                                     </ul>
                                 </div></div>
                             @endif
-                            @if (session('danger'))
+                           @if (session('danger'))
                             <div class="alert alert-danger">
                                 {{ session('danger') }}
                             </div>

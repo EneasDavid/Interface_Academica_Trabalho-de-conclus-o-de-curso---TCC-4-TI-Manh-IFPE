@@ -112,7 +112,7 @@
                     <p>Contato</p>
                     <input type="text" name="numeroCelular" class="input-home" placeholder="Celular: (ex.81996376933)">
                     <input type="email" name="email" placeholder="E-mail:" class="input-home">
-                    <input type="text" name="senha" placeholder="senha:" class="input-home">
+                    <input type="password" name="senha" placeholder="senha:" class="input-home">
                 </div>
             </div>
             <div class="col-sm-3">

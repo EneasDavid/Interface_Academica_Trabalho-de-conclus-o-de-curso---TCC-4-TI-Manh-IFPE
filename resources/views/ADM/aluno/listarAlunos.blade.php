@@ -19,12 +19,12 @@
         </form>
         @if ($busca)
              <p>Procurando por {{$busca}}</p>
-        @elseif(count($alunos)>0 && empty($busca))
+        @elseif(empty($alunos)>0 && empty($busca))
              <h5>Todos os alunos matriculados</h5>
         @endif
-        @if (count($alunos)==0 && $busca)
-             <p>Aluno não encontrado</p>
-        @elseif (count($alunos)==0)
+        @if (empty($alunos) && $busca)
+             <p><a href="/listarAlunos">Aluno não encontrado</a></p>
+        @elseif (empty($alunos))
              <p>Nenhum aluno matriculado <strong><a href="/criarAluno">click aqui para matricular um</a></strong></p>
         @else
              <div style="display: flex;align-items: center;flex-wrap: wrap;">
@@ -69,9 +69,12 @@
     </div>
     @endif
 
-        @if ($busca)
-            <a href="/listarAlunos">Ver todos os alunos</a>
-        @elseif(count($alunos)>0)
+        @if (!empty($busca) && !empty($alunos))
+            <div style="display: flex;justify-content: space-between;flex-direction: row;">
+                <a href="/listarAlunos">Ver todos os alunos</a>
+                <a href="#topo">Voltar ao topo</a>
+            </div>
+        @elseif(!empty($alunos))
             <a href="#topo">Voltar ao topo</a>
         @endif
         </div>

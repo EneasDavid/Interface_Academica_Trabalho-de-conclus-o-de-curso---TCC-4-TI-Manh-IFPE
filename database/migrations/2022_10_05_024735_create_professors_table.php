@@ -21,7 +21,7 @@ return new class extends Migration
             $table->dateTime('dataNascimento');
             $table->string('naturalidade');
             $table->string('etnia');
-            $table->string('rg')->unique();
+            $table->string('rg');
             $table->string('rgExpedicao');
             $table->string('ufExpeditor');
             $table->string('expeditorRg');

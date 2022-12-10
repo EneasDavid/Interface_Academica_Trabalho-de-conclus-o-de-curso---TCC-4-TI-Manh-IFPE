@@ -28,6 +28,7 @@ class professor extends Model
         'cidade',
         'bairro',
         'rua',
+        'id_usuario_to_professor',
         'numeroCasa',
         'complementoCasa',
         'nivelAcesso',

@@ -1,16 +1,15 @@
 <!doctype html>
-<html lang="pt-bt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/style.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/code.jquery.com/jquery-1.11.1.min.js"></script>
     <title>Sistema Acadêmico</title>
 </head>
 
 <body>
-<!--menu-->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="navAjuste">
         <a class="navbar-text" href="/homeAluno">Home</a>
@@ -84,20 +83,23 @@
     </div>
 </nav>
     <div style="display: flex;">
-        <h4 style="padding-left: 55px">Calendário Acadêmico</h4>
+        <h4 style="padding-left: 55px">Solicitar documentos</h4>
     </div>
-    <div class="container" style="display: block;height: 80%;">
-        <div class="row" style="justify-content: center;height: 30%;">
-            <div class="col-sm" style="width: 100%;">
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%239ee1ad&ctz=America%2FSao_Paulo&showTitle=1&showNav=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&title=Calend%C3%A1rio%20acad%C3%AAmico&showDate=1&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043"
-                    width="100%" height="300%" frameborder="0" scrolling="no" style="height: 38rem;"></iframe>
-            </div>
-
+    <div class="container" style="display: flex;justify-content: space-around;">
+        <div class="row" style="margin-top: 13rem;">
+            <form class="container" action="/gerarPDF" method="post">
+                @csrf
+                <select name="solicitarDocumento" id="Base_Combobox" style="margin:5px ;">
+                    <option value="historico">Histórico escolar</option>
+                    <option value="boletim">Boletim</option>
+                    <option value="atestado-matricula">Atestado de Matrícula</option>
+                    <option value="conclusao">Declaração de conclusão</option>
+                </select>
+                <button class="btn" style="display: block;margin:5px ;">Solicitar</button>
+            </form>
         </div>
     </div>
-    </div>
-    </div>
+
     <script src="/js/jquery.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="/js/script.js"></script>
