@@ -1,3 +1,9 @@
+### Projeto de Conclusão de curso - IFPE
+Autores:
+> David Enéas - Desenvolvedor Back End
+> Emanuele Maria - Desenvolvedor Front End
+> Pedro Antonio - QA
+
 # Mudar nome do banco de dados no arquivo .env
 # ------------------------------------------
 # Configurar o nome do banco de dados no arquivo .env.
